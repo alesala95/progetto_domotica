@@ -1,35 +1,25 @@
 package it.progetto_domotica.model;
 
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Utente {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUtente;
+	private String email;
 	@Column(length = 50, nullable = false)
 	private String nome;
 	@Column(length = 50, nullable = false)
 	private String cognome;
 	@Column(length = 3, nullable = false)
 	private int eta;
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
-	private Date dataNascita;
 	@Column(length = 50, nullable = false)
 	private String username;
 	@Column(length = 50, nullable = false)
@@ -40,12 +30,12 @@ public class Utente {
 	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Ricetta> ricette;
 
-	public int getIdUtente() {
-		return idUtente;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setIdUtente(int idUtente) {
-		this.idUtente = idUtente;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getNome() {
@@ -70,14 +60,6 @@ public class Utente {
 
 	public void setEta(int eta) {
 		this.eta = eta;
-	}
-
-	public Date getDataNascita() {
-		return dataNascita;
-	}
-
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
 	}
 
 	public String getUsername() {
