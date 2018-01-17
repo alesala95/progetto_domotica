@@ -24,6 +24,8 @@ public class Ricetta {
 	private String descrizione;
 	@Column(length = 500, nullable = false)
 	private String ingredienti;
+	@Column(length = 3, nullable = false)
+	private int tempoPreparazione;
 	@Column(nullable = false)
 	private byte[] immagine;
 
@@ -62,6 +64,14 @@ public class Ricetta {
 
 	public void setIngredienti(String ingredienti) {
 		this.ingredienti = ingredienti;
+	}
+
+	public int getTempoPreparazione() {
+		return tempoPreparazione;
+	}
+
+	public void setTempoPreparazione(int tempoPreparazione) {
+		this.tempoPreparazione = tempoPreparazione;
 	}
 
 	public byte[] getImmagine() {
