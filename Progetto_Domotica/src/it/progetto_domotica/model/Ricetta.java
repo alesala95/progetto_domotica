@@ -24,7 +24,7 @@ public class Ricetta {
 	private String descrizione;
 	@Column(length = 500, nullable = false)
 	private String ingredienti;
-	@Column(length = 3, nullable = false)
+	@Column(length = 5, nullable = false)
 	private int tempoPreparazione;
 	@Column(nullable = false)
 	private byte[] immagine;
