@@ -17,9 +17,11 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteCategory;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.R;
@@ -27,18 +29,12 @@ import com.example.itsadmin.smartfridge_fragment.R;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CategoryRecipeFragment extends Fragment {
+
     FloatingActionButton Floatingbtn;
     FloatingActionButton FBAsearch;
     FloatingActionButton FBAadd;
     FloatingActionButton FBAfavourite;
-    static final int RICETTE_CAT = 1;
-    static final int RICETTE_PREF = 2;
-
-    int modalita;
 
     RelativeLayout relativeLayout;
 
@@ -51,45 +47,23 @@ public class CategoryRecipeFragment extends Fragment {
 
     boolean flag = false;
 
-    ArrayList<ItemListRicetteConsigliate>dati;
+    ArrayList<ItemListRicetteConsigliate> cardRicette;
 
-    public CategoryRecipeFragment() {
-        // Required empty public constructor
-
-    }
-
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-
-        modalita = args.getInt("mod");
-    }
+    public CategoryRecipeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view=inflater.inflate(R.layout.fragment_category_recipe, container, false);
 
         Bundle b= getArguments();
         String nome= b.getString("cat");
 
-        catName=(TextView)view.findViewById(R.id.catName);
+        catName = view.findViewById(R.id.catName);
         catName.setText(nome);
 
-
-        if(modalita==1){
-
-            //query per categoria di ricette
-        }else if(modalita==2){
-
-            //query per ricette preferite
-        }
-
-        ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
-        RecyclerView rw = (RecyclerView) view.findViewById(R.id.rw);
-
-        rw.setLayoutManager(new GridLayoutManager(getContext(),2));
+        cardRicette = new ArrayList<>();
 
         cardRicette.add(new ItemListRicetteConsigliate("PASTA",R.drawable.pasta));
         cardRicette.add(new ItemListRicetteConsigliate("POLLO",R.drawable.pollo));
@@ -98,20 +72,19 @@ public class CategoryRecipeFragment extends Fragment {
         cardRicette.add(new ItemListRicetteConsigliate("POLLO",R.drawable.pollo));
         cardRicette.add(new ItemListRicetteConsigliate("TIRA",R.drawable.tira));
 
-        rw.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(),getFragmentManager()));
+        GridView gridCategory = view.findViewById(R.id.gridCategory);
+        AdapterRicetteCategory adapter = new AdapterRicetteCategory(getActivity(),cardRicette);
 
+        gridCategory.setAdapter(adapter);
 
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
         FBAsearch = (FloatingActionButton) view.findViewById(R.id.FBAsearch);
         FBAadd = (FloatingActionButton) view.findViewById(R.id.FBAadd);
         FBAfavourite = (FloatingActionButton) view.findViewById(R.id.FBAfavourite);
 
-
         TextFABSearch = (Button) view.findViewById(R.id.TextFABSearch);
         TextFABAdd = (Button) view.findViewById(R.id.TextFABRecipe);
         TextFABFavourite = (Button) view.findViewById(R.id.TextFABFavourite);
-
-
 
         final Animation fadein = new AlphaAnimation(0.0f, 1.0f);
         fadein.setDuration(650);
@@ -120,7 +93,6 @@ public class CategoryRecipeFragment extends Fragment {
         fadeout.setDuration(500);
 
         final Animation rightToleft = AnimationUtils.loadAnimation(this.getContext(), R.anim.righttoleft);
-
 
         Floatingbtn.setOnClickListener(new View.OnClickListener() {
             @Override

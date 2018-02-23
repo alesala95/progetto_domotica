@@ -69,7 +69,7 @@ public class AdapterList extends ArrayAdapter<ListItem> {
         return rowView;
     }
 
-    static class ViewHolder{
+    private static class ViewHolder{
 
         TextView nomeB;
         TextView quantitaB;

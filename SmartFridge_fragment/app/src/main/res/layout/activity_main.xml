@@ -29,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation"
-        android:layout_below="@+id/barra" />
+        android:layout_below="@+id/barra"
+        android:background="#EBF5FB"/>
 
     <android.support.design.widget.BottomNavigationView
 
