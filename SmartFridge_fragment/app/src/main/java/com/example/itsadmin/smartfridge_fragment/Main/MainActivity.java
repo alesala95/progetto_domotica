@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     Fragment frag [];
 
+    int fragCorrente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         frag = new Fragment[3];
         setUpViews();
 
-        inizializzaFragment(0);
         cambiaFragment(0);
     }
 
@@ -75,12 +75,7 @@ public class MainActivity extends AppCompatActivity {
             if(nFrag!=0){
 
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
-                fragmentTransactionH.add(R.id.fram, new HomeFragment(),"home");
                 fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
-<<<<<<< HEAD
-                fragmentTransactionH.addToBackStack("home");
-=======
->>>>>>> 9dc77ffeaf83125af027669fb3ed3e5b1a3841e4
                 fragmentTransactionH.commit();
             }else{
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
@@ -91,8 +86,10 @@ public class MainActivity extends AppCompatActivity {
         }else{
 
             inizializzaFragment(nFrag);
+            cambiaFragment(nFrag);
         }
 
+        fragCorrente = nFrag;
     }
 
     private void setUpViews (){
@@ -193,8 +190,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        navigation.setSelectedItemId(R.id.navigation_home);
 
+        if(fragCorrente!=0){
+
+            cambiaFragment(0);
+            navigation.setSelectedItemId(R.id.navigation_home);
+        }else{
+
+            super.onBackPressed();
+        }
     }
 }
