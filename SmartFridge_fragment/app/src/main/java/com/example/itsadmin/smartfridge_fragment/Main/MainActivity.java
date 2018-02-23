@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     BottomNavigationView navigation;
-    Fragment frag [];
+    Fragment frag[];
 
     int fragCorrente;
 
@@ -49,38 +49,38 @@ public class MainActivity extends AppCompatActivity {
         cambiaFragment(0);
     }
 
-    private void inizializzaFragment (int i){
+    private void inizializzaFragment(int i) {
 
-        switch (i){
+        switch (i) {
             case 0:
-                frag [0] = new HomeFragment();
+                frag[0] = new HomeFragment();
                 break;
 
             case 1:
-                frag [1] = new FrigoFragment();
+                frag[1] = new FrigoFragment();
                 break;
 
             case 2:
-                frag [2] = new RecipeFragment();
+                frag[2] = new RecipeFragment();
                 break;
         }
     }
 
-    private void cambiaFragment (int nFrag){
+    private void cambiaFragment(int nFrag) {
 
-        if(frag[nFrag]!=null) {
-            if(nFrag!=0){
+        if (frag[nFrag] != null) {
+            if (nFrag != 0) {
 
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
                 fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
                 fragmentTransactionH.commit();
-            }else{
+            } else {
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
                 fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
                 fragmentTransactionH.commit();
             }
 
-        }else{
+        } else {
 
             inizializzaFragment(nFrag);
             cambiaFragment(nFrag);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         fragCorrente = nFrag;
     }
 
-    private void setUpViews (){
+    private void setUpViews() {
 
         setContentView(R.layout.activity_main);
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                Intent intent=new Intent(getApplicationContext(),SettingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
 
                 return false;
@@ -175,10 +175,10 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case R.id.navigation_setting:
 
-                startActivity(new Intent(MainActivity.this,SettingActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
         }
 
@@ -188,13 +188,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if(fragCorrente!=0){
+        if (fragCorrente != 0) {
 
             cambiaFragment(0);
             navigation.setSelectedItemId(R.id.navigation_home);
-        }else{
+        } else {
 
             super.onBackPressed();
         }
     }
+
 }

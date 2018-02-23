@@ -1,293 +1,210 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<FrameLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.itsadmin.smartfridge_fragment.Main.Fragments.RecipeItemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginRight="5dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
 
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_recipe"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="7dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+        <ScrollView
 
-            android:background="#EEE"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <RelativeLayout
 
-            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_gravity="bottom"
-                android:background="@color/transparent">
+                android:layout_height="wrap_content"
+                android:clipToPadding="false">
 
-                <RatingBar
+                <android.support.v7.widget.CardView
+
+                    android:id="@+id/card_recipe"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="20dp"
+                    android:background="#FFF"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/transparent">
+
+                        <RatingBar
+
+                            android:id="@+id/valutazioneCommunity"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:layout_marginLeft="10dp"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="3" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <TextView
+
+                    android:id="@+id/nomeRicetta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/card_recipe"
+                    android:layout_toEndOf="@+id/card_recipe"
+                    android:text="Ricetta"
+                    android:textColor="#000"
+                    android:textSize="24sp" />
+
+                <TextView
+
+                    android:id="@+id/nomeUtente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/nomeRicetta"
+                    android:layout_below="@id/nomeRicetta"
+                    android:layout_marginTop="5dp"
+                    android:text="Johnny Punzo Sins"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+
+                    android:id="@+id/tagDifficolta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/nomeRicetta"
+                    android:layout_below="@id/nomeUtente"
+                    android:layout_marginTop="15dp"
+                    android:text="Difficolta"
+                    android:textColor="@android:color/darker_gray" />
+
+                <RatingBar
+
+                    android:id="@+id/difficolta_rate"
                     style="?android:attr/ratingBarStyleSmall"
-                    android:numStars="5"
-                    android:stepSize=".5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tagDifficolta"
+                    android:layout_alignEnd="@+id/tagVota"
+                    android:max="3"
+                    android:numStars="3"
+                    android:progressBackgroundTint="@color/transparent"
+                    android:progressDrawable="@drawable/chef"
                     android:rating="3"
+                    android:secondaryProgressTint="@color/transparent" />
 
+                <TextView
+                    android:id="@+id/tagDurata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tagDifficolta"
+                    android:layout_toEndOf="@+id/card_recipe"
+                    android:text="Durata"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/durata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tagDurata"
+                    android:layout_alignBottom="@+id/tagDurata"
+                    android:layout_alignEnd="@+id/valutazionePersonale"
+                    android:text="1 ora" />
+
+                <TextView
+                    android:id="@+id/tagVota"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tagDurata"
+                    android:layout_toEndOf="@+id/card_recipe"
+                    android:text="Lascia il tuo voto!"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@android:color/darker_gray"/>
+
+                <RatingBar
+
+                    android:id="@+id/valutazionePersonale"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignBottom="@+id/card_recipe"
+                    android:layout_toEndOf="@+id/card_recipe"
+                    android:clickable="true"
+                    android:numStars="5"
+                    android:stepSize=".5" />
+
+                <!-- ingredienti e procedimento -->
+
+                <TextView
+                    android:id="@+id/tagIngredienti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/card_recipe"
+                    android:layout_below="@id/card_recipe"
+                    android:layout_gravity="center"
+                    android:text="Ingredienti"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/testoIngredienti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/tagIngredienti"
+                    android:layout_below="@+id/tagIngredienti"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="35dp"
+                    android:background="#FFF"
+                    android:elevation="2dp"
+                    android:padding="6dp"
+                    android:text=" -Uova\n -Uova\n -Uova\n -Uova\n" />
 
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    android:max="5"
-                    />
+                <TextView
+                    android:id="@+id/tagProcedimento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/card_recipe"
+                    android:layout_below="@id/testoIngredienti"
+                    android:layout_marginTop="10dp"
+                    android:text="Procedimento"
+                    android:textSize="20sp" />
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/testoProcedimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/tagProcedimento"
+                    android:layout_below="@id/tagProcedimento"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FFF"
+                    android:elevation="2dp"
+                    android:padding="6dp"
+                    android:text="Procedimento ... \n \n" />
 
+            </RelativeLayout>
 
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           android:layout_marginTop="20dp"
-           android:layout_marginLeft="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NOME RICETTA"
-            android:textColor="@color/colorAccent"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            />
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_marginTop="3dp"
-               android:layout_alignBottom="@+id/lldifficolta"
-               >
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Creata da:"
-                   android:textColor="@android:color/darker_gray"
-
-                   />
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginLeft="3dp"
-                   android:text="Nome Utente"
-                   android:textColor="@android:color/darker_gray"
-
-                   />
-
-
-           </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lldifficolta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Difficoltà:"
-                android:textColor="@android:color/darker_gray"
-
-                />
-
-            <RatingBar
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-
-                android:max="3"
-                android:numStars="3"
-                android:progressDrawable="@drawable/chef"
-                android:rating="3"
-                android:secondaryProgressTint="@color/transparent"
-                android:progressBackgroundTint="@color/transparent"
-
-                android:stepSize=".5"
-                android:transformPivotX="0dp"
-                android:transformPivotY="0dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="3dp"
-            android:layout_alignBottom="@+id/lldifficolta"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Durata:"
-                android:textColor="@android:color/darker_gray"
-
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="30min"
-                android:textColor="@android:color/darker_gray"
-
-                />
-
-
-        </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="5dp"
-               android:orientation="horizontal">
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Vota:"
-                   android:textColor="@android:color/darker_gray"
-
-                   />
-
-               <RatingBar
-                   style="?android:attr/ratingBarStyleSmall"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginLeft="3dp"
-                   android:layout_marginTop="2dp"
-
-                   android:max="5"
-                   android:numStars="5"
-                   android:rating="0"
-                   android:secondaryProgressTint="@color/transparent"
-                   android:progressBackgroundTint="@color/transparent"
-
-                   android:clickable="true"
-                   android:stepSize=".5"
-                   android:transformPivotX="0dp"
-                   android:transformPivotY="0dp" />
-
-           </LinearLayout>
-
-       </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+    <include layout="@layout/fab"/>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="7dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Ingredienti"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="4dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=" -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n -Uova\n"
-                    />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="7dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Procedimento"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="4dp"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=" saffhjhfjksahfjkdshfjksdhfjksdhfjskdhfskdjfhgskfgdjfgsj\n fhsdfuhfuiagufagfgsafkgaskfgaskjfgsakjfgsakjfgsajk\n hduishfusafhkasdjfhdausfhdauhfiu\n vsdgdg"
-                        />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-        </LinearLayout>
-
-
-</LinearLayout>
-    </ScrollView>
-
-
-    <include layout="@layout/fab"></include>
 </FrameLayout>

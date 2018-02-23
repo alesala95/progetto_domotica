@@ -1,29 +1,24 @@
 package com.example.itsadmin.smartfridge_fragment.Main.Fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.itsadmin.smartfridge_fragment.R;
 
-import java.util.ArrayList;
 
 
 /**
@@ -59,11 +54,12 @@ public class RecipeItemFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_recipe_item, container, false);
 
-
+        RatingBar rate = view.findViewById(R.id.valutazionePersonale);
       /*  ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
         RecyclerView rw2 = (RecyclerView) view.findViewById(R.id.rec_view2);
         rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         rw2.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));*/
+
 
 
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
