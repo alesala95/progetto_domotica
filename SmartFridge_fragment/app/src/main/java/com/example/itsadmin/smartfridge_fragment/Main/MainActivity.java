@@ -54,17 +54,14 @@ public class MainActivity extends AppCompatActivity {
         switch (i){
             case 0:
                 frag [0] = new HomeFragment();
-                cambiaFragment(0);
                 break;
 
             case 1:
                 frag [1] = new FrigoFragment();
-                cambiaFragment(1);
                 break;
 
             case 2:
                 frag [2] = new RecipeFragment();
-                cambiaFragment(2);
                 break;
         }
     }
