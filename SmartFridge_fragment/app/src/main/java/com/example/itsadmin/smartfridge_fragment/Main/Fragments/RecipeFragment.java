@@ -255,10 +255,8 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         CategoryRecipeFragment fragmentCategory=new CategoryRecipeFragment();
 
         Bundle b = new Bundle();
-        b.putInt("mod",fragmentCategory.RICETTE_CAT);
         b.putString("cat",id);
         fragmentCategory.setArguments(b);
-        //CategoryRecipeFragment fragmentRicettePreferite = new ... ;
 
         FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fram,fragmentCategory,"CreateRecipeFragment");
