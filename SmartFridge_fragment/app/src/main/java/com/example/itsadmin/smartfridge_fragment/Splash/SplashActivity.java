@@ -18,6 +18,8 @@ public class SplashActivity extends AppCompatActivity {
 
         System.out.println("ciaobellagfgkljbkn");
 
+        ///////////////////////////////////////////////
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
