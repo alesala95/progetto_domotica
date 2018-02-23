@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,7 +39,6 @@ public class RecipeItemFragment extends Fragment {
 
     RelativeLayout relativeLayout;
 
-    Button TextFABSearch;
     Button TextFABAdd;
     Button TextFABFavourite;
     Button TextFABShare;
@@ -142,6 +142,20 @@ public class RecipeItemFragment extends Fragment {
             public void onClick(View v) {
 
                 Toast.makeText(getContext(),"Aggiunto ai preferiti",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        FBAadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CreateRecipeFragment fragmentCreate=new CreateRecipeFragment();
+
+                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fram,fragmentCreate,"CreateRecipeFragment");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

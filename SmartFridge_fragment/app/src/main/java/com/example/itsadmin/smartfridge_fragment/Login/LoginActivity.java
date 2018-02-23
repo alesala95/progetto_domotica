@@ -35,12 +35,12 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.Fr
         Utente.getInstance().seteMail(preferences.getString("eMail",null));
         Utente.getInstance().setPassword(preferences.getString("password",null));
 
-        if(Utente.getInstance().geteMail()!=null&&Utente.getInstance().getPassword()!=null){
+        if(true){//Utente.getInstance().geteMail()!=null&&Utente.getInstance().getPassword()!=null
 
             Frigorifero.getInstance().setNome(preferences.getString("nomeFrigo",null));
             Frigorifero.getInstance().setCodice(preferences.getString("codiceFrigo",null));
 
-            if(Frigorifero.getInstance().getNome()!=null&&Frigorifero.getInstance().getCodice()!=null){
+            if(true){//Frigorifero.getInstance().getNome()!=null&&Frigorifero.getInstance().getCodice()!=null
 
                 Intent i = new Intent(this,MainActivity.class);
                 startActivity(i);

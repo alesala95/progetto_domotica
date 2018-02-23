@@ -34,6 +34,7 @@
                     app:cardCornerRadius="7dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="3dp"
                     android:clickable="true"
                     >
 
@@ -203,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:text="Aggiungi"
-
+                    android:layout_marginBottom="3dp"
                     android:background="@drawable/rounded_style"
 
                     />
