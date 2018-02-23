@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         RecyclerView rw = (RecyclerView) view.findViewById(R.id.rec_view);
         rw.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
-        ila.add(new ItemListaScadenze("Mela",R.drawable.apple));
+        ila.add(new ItemListaScadenze("Mela",R.drawable.mela));
         ila.add(new ItemListaScadenze("Banana",R.drawable.banana));
         ila.add(new ItemListaScadenze("adas",R.drawable.snowwwww));
 
@@ -65,9 +65,9 @@ public class HomeFragment extends Fragment {
         RecyclerView rw2 = (RecyclerView) view.findViewById(R.id.rec_view2);
         rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
-        cardRicette.add(new ItemListRicetteConsigliate("PASTA",R.drawable.pasta));
-        cardRicette.add(new ItemListRicetteConsigliate("POLLO",R.drawable.pollo));
-        cardRicette.add(new ItemListRicetteConsigliate("TIRA",R.drawable.tira));
+        cardRicette.add(new ItemListRicetteConsigliate("Pasta",R.drawable.pasta));
+        cardRicette.add(new ItemListRicetteConsigliate("Pollo",R.drawable.pollo));
+        cardRicette.add(new ItemListRicetteConsigliate("Tiramisù",R.drawable.tira));
 
         rw2.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
 

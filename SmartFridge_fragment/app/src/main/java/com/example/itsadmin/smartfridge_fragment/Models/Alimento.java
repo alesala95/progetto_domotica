@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Alimento {
 
+
     @SerializedName("nome")
     String nome;
     @SerializedName("quantita")
@@ -59,4 +60,6 @@ public class Alimento {
 
         return "Ciao, sono una "+nome+" e siamo in "+quantita+" e scadiamo il "+scadenza.toString();
     }
+
+
 }
