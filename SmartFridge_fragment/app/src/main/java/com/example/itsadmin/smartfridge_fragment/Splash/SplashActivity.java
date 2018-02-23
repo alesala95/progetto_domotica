@@ -16,9 +16,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.BlueColor));//cambia colore navigation bar
 
-        System.out.println("ciaobellagfgkljbkn");
-
-        ///////////////////////////////////////////////
 
         new Handler().postDelayed(new Runnable() {
             @Override
