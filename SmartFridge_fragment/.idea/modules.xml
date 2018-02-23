@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SmartFridge_fragment.iml" filepath="$PROJECT_DIR$/SmartFridge_fragment.iml" />
+      <module fileurl="file://C:\Users\User\Documents\progetto_domotica\SmartFridge_fragment\SmartFridge_fragment.iml" filepath="C:\Users\User\Documents\progetto_domotica\SmartFridge_fragment\SmartFridge_fragment.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\User\Documents\progetto_domotica\SmartFridge_fragment\app\app.iml" filepath="C:\Users\User\Documents\progetto_domotica\SmartFridge_fragment\app\app.iml" />
     </modules>
   </component>
 </project>
