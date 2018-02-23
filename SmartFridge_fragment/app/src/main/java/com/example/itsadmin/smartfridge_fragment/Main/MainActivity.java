@@ -75,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
                 fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
+<<<<<<< HEAD
+=======
+                fragmentTransactionH.addToBackStack("home");
+>>>>>>> bbf66215a2ecb54172ccdb8729696831cab7bca4
                 fragmentTransactionH.commit();
             }else{
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
