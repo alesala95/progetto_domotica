@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Default" parent="Theme.Design.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:navigationBarColor">@color/NavColor</item>
+        <item name="android:statusBarColor">@color/AzzurroMin</item>
+
+        <item name="colorControlNormal">#2196F3</item>
+        <item name="colorControlActivated">#00e5ff</item>
+
+        <item name="android:actionBarStyle">@color/AzzurroMin</item>
+
+    </style>
+
+
+    <style name="Grifondoro" parent="Theme.Design.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/grif_red</item>
+        <item name="android:navigationBarColor">@color/grif_red</item>
+
+
+        <item name="colorControlNormal">#2196F3</item>
+        <item name="colorControlActivated">#00e5ff</item>
+
+    </style>
+
+</resources>

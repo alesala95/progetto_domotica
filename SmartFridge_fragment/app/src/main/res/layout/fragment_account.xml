@@ -1,0 +1,214 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.itsadmin.smartfridge_fragment.Setting.Fragments.AccountFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/accountNome"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="@color/TemperatureColor"
+            android:clickable="true"
+            >
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp"
+
+                android:layout_gravity="center_horizontal|center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome"
+                    android:textColor="@android:color/darker_gray"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Luca"
+                    android:textColor="@android:color/black"
+                    />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountCognome"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="@color/TemperatureColor"
+            android:clickable="true"
+            >
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp"
+
+                android:layout_gravity="center_horizontal|center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cognome"
+                    android:textColor="@android:color/darker_gray"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Punzo"
+                    android:textColor="@android:color/black"
+                    />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/accountEmail"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="@color/TemperatureColor"
+            android:clickable="true"
+            >
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp"
+
+                android:layout_gravity="center_horizontal|center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@android:color/darker_gray"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="asdsadas@gmail.com"
+                    android:textColor="@android:color/black"
+                    />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountSetPsw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/TemperatureColor"
+            android:clickable="true"
+            >
+
+            <LinearLayout
+                android:id="@+id/dimension"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                >
+
+                <TextView
+
+                    android:id="@+id/txtset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Imposta nuova password"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/editTextPsw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Inserisci password attuale"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:textColor="@android:color/black"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/editTextSetPsw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Imposta nuova password"
+                    android:textColor="@android:color/black"
+                    android:visibility="gone"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+
+                    />
+
+                <EditText
+                    android:id="@+id/editTextSetPsw1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ripeti password"
+                    android:textColor="@android:color/black"
+                    android:visibility="gone"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+
+                    />
+
+                <Button
+                    android:id="@+id/btnConferma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Conferma"
+                    android:background="@drawable/rounded_style"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

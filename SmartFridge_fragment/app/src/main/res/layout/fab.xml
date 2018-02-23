@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
+    >
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FloatingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|right"
+        android:clickable="true"
+
+        android:focusable="true"
+        android:src="@mipmap/fab"
+        app:backgroundTint="@color/AzzurroMin"
+        app:fabSize="normal"
+        android:padding="2dp"
+        />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FBAsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/FloatingBtn"
+        android:layout_alignEnd="@+id/FloatingBtn"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="7dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:backgroundTint="@color/AzzurroMin"
+        app:fabSize="mini"
+        app:srcCompat="@mipmap/search" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FBAadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/FBAsearch"
+        android:layout_alignEnd="@+id/FBAsearch"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:backgroundTint="@color/AzzurroMin"
+        app:fabSize="mini"
+        app:srcCompat="@mipmap/add" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FBAfavourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/FBAadd"
+        android:layout_alignEnd="@+id/FBAadd"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:backgroundTint="@color/AzzurroMin"
+        app:fabSize="mini"
+        app:srcCompat="@mipmap/star" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FBAshare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/FBAfavourite"
+        android:layout_alignEnd="@+id/FBAfavourite"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:backgroundTint="@color/AzzurroMin"
+        app:fabSize="mini"
+        app:srcCompat="@mipmap/share" />
+
+    <Button
+        android:id="@+id/TextFABSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/FBAsearch"
+        android:layout_alignEnd="@+id/FBAsearch"
+        android:layout_marginEnd="29dp"
+        android:background="@drawable/roundedtextview"
+        android:clickable="false"
+        android:text="Ricerca"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/TextFABRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/FBAadd"
+        android:layout_alignEnd="@+id/FBAadd"
+        android:layout_marginEnd="29dp"
+        android:background="@drawable/roundedtextview"
+        android:clickable="false"
+        android:text="Crea"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/TextFABFavourite"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/FBAfavourite"
+        android:layout_alignEnd="@+id/FBAfavourite"
+        android:layout_marginEnd="31dp"
+        android:background="@drawable/roundedtextview"
+        android:clickable="false"
+        android:text="Preferiti"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/TextFABShare"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/FBAshare"
+        android:layout_alignEnd="@+id/FBAshare"
+        android:layout_marginEnd="31dp"
+        android:background="@drawable/roundedtextview"
+        android:clickable="false"
+        android:text="Condividi"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+
+    <EditText
+        android:id="@+id/editTextSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+
+        android:background="@drawable/roundedsearch"
+        android:drawableLeft="@mipmap/searchedit"
+        android:ems="10"
+        android:hint="Es. Cena, Pranzo, Pasta, Carne"
+        android:inputType="text"
+        android:visibility="gone" />
+
+</RelativeLayout>

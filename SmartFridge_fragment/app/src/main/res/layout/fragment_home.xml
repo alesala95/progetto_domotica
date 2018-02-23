@@ -1,0 +1,137 @@
+
+<FrameLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.itsadmin.smartfridge_fragment.Main.Fragments.HomeFragment"
+    android:clipToPadding="false">
+
+    <ScrollView
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:clipToPadding="false">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false">
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/targetStatusContainer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:backgroundTint="@color/AzzurroMin"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:clipToPadding="false"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <TextView
+
+                        android:id="@+id/target"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Status"
+                        android:textColor="#FFF"
+                        android:textSize="30sp" />
+
+                    <TextView
+
+                        android:id="@+id/statusTarget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/target"
+                        android:text="Stato: On"
+                        android:textSize="24sp"
+                        android:textColor="#FFF"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left|center_vertical"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+
+                        android:id="@+id/temperaturaTarget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Temperatura: 3°"
+                        android:textSize="24sp"
+                        android:textColor="#FFF"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/statusTarget"
+                        android:gravity="left|center_vertical"
+                        android:layout_centerInParent="true"/>
+
+                    <ImageView
+
+                        android:id="@+id/iconaTarget"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignBottom="@+id/temperaturaTarget"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/drop" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+
+                android:id="@+id/titleAlimentiInScadenza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Alimenti in scadenza"
+                android:layout_below="@id/targetStatusContainer"
+                android:layout_alignLeft="@id/targetStatusContainer"
+                android:layout_marginTop="-10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/rec_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:layout_below="@id/titleAlimentiInScadenza"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+
+                android:id="@+id/titleRicetteConsigliate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Ricette consigliate"
+                android:layout_below="@id/rec_view"
+                android:layout_alignLeft="@id/targetStatusContainer"
+                android:layout_marginBottom="10dp"/>
+
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/rec_view2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleRicetteConsigliate"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="10dp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

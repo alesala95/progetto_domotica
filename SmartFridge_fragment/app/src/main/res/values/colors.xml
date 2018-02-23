@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="TemperatureColor" id="TemperatureColor">#FFFFFF</color>
+
+    <color name="AzzurroMin" id="AzzurroMin" >#00e5ff</color>
+    <color name="NavColor">#40C4FF</color>
+    <color name="BlueColor">#01579B</color>
+
+
+    <color name="register">#03A9F4</color>
+
+    <color name="settingIcon">#424242</color>
+    <color name="transparent">#40000000</color>
+    <color name="transparentOff">#00000000</color>
+
+    <color name="grif_red">#B71C1C</color>
+
+
+</resources>

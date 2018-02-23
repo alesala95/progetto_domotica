@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="5dp"
+    android:clipToPadding="false"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/imageF"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:id="@+id/back">
+
+
+        <TextView
+            android:id="@+id/nomeB"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="@android:color/black"
+            android:text="nome"
+            />
+
+
+        <TextView
+            android:id="@+id/quantitaB"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="scadenza"
+            android:layout_below="@id/nomeB"
+            />
+
+
+        <TextView
+            android:id="@+id/scadenzaB"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="quantità"
+            android:layout_below="@id/quantitaB"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/nomeF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nomeG"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal|bottom"/>
+
+
+
+</android.support.v7.widget.CardView>

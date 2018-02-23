@@ -1,0 +1,300 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.itsadmin.smartfridge_fragment.Setting.Fragments.NotificationFragment"
+    >
+
+    <LinearLayout
+        android:id="@+id/page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
+
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Notifiche frigo" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/TemperatureColor"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="30dp"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Notifiche"
+                            android:textColor="@android:color/black"
+
+                            />
+
+                        <Switch
+                            android:id="@+id/swtEnableNot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Disattivate"
+                            android:textColor="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutVibrationFridge"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/TemperatureColor"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="30dp"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Vibrazione"
+                            android:textColor="@android:color/black" />
+
+
+                        <TextView
+                            android:id="@+id/textViewTypeVibrationFridge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Default"
+
+                            android:textColor="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutSoundFridge"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/TemperatureColor"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="30dp"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Suono"
+                            android:textColor="@android:color/black" />
+
+
+                        <TextView
+                            android:id="@+id/textViewTypeSoundFridge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Default"
+
+                            android:textColor="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Notifiche spesa" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/TemperatureColor"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="30dp"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Notifiche"
+                            android:textColor="@android:color/black"
+
+                            />
+
+                        <Switch
+                            android:id="@+id/swtEnableNotShop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Disattivate"
+                            android:textColor="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutVibrationShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/TemperatureColor"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="30dp"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Vibrazione"
+                            android:textColor="@android:color/black" />
+
+
+                        <TextView
+                            android:id="@+id/textViewTypeVibrationShop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Default"
+
+                            android:textColor="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutSoundShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/TemperatureColor"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="30dp"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Suono"
+                            android:textColor="@android:color/black" />
+
+
+                        <TextView
+                            android:id="@+id/textViewTypeSoundShop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Default"
+
+                            android:textColor="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+
+
+    <include layout="@layout/snack_bar"
+    android:id="@+id/RLsnack"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+
+
+
+        ></include>
+
+    <include
+        android:id="@+id/snack_bar_audio"
+        layout="@layout/snack_bar_audio"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+
+
+        ></include>
+
+
+</FrameLayout>

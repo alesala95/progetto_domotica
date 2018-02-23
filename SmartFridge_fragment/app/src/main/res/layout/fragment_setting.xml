@@ -1,0 +1,263 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.itsadmin.smartfridge_fragment.Setting.Fragments.SettingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/itemAccount"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/TemperatureColor"
+                android:clickable="true"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+
+                    android:src="@mipmap/account"
+                    android:tint="@color/settingIcon"
+                    android:layout_marginLeft="20dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Nome"
+                    android:textColor="@android:color/black"
+                    />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Account"
+                        android:textColor="@android:color/darker_gray"
+
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemInfoFridge"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/TemperatureColor"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/frigo"
+                    android:tint="@color/settingIcon"
+                    android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Frigo"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Informazioni"
+                        android:textColor="@android:color/darker_gray"
+
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemNotification"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/TemperatureColor"
+
+                android:layout_marginTop="7dp"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/notifica"
+                    android:tint="@color/settingIcon"
+                    android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Notifiche"
+                        android:textColor="@android:color/black"
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemTheme"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/TemperatureColor"
+
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/theme"
+                    android:tint="@color/settingIcon"
+                    android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Temi"
+                        android:textColor="@android:color/darker_gray"
+                        />
+
+                    <Spinner
+                        android:id="@+id/spinnerThemes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
+                        >
+
+
+                    </Spinner>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemContact"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/TemperatureColor"
+
+                android:layout_marginTop="7dp"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ask"
+
+                    android:tint="@color/settingIcon"
+                    android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Domande"
+                        android:textColor="@android:color/black"
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemInfo"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/TemperatureColor"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/info"
+                    android:tint="@color/settingIcon"
+                    android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Info"
+                        android:textColor="@android:color/black"
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

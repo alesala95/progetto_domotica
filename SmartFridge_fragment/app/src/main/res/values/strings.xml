@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SmartFridge_fragment</string>
+    <string name="title_home">Home</string>
+    <string name="title_frigo">Frigo</string>
+    <string name="title_recipe">Ricette</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_setting">Impostazioni</string>
+    <integer name="anim_length">1000</integer>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="temi">
+        <item>Default</item>
+        <item>Grifondoro</item>
+        <item>Serpeverde</item>
+        <item>Crovonero</item>
+        <item>Tassorosso</item>
+
+    </string-array>
+
+</resources>
