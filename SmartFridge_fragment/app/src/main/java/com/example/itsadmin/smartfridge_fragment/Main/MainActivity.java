@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     Fragment frag [];
 
-    int fragCorrente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
         frag = new Fragment[3];
         setUpViews();
 
-
+        inizializzaFragment(0);
         cambiaFragment(0);
-        fragCorrente = 0;
     }
 
     private void inizializzaFragment (int i){
@@ -56,14 +54,17 @@ public class MainActivity extends AppCompatActivity {
         switch (i){
             case 0:
                 frag [0] = new HomeFragment();
+                cambiaFragment(0);
                 break;
 
             case 1:
                 frag [1] = new FrigoFragment();
+                cambiaFragment(1);
                 break;
 
             case 2:
                 frag [2] = new RecipeFragment();
+                cambiaFragment(2);
                 break;
         }
     }
@@ -74,11 +75,9 @@ public class MainActivity extends AppCompatActivity {
             if(nFrag!=0){
 
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
+                fragmentTransactionH.add(R.id.fram, new HomeFragment(),"home");
                 fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
-<<<<<<< HEAD
-=======
                 fragmentTransactionH.addToBackStack("home");
->>>>>>> bbf66215a2ecb54172ccdb8729696831cab7bca4
                 fragmentTransactionH.commit();
             }else{
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
@@ -89,10 +88,8 @@ public class MainActivity extends AppCompatActivity {
         }else{
 
             inizializzaFragment(nFrag);
-            cambiaFragment(nFrag);
         }
 
-        fragCorrente = nFrag;
     }
 
     private void setUpViews (){
@@ -191,16 +188,10 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-
     @Override
     public void onBackPressed() {
-        
-        if(fragCorrente!=0) {
+        super.onBackPressed();
+        navigation.setSelectedItemId(R.id.navigation_home);
 
-            cambiaFragment(0);
-            navigation.setSelectedItemId(R.id.navigation_home);
-        }else
-            super.onBackPressed();
     }
-
 }
