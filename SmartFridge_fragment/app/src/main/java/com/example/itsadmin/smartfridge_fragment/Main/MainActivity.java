@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
+import com.example.itsadmin.smartfridge_fragment.Main.Fragments.CreateRecipeFragment;
 import com.example.itsadmin.smartfridge_fragment.Main.Fragments.FrigoFragment;
 import com.example.itsadmin.smartfridge_fragment.Main.Fragments.HomeFragment;
 import com.example.itsadmin.smartfridge_fragment.R;
@@ -35,37 +36,60 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     BottomNavigationView navigation;
     Fragment frag [];
-    String titles [];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         frag = new Fragment[3];
-        titles = new String[3];
-
         setUpViews();
-        inizializzaFragment();
+
+        inizializzaFragment(0);
         cambiaFragment(0);
     }
 
-    private void inizializzaFragment (){
+    private void inizializzaFragment (int i){
 
-        frag [0] = new HomeFragment();
-        frag [1] = new FrigoFragment();
-        frag [2] = new RecipeFragment();
+        switch (i){
+            case 0:
+                frag [0] = new HomeFragment();
+                cambiaFragment(0);
+                break;
 
-        titles [0] = "Home";
-        titles [1] = "I Miei Alimenti";
-        titles [2] = "Ricettario";
+            case 1:
+                frag [1] = new FrigoFragment();
+                cambiaFragment(1);
+                break;
+
+            case 2:
+                frag [2] = new RecipeFragment();
+                cambiaFragment(2);
+                break;
+        }
     }
 
     private void cambiaFragment (int nFrag){
 
-        FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
-        fragmentTransactionH.replace(R.id.fram,frag[nFrag]);
-        fragmentTransactionH.commit();
-        getSupportActionBar().setTitle(titles[nFrag]);
+        if(frag[nFrag]!=null) {
+            if(nFrag!=0){
+
+                FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
+                fragmentTransactionH.add(R.id.fram, new HomeFragment(),"home");
+                fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
+                fragmentTransactionH.addToBackStack("home");
+                fragmentTransactionH.commit();
+            }else{
+                FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
+                fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
+                fragmentTransactionH.commit();
+            }
+
+        }else{
+
+            inizializzaFragment(nFrag);
+        }
+
     }
 
     private void setUpViews (){
