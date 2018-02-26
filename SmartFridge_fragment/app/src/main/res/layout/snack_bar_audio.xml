@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         >
         <RadioButton
-            android:id="@+id/rbtnDeafault"
+            android:id="@+id/rbtnDeaf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Deafault"
@@ -22,7 +22,7 @@
             />
 
         <RadioButton
-            android:id="@+id/rbtnDisable"
+            android:id="@+id/rbtnSilence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Silenzioso"
@@ -33,7 +33,7 @@
             />
 
         <RadioButton
-            android:id="@+id/rbtnShort"
+            android:id="@+id/rbtnWhisper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Whisper"
@@ -44,7 +44,7 @@
             />
 
         <RadioButton
-            android:id="@+id/rbtnLong"
+            android:id="@+id/rbtnRing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ring"

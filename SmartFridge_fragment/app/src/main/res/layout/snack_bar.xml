@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:id="@+id/snack_bar_audio_not"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/TemperatureColor">
     <RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentLeft="true"
+    >
+    <RadioButton
+        android:id="@+id/rbtnDeafault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        >
-        <RadioButton
-            android:id="@+id/rbtnDeafault"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Deafault"
-            android:textSize="15dp"
-            android:checked="true"
-            android:layout_marginLeft="10dp"
-            android:layoutDirection="rtl"
-            />
+        android:text="Deafault"
+        android:textSize="15dp"
+        android:checked="true"
+        android:layout_marginLeft="10dp"
+        android:layoutDirection="rtl"
+        />
 
-        <RadioButton
-            android:id="@+id/rbtnDisable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Disabilitata"
-            android:textSize="15dp"
+    <RadioButton
+        android:id="@+id/rbtnDisable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disabilitata"
+        android:textSize="15dp"
 
-            android:layout_marginLeft="10dp"
-            android:layoutDirection="rtl"
-            />
+        android:layout_marginLeft="10dp"
+        android:layoutDirection="rtl"
+        />
 
-        <RadioButton
-            android:id="@+id/rbtnShort"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Short"
-            android:textSize="15dp"
+    <RadioButton
+        android:id="@+id/rbtnShort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Short"
+        android:textSize="15dp"
 
-            android:layout_marginLeft="10dp"
-            android:layoutDirection="rtl"
-            />
+        android:layout_marginLeft="10dp"
+        android:layoutDirection="rtl"
+        />
 
-        <RadioButton
-            android:id="@+id/rbtnLong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Long"
-            android:textSize="15dp"
+    <RadioButton
+        android:id="@+id/rbtnLong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Long"
+        android:textSize="15dp"
 
-            android:layout_marginLeft="10dp"
-            android:layoutDirection="rtl"
-            />
+        android:layout_marginLeft="10dp"
+        android:layoutDirection="rtl"
+        />
 
-    </RadioGroup>
-</RelativeLayout>
+</RadioGroup>
+</LinearLayout>
