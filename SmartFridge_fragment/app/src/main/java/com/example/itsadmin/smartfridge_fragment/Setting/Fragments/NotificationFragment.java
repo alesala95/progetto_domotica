@@ -94,12 +94,7 @@ public class NotificationFragment extends Fragment {
                 }
             }
         });
-
-
-
-        final LinearLayout page=(LinearLayout) view.findViewById(R.id.page);
-        final View snackBar=(View) view.findViewById(R.id.RLsnack);
-        final View snackBarAudio=(View) view.findViewById(R.id.snack_bar_audio);
+        
 
 
         linearLayoutVibrationFridge.setOnClickListener(new View.OnClickListener() {
@@ -148,35 +143,6 @@ public class NotificationFragment extends Fragment {
             }
         });
 
-      /*  page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(flag!=0) {
-                    Animation showPopOut = AnimationUtils.loadAnimation(getContext(), R.anim.show_popup_out);
-                   // page.setForeground(new ColorDrawable(ContextCompat.getColor(getContext(), R.color.transparentOff)));//API 23, oscuramentoschermata
-                    switch (flag){
-                        case 1:
-                            snackBar.startAnimation(showPopOut);
-                            snackBar.setVisibility(View.GONE);
-                            flag=0;
-                            break;
-
-                        case 2:
-                            snackBarAudio.startAnimation(showPopOut);
-                            snackBarAudio.setVisibility(View.GONE);
-                            flag=0;
-                            break;
-
-                    }
-
-                }
-            }
-        });*/
-
-
-
-        // Inflate the layout for this fragment
         return view;
     }
 
