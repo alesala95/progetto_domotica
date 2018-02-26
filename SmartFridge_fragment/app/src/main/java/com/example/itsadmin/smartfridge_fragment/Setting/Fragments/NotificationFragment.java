@@ -94,7 +94,7 @@ public class NotificationFragment extends Fragment {
                 }
             }
         });
-        
+
 
 
         linearLayoutVibrationFridge.setOnClickListener(new View.OnClickListener() {
