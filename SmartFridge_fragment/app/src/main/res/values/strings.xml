@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartFridge_fragment</string>
+    <string name="app_name">SmartFridge</string>
     <string name="title_home">Home</string>
     <string name="title_frigo">Frigo</string>
     <string name="title_recipe">Ricette</string>
