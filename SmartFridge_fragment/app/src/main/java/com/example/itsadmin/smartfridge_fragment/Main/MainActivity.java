@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     int fragCorrente;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,5 +199,8 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
+
 
 }

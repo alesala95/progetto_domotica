@@ -83,6 +83,8 @@ public class SettingFragment extends Fragment {
         spinnerthemes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+
+
             }
 
             @Override

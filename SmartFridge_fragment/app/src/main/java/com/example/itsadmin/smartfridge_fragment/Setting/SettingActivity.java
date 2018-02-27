@@ -33,6 +33,8 @@ public class SettingActivity extends AppCompatActivity implements FragmentsSetti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //setTheme(R.style.Grifondoro);
+
         setUpViews();
 
         settings = getSharedPreferences("setting", 0);
