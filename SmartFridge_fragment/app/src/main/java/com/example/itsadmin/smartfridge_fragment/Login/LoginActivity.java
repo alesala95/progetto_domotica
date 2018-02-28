@@ -32,8 +32,12 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.Fr
 
         preferences = getSharedPreferences("Login", 0);
 
+        //creazione dei dati login su preferences
+
         Utente.getInstance().seteMail(preferences.getString("eMail",null));
         Utente.getInstance().setPassword(preferences.getString("password",null));
+
+        //controllo dati inseriti per login e salvataggio tramite singleton
 
         if(true){//Utente.getInstance().geteMail()!=null&&Utente.getInstance().getPassword()!=null
 
@@ -75,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.Fr
         if(index != -1){
 
             cambiaFragment(index);
+
         }else{
             Intent splash=new Intent(LoginActivity.this,MainActivity.class);
            startActivity(splash);

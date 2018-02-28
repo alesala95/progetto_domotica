@@ -33,10 +33,10 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     CardView targetStatusContainer;
-    TextView temperaturaTarget;
     ImageView iconaTarget;
     TextView target;
     TextView targetStatus;
+    TextView temperaturaTarget;
 
     boolean flag = false;
 
@@ -47,12 +47,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         // lista alimenti in scadenza
         ArrayList <ItemListaScadenze> ila = new ArrayList<>();
 
         RecyclerView rw = (RecyclerView) view.findViewById(R.id.rec_view);
         rw.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
+        //aggiunta dei prodotti in scadenza
         ila.add(new ItemListaScadenze("Mela",R.drawable.mela));
         ila.add(new ItemListaScadenze("Banana",R.drawable.banana));
         ila.add(new ItemListaScadenze("adas",R.drawable.snowwwww));
@@ -65,6 +67,7 @@ public class HomeFragment extends Fragment {
         RecyclerView rw2 = (RecyclerView) view.findViewById(R.id.rec_view2);
         rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
+        //aggiunta delle ricette consigliate
         cardRicette.add(new ItemListRicetteConsigliate("Pasta",R.drawable.pasta));
         cardRicette.add(new ItemListRicetteConsigliate("Pollo",R.drawable.pollo));
         cardRicette.add(new ItemListRicetteConsigliate("Tiramisù",R.drawable.tira));
@@ -78,13 +81,14 @@ public class HomeFragment extends Fragment {
         target = view.findViewById(R.id.target);
         targetStatus = view.findViewById(R.id.statusTarget);
 
-        // query per controllare lo stato
+        // query per controllare lo stato acceso/spento ?
         target.setText("Frigo");
 
         targetStatusContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Animazione della card
                 final ObjectAnimator oa1 = ObjectAnimator.ofFloat(targetStatusContainer, "scaleX", 1f, 0f);
                 final ObjectAnimator oa2 = ObjectAnimator.ofFloat(targetStatusContainer, "scaleX", 0f, 1f);
                 oa1.setInterpolator(new DecelerateInterpolator());
@@ -96,14 +100,15 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        if (!flag) {
+                        if (!flag) {//retro
 
                             temperaturaTarget.setText("Temperatura: -3°");
                             iconaTarget.setImageResource(R.drawable.snowwwww);
                             target.setText("Freezer");
                             oa2.start();
                             flag=true;
-                        }else {
+
+                        }else {//fronte
 
                             temperaturaTarget.setText("Temperatura: 3°");
                             iconaTarget.setImageResource(R.drawable.drop);

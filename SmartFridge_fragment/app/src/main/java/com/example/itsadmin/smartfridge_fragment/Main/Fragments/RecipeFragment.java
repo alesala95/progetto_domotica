@@ -49,8 +49,7 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
     public RecipeFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_recipe, container, false);
 
@@ -60,19 +59,23 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         catDolci = view.findViewById(R.id.catDolci);
         catSpuntini = view.findViewById(R.id.catSpuntini);
 
+        //gestione click delle varie categorie
         catAntipasti.setOnClickListener(this);
         catPrimi.setOnClickListener(this);
         catSecondi.setOnClickListener(this);
         catDolci.setOnClickListener(this);
         catSpuntini.setOnClickListener(this);
 
-        ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
 
+        ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();//creazione arraylist di ricette
+
+        //aggiunta ricette
         cardRicette.add(new ItemListRicetteConsigliate("PASTA",R.drawable.pasta));
         cardRicette.add(new ItemListRicetteConsigliate("POLLO",R.drawable.pollo));
         cardRicette.add(new ItemListRicetteConsigliate("TIRA",R.drawable.tira));
 
 
+        //setto le ricette nelle varie recycler
         RecyclerView rw = view.findViewById(R.id.rec_view);
         rw.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         rw.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(),getFragmentManager()));
@@ -93,27 +96,31 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         rw5.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         rw5.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
 
-        Floatingbtn = view.findViewById(R.id.FloatingBtn);
-        FBAsearch = view.findViewById(R.id.FBAsearch);
-        FBAadd = view.findViewById(R.id.FBAadd);
-        FBAfavourite = view.findViewById(R.id.FBAfavourite);
+        //gestione Floating Button
+        Floatingbtn = view.findViewById(R.id.FloatingBtn);//FBA principale
+        FBAsearch = view.findViewById(R.id.FBAsearch);//FBA per la ricerca
+        FBAadd = view.findViewById(R.id.FBAadd);//FBA per la creazione di una ricetta
+        FBAfavourite = view.findViewById(R.id.FBAfavourite);//FBA per visualizzare le ricette preferite
 
-        relativeLayout = view.findViewById(R.id.frame);
+        relativeLayout = view.findViewById(R.id.frame);//?????????????????????????????????????????????????????
 
+        //didascalie dei FBA
         TextFABSearch = view.findViewById(R.id.TextFABSearch);
         TextFABAdd = view.findViewById(R.id.TextFABRecipe);
         TextFABFavourite = view.findViewById(R.id.TextFABFavourite);
 
+        //animazione FAB, apparizione dei sottoFBA
         final Animation fadein = new AlphaAnimation(0.0f, 1.0f);
         fadein.setDuration(650);
 
+        //animazione FAB, chiusura dei sottoFBA
         final Animation fadeout = new AlphaAnimation(1.0f, 0.0f);
         fadeout.setDuration(500);
 
-        final Animation rightToleft = AnimationUtils.loadAnimation(this.getContext(), R.anim.righttoleft);
+        final Animation rightToleft = AnimationUtils.loadAnimation(this.getContext(), R.anim.righttoleft);//animazione didascalie
 
 
-        Floatingbtn.setOnClickListener(new View.OnClickListener() {
+        Floatingbtn.setOnClickListener(new View.OnClickListener() {//apparizione e sparizione dei sottoFBA, al click del FBA principale
             @Override
             public void onClick(View v) {
                 if (!flag) {
@@ -145,6 +152,7 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
             }
         });
 
+        //??????????????????????????????????????????????????????????????????????????????
        relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,13 +160,15 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
             }
         });
 
+
         editTextSearch = view.findViewById(R.id.editTextSearch);
 
-        FBAsearch.setOnClickListener(new View.OnClickListener() {
+        FBAsearch.setOnClickListener(new View.OnClickListener() {//FBA per ricerca
             @Override
             public void onClick(View v) {
 
                 editTextSearch.setVisibility(View.VISIBLE);
+                //apparizione tastiera
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(editTextSearch , InputMethodManager.SHOW_IMPLICIT);
 
@@ -168,9 +178,9 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
 
         FBAadd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//FBA aggiunta ricetta
 
-                CreateRecipeFragment fragmentCreate=new CreateRecipeFragment();
+                CreateRecipeFragment fragmentCreate=new CreateRecipeFragment();//apertura fragment per creazione ricetta
 
                 FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fram,fragmentCreate,"CreateRecipeFragment");
@@ -179,7 +189,7 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        FBAfavourite.setOnClickListener(new View.OnClickListener() {
+        FBAfavourite.setOnClickListener(new View.OnClickListener() {//FBA preferiti ??????????????????????????????
             @Override
             public void onClick(View v) {
 

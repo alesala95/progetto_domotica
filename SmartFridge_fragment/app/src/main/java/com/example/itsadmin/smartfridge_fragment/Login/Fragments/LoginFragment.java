@@ -29,6 +29,7 @@ public class LoginFragment extends Fragment{
     EditText eMail;
     EditText password;
 
+
     FragmentLoginListener list;
 
     public LoginFragment (){
@@ -43,6 +44,7 @@ public class LoginFragment extends Fragment{
         list = (FragmentLoginListener)context;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class LoginFragment extends Fragment{
         eMail = view.findViewById(R.id.editLoginMail);
         password = view.findViewById(R.id.editLoginPassword);
 
+
+        //Controlli per l'accesso
+
         btnAccedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,14 +70,14 @@ public class LoginFragment extends Fragment{
 
                     if( true ){ //se utente esiste
 
-                        list.cambia(2);
+                        list.cambia(2); //apertura fragment per la configurazione del frigo
                         eMail.setText("");
                         password.setText("");
-                    }else{
+                    }else{//utente non trovato
 
                         Toast.makeText(getActivity(),"Utente o password errati",Toast.LENGTH_LONG).show();
                     }
-                }else{
+                }else{//campi vuoti
 
                     Toast.makeText(getActivity(),"Compilare i campi",Toast.LENGTH_LONG).show();
                 }
@@ -84,7 +89,8 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                list.cambia(1);
+                list.cambia(1);//apertura fragment registrazione
+                //Svuoto i campi
                 eMail.setText("");
                 password.setText("");
             }

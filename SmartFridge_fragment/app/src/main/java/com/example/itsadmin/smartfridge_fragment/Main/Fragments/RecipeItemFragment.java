@@ -26,13 +26,14 @@ import com.example.itsadmin.smartfridge_fragment.R;
  */
 public class RecipeItemFragment extends Fragment {
 
+    //fragment singola ricetta
+
     FloatingActionButton Floatingbtn;
-    FloatingActionButton FBAsearch;
     FloatingActionButton FBAadd;
     FloatingActionButton FBAfavourite;
     FloatingActionButton FBAShare;
 
-    RelativeLayout relativeLayout;
+    RelativeLayout relativeLayout;//????????????????????????????????????????????
 
     Button TextFABAdd;
     Button TextFABFavourite;
@@ -49,26 +50,20 @@ public class RecipeItemFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view=inflater.inflate(R.layout.fragment_recipe_item, container, false);
 
-        RatingBar rate = view.findViewById(R.id.valutazionePersonale);
-      /*  ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
-        RecyclerView rw2 = (RecyclerView) view.findViewById(R.id.rec_view2);
-        rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rw2.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));*/
+        RatingBar rate = view.findViewById(R.id.valutazionePersonale);//????????????????????????????????????????
 
+        //manca la votazione
 
-
+        //Gestione FBA
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
 
         FBAadd = (FloatingActionButton) view.findViewById(R.id.FBAadd);
         FBAfavourite = (FloatingActionButton) view.findViewById(R.id.FBAfavourite);
         FBAShare = (FloatingActionButton) view.findViewById(R.id.FBAshare);
-
-
 
         TextFABAdd = (Button) view.findViewById(R.id.TextFABRecipe);
         TextFABFavourite = (Button) view.findViewById(R.id.TextFABFavourite);

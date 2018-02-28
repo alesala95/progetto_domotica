@@ -22,7 +22,9 @@ import com.example.itsadmin.smartfridge_fragment.R;
  * Created by itsadmin on 22/02/2018.
  */
 
-public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.OnRefreshListener{//per refresh della pagina
+
+    //Fragment per ricerca e connessione al frigo
 
     SwipeRefreshLayout refreshLayout;
     RecyclerView recSwipe;
@@ -65,7 +67,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         taskR.execute();
     }
 
-    private void frigoDialog(String nome){
+    private void frigoDialog(String nome){ //dialog usato per l'inserimento della password per connettersi al frigo
 
 
         final AlertDialog.Builder miaAlert = new AlertDialog.Builder(getActivity());

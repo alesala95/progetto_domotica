@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     int fragCorrente;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void cambiaFragment(int nFrag) {
 
-        if (frag[nFrag] != null) {
+        if (frag[nFrag] != null) {//verifico che il fragment esista, altrimenti lo si inizializza
             if (nFrag != 0) {
-
+//???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
                 FragmentTransaction fragmentTransactionH = getSupportFragmentManager().beginTransaction();
                 fragmentTransactionH.replace(R.id.fram, frag[nFrag]);
                 fragmentTransactionH.commit();
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // bottom navigation
         navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //gestione bottom navigation menu
 
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -165,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { //creazione toolbar
 
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.tool_bar, menu);
@@ -173,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {//gestione click icona toolbar
 
         int id = item.getItemId();
 
@@ -188,12 +187,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {//gestione del click del soft touch back
 
         if (fragCorrente != 0) {
 
             cambiaFragment(0);
             navigation.setSelectedItemId(R.id.navigation_home);
+
         } else {
 
             super.onBackPressed();

@@ -58,6 +58,7 @@ public class RegistratiFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                //controllo che i campi non siano vuoti
                 if((!(regNome.getText()+"").equals(""))&&(!(regCognome.getText()+"").equals(""))&&(!(regMail.getText()+"").equals(""))&&(!(regPassword.getText()+"").equals(""))){
 
                     // Aggungi utente al DB
@@ -66,6 +67,9 @@ public class RegistratiFragment extends Fragment {
                     regCognome.setText("");
                     regPassword.setText("");
                     regMail.setText("");
+
+                    //Controllare che l'utente non esista prima di aggiungerlo
+
                 }else{
 
                     Toast.makeText(getActivity(),"Compilare tutti i campi",Toast.LENGTH_LONG).show();
