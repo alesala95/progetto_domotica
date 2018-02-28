@@ -56,30 +56,30 @@ public class DataBaseAdapter {
         return values;
     }
 
-    //create a contact
+    //create a alimento
     public long alimento(String nome, String data_scadenza, String immagine ) {
         ContentValues initialValues = createContentValues(nome, data_scadenza, immagine);
         return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
     }
 
-    //update a contact
+    //update a alimento
     public boolean updateAlimento( long contactID, String nome, String data_scadenza, String immagine ) {
         ContentValues updateValues = createContentValues(nome,data_scadenza, immagine);
         return database.update(DATABASE_TABLE, updateValues, KEY_ID + "=" + contactID, null) > 0;
     }
 
 
-    //delete a contact
+    //delete a alimento
     public boolean deleteAlimento(long contactID) {
         return database.delete(DATABASE_TABLE, KEY_ID + "=" + contactID, null) > 0;
     }
 
-    //fetch all contacts
+    //fetch all alimenti
     public Cursor fetchAllAlimenti() {
         return database.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_NOME, KEY_DATA_SCADENZA, KEY_IMG}, null, null, null, null, null);
     }
 
-    //fetch contacts filter by a string
+    //fetch alimenti filter by a string
     public Cursor fetchAlimentoByFilter(String filter) {
         Cursor mCursor = database.query(true, DATABASE_TABLE, new String[] {
                         KEY_ID, KEY_NOME, KEY_DATA_SCADENZA, KEY_IMG  },
@@ -96,5 +96,9 @@ public class DataBaseAdapter {
                 {KEY_ID, KEY_NOME, KEY_DATA_SCADENZA, KEY_IMG },KEY_ID+"="+filter,null,null,null,null,null);
         return sCursor;
     }
+
+
+
+
 
 }
