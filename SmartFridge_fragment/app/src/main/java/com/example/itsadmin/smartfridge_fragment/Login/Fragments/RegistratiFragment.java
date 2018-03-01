@@ -59,7 +59,7 @@ public class RegistratiFragment extends Fragment {
             public void onClick(View v) {
 
                 //controllo che i campi non siano vuoti
-                if((!(regNome.getText()+"").equals(""))&&(!(regCognome.getText()+"").equals(""))&&(!(regMail.getText()+"").equals(""))&&(!(regPassword.getText()+"").equals(""))){
+                if(true/*(!(regNome.getText()+"").equals(""))&&(!(regCognome.getText()+"").equals(""))&&(!(regMail.getText()+"").equals(""))&&(!(regPassword.getText()+"").equals(""))*/){
 
                     // Aggungi utente al DB
                     listener.cambia(0);
