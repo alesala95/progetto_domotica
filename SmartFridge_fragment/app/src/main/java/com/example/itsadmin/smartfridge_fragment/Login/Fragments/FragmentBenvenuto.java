@@ -100,7 +100,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         NsdManager.ResolveListener mResolveListener;
         private final String mServiceName = "Frigo";
 
-        String nome = "Martina";
+        String nome = "0001";
 
         NsdManager mNsdManager = (NsdManager) getActivity().getSystemService(Context.NSD_SERVICE);
 

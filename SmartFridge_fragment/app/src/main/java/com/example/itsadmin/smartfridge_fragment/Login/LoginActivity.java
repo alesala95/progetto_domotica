@@ -39,12 +39,12 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.Fr
 
         //controllo dati inseriti per login e salvataggio tramite singleton
 
-        if(true){//Utente.getInstance().geteMail()!=null&&Utente.getInstance().getPassword()!=null
+        if(Utente.getInstance().geteMail()!=null&&Utente.getInstance().getPassword()!=null){//
 
             Frigorifero.getInstance().setNome(preferences.getString("nomeFrigo",null));
             Frigorifero.getInstance().setCodice(preferences.getString("codiceFrigo",null));
 
-            if(true){//Frigorifero.getInstance().getNome()!=null&&Frigorifero.getInstance().getCodice()!=null
+            if(Frigorifero.getInstance().getNome()!=null&&Frigorifero.getInstance().getCodice()!=null){//
 
                 Intent i = new Intent(this,MainActivity.class);
                 startActivity(i);

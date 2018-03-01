@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                if((!(eMail.getText()+"").equals(""))&&(!(password.getText()+"").equals(""))){
+                if(true/*(!(eMail.getText()+"").equals(""))&&(!(password.getText()+"").equals(""))*/){
 
                     // query per vedere se l'utente esiste
 
