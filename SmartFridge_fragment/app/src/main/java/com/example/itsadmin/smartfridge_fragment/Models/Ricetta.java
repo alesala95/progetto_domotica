@@ -9,32 +9,40 @@ import com.google.gson.annotations.SerializedName;
 public class Ricetta {
     @SerializedName("idRicetta")
     int id;
-    @SerializedName("Nome")
+    @SerializedName("nome")
     String nome;
-    @SerializedName("Difficoltà")
-    int difficoltà;
-    @SerializedName("Durata")
+    @SerializedName("difficolta")
+    int difficolta;
+    @SerializedName("durata")
     String durata;
-    @SerializedName("Preferita")
-    int preferita;
+    @SerializedName("autore")
+    String autore;
+    @SerializedName("ingredienti")
+    String ingredienti;
+    @SerializedName("procedimento")
+    String procedimento;
 
-    public Ricetta(int id,String nome,int difficoltà,String durata, int preferita) {
-
-        this.id=id;
-        this.nome=nome;
-        this.difficoltà=difficoltà;
-        this.durata=durata;
-        this.preferita=preferita;
+    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento) {
+        this.id = id;
+        this.nome = nome;
+        this.difficolta = difficolta;
+        this.durata = durata;
+        this.autore = autore;
+        this.ingredienti = ingredienti;
+        this.procedimento = procendimento;
     }
 
-    public Ricetta(Ricetta ricetta) {
 
-        this.id=ricetta.getId();
-        this.nome=ricetta.getNome();
-        this.difficoltà=ricetta.getDifficoltà();
-        this.durata=ricetta.getDurata();
-        this.preferita=ricetta.getPreferita();
 
+    public Ricetta (Ricetta r){
+
+        this.id = r.getId();
+        this.nome = r.getNome();
+        this.difficolta = r.getDifficolta();
+        this.durata = r.getDurata();
+        this.autore = r.getAutore();
+        this.ingredienti = r.getIngredienti();
+        this.procedimento = r.getProcedimento();
     }
 
     public int getId() {
@@ -53,12 +61,12 @@ public class Ricetta {
         this.nome = nome;
     }
 
-    public int getDifficoltà() {
-        return difficoltà;
+    public int getDifficolta() {
+        return difficolta;
     }
 
-    public void setDifficoltà(int difficoltà) {
-        this.difficoltà = difficoltà;
+    public void setDifficolta(int difficolta) {
+        this.difficolta = difficolta;
     }
 
     public String getDurata() {
@@ -69,11 +77,35 @@ public class Ricetta {
         this.durata = durata;
     }
 
-    public int getPreferita() {
-        return preferita;
+    public String getAutore() {
+        return autore;
     }
 
-    public void setPreferita(int preferita) {
-        this.preferita = preferita;
+    public void setAutore(String autore) {
+        this.autore = autore;
+    }
+
+    public String getIngredienti() {
+        return ingredienti;
+    }
+
+    public void setIngredienti(String ingredienti) {
+        this.ingredienti = ingredienti;
+    }
+
+    public String getProcedimento() {
+        return procedimento;
+    }
+
+    public void setProcedimento(String procedimento) {
+        this.procedimento = procedimento;
+    }
+
+    @Override
+    public String toString (){
+
+        return "Ciao sono "+nome;
     }
 }
+
+

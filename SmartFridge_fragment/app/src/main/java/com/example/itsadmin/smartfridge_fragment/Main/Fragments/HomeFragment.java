@@ -65,14 +65,14 @@ public class HomeFragment extends Fragment {
         ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
 
         RecyclerView rw2 = (RecyclerView) view.findViewById(R.id.rec_view2);
-        rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        //rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
         //aggiunta delle ricette consigliate
         cardRicette.add(new ItemListRicetteConsigliate("Pasta",R.drawable.pasta));
         cardRicette.add(new ItemListRicetteConsigliate("Pollo",R.drawable.pollo));
         cardRicette.add(new ItemListRicetteConsigliate("Tiramisù",R.drawable.tira));
 
-        rw2.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
+        //rw2.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
 
         // card temperatura frigo/freezer
         targetStatusContainer = view.findViewById(R.id.targetStatusContainer);

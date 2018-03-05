@@ -58,6 +58,10 @@ public class RecipeItemFragment extends Fragment {
 
         //manca la votazione
 
+        getArguments().getInt("id");
+
+        // rerer
+
         //Gestione FBA
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
 

@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterList;
+import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteCategory;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ListItem;
@@ -34,10 +35,13 @@ import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.AlimentiAPI;
 import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.RicetteAPI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class RecipeFragment extends Fragment implements View.OnClickListener{
@@ -62,6 +66,19 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
     ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
     AdapterRicetteConsigliate adapterRicette;
 
+    ArrayList <Ricetta> antipasti;
+    ArrayList <Ricetta> primi;
+    ArrayList <Ricetta> secondi;
+    ArrayList <Ricetta> dolci;
+    ArrayList <Ricetta> spuntini;
+
+    AdapterRicetteConsigliate adapterAntipasti;
+    AdapterRicetteConsigliate adapterPrimi;
+    AdapterRicetteConsigliate adapterSecondi;
+    AdapterRicetteConsigliate adapterDolci;
+    AdapterRicetteConsigliate adapterSpuntini;
+
+    ArrayList <Ricetta> aus;
 
     public RecipeFragment() {}//costruttore
 
@@ -83,35 +100,40 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         catDolci.setOnClickListener(this);
         catSpuntini.setOnClickListener(this);
 
+        antipasti = new ArrayList<>();
+        primi = new ArrayList<>();
+        secondi = new ArrayList<>();
+        dolci = new ArrayList<>();
+        spuntini = new ArrayList<>();
 
-        adapterRicette= new AdapterRicetteConsigliate(cardRicette, getContext());
-
-        //aggiunta ricette
-        cardRicette.add(new ItemListRicetteConsigliate("PASTA",R.drawable.pasta));
-        cardRicette.add(new ItemListRicetteConsigliate("POLLO",R.drawable.pollo));
-        cardRicette.add(new ItemListRicetteConsigliate("TIRA",R.drawable.tira));
-
+        adapterAntipasti = new AdapterRicetteConsigliate(antipasti, getActivity(),getFragmentManager());
+        adapterPrimi = new AdapterRicetteConsigliate(primi, getActivity(),getFragmentManager());
+        adapterSecondi = new AdapterRicetteConsigliate(secondi, getActivity(),getFragmentManager());
+        adapterDolci = new AdapterRicetteConsigliate(dolci, getActivity(),getFragmentManager());
+        adapterSpuntini = new AdapterRicetteConsigliate(spuntini, getActivity(),getFragmentManager());
 
         //setto le ricette nelle varie recycler
         RecyclerView rw = view.findViewById(R.id.rec_view);
         rw.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rw.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(),getFragmentManager()));
+        rw.setAdapter(adapterAntipasti);
 
         RecyclerView rw2 = view.findViewById(R.id.rec_view2);
         rw2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rw2.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
+        rw2.setAdapter(adapterPrimi);
 
         RecyclerView rw3 = view.findViewById(R.id.rec_view3);
         rw3.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rw3.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
+        rw3.setAdapter(adapterSecondi);
 
         RecyclerView rw4 = view.findViewById(R.id.rec_view4);
         rw4.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rw4.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
+        rw4.setAdapter(adapterDolci);
 
         RecyclerView rw5 = view.findViewById(R.id.rec_view5);
         rw5.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rw5.setAdapter(new AdapterRicetteConsigliate(cardRicette,getContext(), getFragmentManager()));
+        rw5.setAdapter(adapterSpuntini);
+
+        executeRicetteService();
 
         //gestione Floating Button
         Floatingbtn = view.findViewById(R.id.FloatingBtn);//FBA principale
@@ -214,8 +236,6 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         });
 
 
-        executeRicetteService();
-
     return  view;
 
     }
@@ -224,30 +244,168 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
 
         RicetteAPI ricetteAPI=RetrofitService.getInstance().getRetrofit().create(RicetteAPI.class);
 
-        Call<ArrayList<Ricetta>> call=ricetteAPI.getAllRicette();
+        // get antipasti
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("categoria","antipasto");
+        map.put("limite",5);
+
+        Call<ArrayList<Ricetta>> call=ricetteAPI.getRicetteCat(map);
 
         call.enqueue(new Callback<ArrayList<Ricetta>>() {
             @Override
             public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
 
-                listRicette = response.body();
+                aus = new ArrayList<>();
+                aus = response.body();
 
-                for(Ricetta i : listRicette)
+                for(Ricetta i : aus) {
 
-                    System.out.println(i.toString());
-
+                    antipasti.add(new Ricetta(i));
+                }
 
                 System.out.println("RESPONSE");
-                aggiorna();
+
+                adapterAntipasti.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
 
-                System.out.println("FAIL");
+                System.out.println("FAIL soos");
+            }
+        });
+
+        // get primi
+
+        map = new HashMap<>();
+        map.put("categoria","primo");
+        map.put("limite",5);
+
+        call=ricetteAPI.getRicetteCat(map);
+
+        call.enqueue(new Callback<ArrayList<Ricetta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
+
+                aus = new ArrayList<>();
+                aus = response.body();
+
+                for(Ricetta i : aus) {
+
+                    primi.add(new Ricetta(i));
+                }
+
+
+                System.out.println("RESPONSE");
+                adapterPrimi.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
+
+                System.out.println("FAIL soos");
+            }
+        });
+
+        // get secondi
+
+        map = new HashMap<>();
+        map.put("categoria","secondo");
+        map.put("limite",5);
+
+        call=ricetteAPI.getRicetteCat(map);
+
+        call.enqueue(new Callback<ArrayList<Ricetta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
+
+                aus = new ArrayList<>();
+                aus = response.body();
+
+                for(Ricetta i : aus) {
+
+                    secondi.add(new Ricetta(i));
+                }
+
+
+                System.out.println("RESPONSE");
+                adapterSecondi.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
+
+                System.out.println("FAIL soos");
+            }
+        });
+
+        // get dolci
+
+        map = new HashMap<>();
+        map.put("categoria","dolce");
+        map.put("limite",5);
+
+        call=ricetteAPI.getRicetteCat(map);
+
+        call.enqueue(new Callback<ArrayList<Ricetta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
+
+                aus = new ArrayList<>();
+                aus = response.body();
+
+                for(Ricetta i : aus) {
+
+                    dolci.add(new Ricetta(i));
+                }
+
+
+                System.out.println("RESPONSE");
+                adapterDolci.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
+
+                System.out.println("FAIL soos");
+            }
+        });
+
+        // get spuntini
+
+        map = new HashMap<>();
+        map.put("categoria","spuntino");
+        map.put("limite",5);
+
+        call=ricetteAPI.getRicetteCat(map);
+
+        call.enqueue(new Callback<ArrayList<Ricetta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
+
+                aus = new ArrayList<>();
+                aus = response.body();
+
+                for(Ricetta i : aus) {
+
+                    spuntini.add(new Ricetta(i));
+                }
+
+
+                System.out.println("RESPONSE");
+                adapterSpuntini.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
+
+                System.out.println("FAIL soos");
             }
         });
     }
+
+
 
 
     private void convertiRicette() {
