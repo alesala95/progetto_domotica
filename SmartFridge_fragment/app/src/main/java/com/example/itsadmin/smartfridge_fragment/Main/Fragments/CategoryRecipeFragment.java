@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteCategory;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
+import com.example.itsadmin.smartfridge_fragment.Main.MainActivity;
 import com.example.itsadmin.smartfridge_fragment.R;
 
 import java.util.ArrayList;
@@ -151,6 +152,7 @@ public class CategoryRecipeFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fram,fragmentCreate,"CreateRecipeFragment");
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
             }
         });
 

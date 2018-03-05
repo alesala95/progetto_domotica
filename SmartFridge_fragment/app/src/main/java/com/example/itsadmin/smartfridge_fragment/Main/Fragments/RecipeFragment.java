@@ -21,11 +21,23 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterList;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
+import com.example.itsadmin.smartfridge_fragment.Main.Items.ListItem;
+import com.example.itsadmin.smartfridge_fragment.Main.MainActivity;
+import com.example.itsadmin.smartfridge_fragment.Models.Alimento;
+import com.example.itsadmin.smartfridge_fragment.Models.Ricetta;
 import com.example.itsadmin.smartfridge_fragment.R;
+import com.example.itsadmin.smartfridge_fragment.Singleton.RetrofitService;
+import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.AlimentiAPI;
+import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.RicetteAPI;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RecipeFragment extends Fragment implements View.OnClickListener{
@@ -46,7 +58,12 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
 
     TextView catAntipasti,catPrimi,catSecondi,catDolci,catSpuntini;
 
-    public RecipeFragment() {}
+    ArrayList<Ricetta> listRicette;
+    ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();
+    AdapterRicetteConsigliate adapterRicette;
+
+
+    public RecipeFragment() {}//costruttore
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +84,7 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         catSpuntini.setOnClickListener(this);
 
 
-        ArrayList<ItemListRicetteConsigliate> cardRicette = new ArrayList<>();//creazione arraylist di ricette
+        adapterRicette= new AdapterRicetteConsigliate(cardRicette, getContext());
 
         //aggiunta ricette
         cardRicette.add(new ItemListRicetteConsigliate("PASTA",R.drawable.pasta));
@@ -197,12 +214,59 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         });
 
 
+        executeRicetteService();
 
     return  view;
 
     }
 
+    public void executeRicetteService() {
 
+        RicetteAPI ricetteAPI=RetrofitService.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Call<ArrayList<Ricetta>> call=ricetteAPI.getAllRicette();
+
+        call.enqueue(new Callback<ArrayList<Ricetta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
+
+                listRicette = response.body();
+
+                for(Ricetta i : listRicette)
+
+                    System.out.println(i.toString());
+
+
+                System.out.println("RESPONSE");
+                aggiorna();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
+
+                System.out.println("FAIL");
+            }
+        });
+    }
+
+
+    private void convertiRicette() {
+
+        cardRicette.clear();
+
+        for (Ricetta i : listRicette) {
+
+            cardRicette.add(new ItemListRicetteConsigliate(i.getNome(), R.drawable.pollo));
+        }
+    }
+
+    private void aggiorna() {
+
+
+        convertiRicette();
+
+        adapterRicette.notifyDataSetChanged();
+    }
 
     private void FAB(Animation fadeout) {
         FBAsearch.startAnimation(fadeout);
@@ -274,5 +338,13 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+
 }
 
