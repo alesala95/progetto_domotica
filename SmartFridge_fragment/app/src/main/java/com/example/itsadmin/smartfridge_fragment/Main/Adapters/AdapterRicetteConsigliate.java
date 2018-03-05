@@ -34,6 +34,13 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
 
     }
 
+    public AdapterRicetteConsigliate(ArrayList<ItemListRicetteConsigliate> ls, Context context) {
+
+        this.ls = ls;
+        this.context=context;
+
+    }
+
     @Override
     public AdapterRicetteConsigliate.AdapterRicetteConsigliateHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
