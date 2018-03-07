@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterList;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteCategory;
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteConsigliate;
+import com.example.itsadmin.smartfridge_fragment.Main.Interfaces.RecipeListener;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ListItem;
 import com.example.itsadmin.smartfridge_fragment.Main.MainActivity;
@@ -44,7 +45,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class RecipeFragment extends Fragment implements View.OnClickListener{
+public class RecipeFragment extends Fragment implements View.OnClickListener, RecipeListener{
 
     FloatingActionButton Floatingbtn;
     FloatingActionButton FBAsearch;
@@ -421,7 +422,7 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
     private void aggiorna() {
 
 
-        convertiRicette();
+       // convertiRicette();
 
         adapterRicette.notifyDataSetChanged();
     }
@@ -485,6 +486,7 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
     }
 
     private void openFrag(String id) {
+
         CategoryRecipeFragment fragmentCategory=new CategoryRecipeFragment();
 
         Bundle b = new Bundle();
@@ -493,16 +495,13 @@ public class RecipeFragment extends Fragment implements View.OnClickListener{
 
         FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fram,fragmentCategory,"CreateRecipeFragment");
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack("CreateRecipeFragment");
         fragmentTransaction.commit();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
+    public void cambiaschermata(int schermata) {
+       // lorenzo sei un coglione viva le puttane come te ciao
     }
-
-
 }
 

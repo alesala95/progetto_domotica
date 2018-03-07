@@ -15,10 +15,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.itsadmin.smartfridge_fragment.Models.Ricetta;
 import com.example.itsadmin.smartfridge_fragment.R;
+import com.example.itsadmin.smartfridge_fragment.Singleton.RetrofitService;
+import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.RicetteAPI;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -43,6 +54,14 @@ public class RecipeItemFragment extends Fragment {
 
     boolean flag = false;
 
+    TextView nomeRicetta;
+    TextView nomeUtente;
+    TextView durataRicetta;
+
+    TextView testoIngredienti;
+    TextView testoProcedimento;
+
+    RatingBar difficoltaRate;
 
     public RecipeItemFragment() {
         // Required empty public constructor
@@ -54,13 +73,53 @@ public class RecipeItemFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.fragment_recipe_item, container, false);
 
-        RatingBar rate = view.findViewById(R.id.valutazionePersonale);//????????????????????????????????????????
+        //RatingBar rate = view.findViewById(R.id.valutazionePersonale);//????????????????????????????????????????
 
         //manca la votazione
 
-        getArguments().getInt("id");
+        int idR;
+        idR = getArguments().getInt("id");
+
+        System.out.println("ID: "+idR);
 
         // rerer
+
+        difficoltaRate = view.findViewById(R.id.difficolta_rate);
+
+        nomeRicetta = view.findViewById(R.id.nomeRicetta);
+        nomeUtente = view.findViewById(R.id.nomeUtente);
+        durataRicetta = view.findViewById(R.id.durata);
+
+        testoIngredienti = view.findViewById(R.id.testoIngredienti);
+        testoProcedimento = view.findViewById(R.id.testoProcedimento);
+
+
+        aggiornaUI(idR);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //Gestione FBA
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
@@ -180,6 +239,43 @@ public class RecipeItemFragment extends Fragment {
 
 
         flag = false;
+    }
+
+    private void aggiornaUI (int id){
+
+        RicetteAPI ricetteAPI= RetrofitService.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map <String,Object> idm = new HashMap<>();
+
+        idm.put("id",id);
+
+        Call <ArrayList<Ricetta>> call=ricetteAPI.getRicetta(idm);
+
+        call.enqueue(new Callback<ArrayList<Ricetta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ricetta>> call, Response<ArrayList<Ricetta>> response) {
+
+                ArrayList <Ricetta> arl = response.body();
+
+                nomeRicetta.setText(arl.get(0).getNome());
+                nomeUtente.setText(arl.get(0).getAutore());
+                durataRicetta.setText(arl.get(0).getDurata());
+                testoIngredienti.setText(arl.get(0).getIngredienti());
+                testoProcedimento.setText(arl.get(0).getProcedimento());
+                difficoltaRate.setRating(arl.get(0).getDifficolta());
+
+                System.out.println("Response");
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ricetta>> call, Throwable t) {
+
+                System.out.println("Failure");
+                System.out.println(t.getCause());
+                System.out.println(t.getMessage());
+            }
+        });
+
     }
 
 }

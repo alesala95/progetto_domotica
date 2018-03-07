@@ -44,18 +44,6 @@
                         android:layout_gravity="bottom"
                         android:background="@color/transparent">
 
-                        <RatingBar
-
-                            android:id="@+id/valutazioneCommunity"
-                            style="?android:attr/ratingBarStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|left"
-                            android:layout_marginLeft="10dp"
-                            android:max="5"
-                            android:numStars="5"
-                            android:rating="3" />
-
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
@@ -83,78 +71,38 @@
                     android:text="Johnny Punzo Sins"
                     android:textColor="@android:color/darker_gray" />
 
-                <TextView
-
-                    android:id="@+id/tagDifficolta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/nomeRicetta"
-                    android:layout_below="@id/nomeUtente"
-                    android:layout_marginTop="15dp"
-                    android:text="Difficolta"
-                    android:textColor="@android:color/darker_gray" />
-
                 <RatingBar
 
                     android:id="@+id/difficolta_rate"
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tagDifficolta"
-                    android:layout_alignEnd="@+id/tagVota"
+                    android:layout_below="@+id/durata"
+                    android:layout_toEndOf="@+id/card_recipe"
                     android:max="3"
                     android:numStars="3"
+                    android:layout_marginTop="10dp"
                     android:progressBackgroundTint="@color/transparent"
-                    android:progressDrawable="@drawable/chef"
                     android:rating="3"
                     android:secondaryProgressTint="@color/transparent" />
 
-                <TextView
-                    android:id="@+id/tagDurata"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tagDifficolta"
-                    android:layout_toEndOf="@+id/card_recipe"
-                    android:text="Durata"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@android:color/darker_gray"/>
+                <!-- android:progressDrawable="@drawable/chef" -->
 
                 <TextView
                     android:id="@+id/durata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/tagDurata"
-                    android:layout_alignBottom="@+id/tagDurata"
-                    android:layout_alignEnd="@+id/valutazionePersonale"
+                    android:layout_below="@+id/nomeUtente"
+                    android:layout_marginTop="16dp"
+                    android:layout_toEndOf="@+id/card_recipe"
                     android:text="1 ora" />
-
-                <TextView
-                    android:id="@+id/tagVota"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tagDurata"
-                    android:layout_toEndOf="@+id/card_recipe"
-                    android:text="Lascia il tuo voto!"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@android:color/darker_gray"/>
-
-                <RatingBar
-
-                    android:id="@+id/valutazionePersonale"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_alignBottom="@+id/card_recipe"
-                    android:layout_toEndOf="@+id/card_recipe"
-                    android:clickable="true"
-                    android:numStars="5"
-                    android:stepSize=".5" />
 
                 <!-- ingredienti e procedimento -->
 
                 <TextView
                     android:id="@+id/tagIngredienti"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/card_recipe"
                     android:layout_below="@id/card_recipe"
@@ -171,13 +119,14 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="#FFF"
-                    android:elevation="2dp"
+                    android:elevation="1dp"
                     android:padding="6dp"
                     android:text=" -Uova\n -Uova\n -Uova\n -Uova\n" />
 
                 <TextView
                     android:id="@+id/tagProcedimento"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/card_recipe"
                     android:layout_below="@id/testoIngredienti"
@@ -195,7 +144,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="#FFF"
-                    android:elevation="2dp"
+                    android:elevation="1dp"
                     android:padding="6dp"
                     android:text="Procedimento ... \n \n" />
 
@@ -205,6 +154,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/fab"/>
+     <include layout="@layout/fab"/>
 
 </FrameLayout>

@@ -23,4 +23,6 @@ public interface RicetteAPI {
     @GET("/ricette.php")
     Call<ArrayList<Ricetta>> getRicetteCat (@QueryMap Map<String,Object> values);
 
+    @GET("/ricette.php")
+    Call<ArrayList<Ricetta>> getRicetta (@QueryMap Map<String,Object> values);
 }

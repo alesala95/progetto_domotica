@@ -22,6 +22,7 @@ import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterRicetteCon
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterScadenze;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListaScadenze;
+import com.example.itsadmin.smartfridge_fragment.Main.MainActivity;
 import com.example.itsadmin.smartfridge_fragment.R;
 
 import java.util.ArrayList;
@@ -124,4 +125,5 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
 }

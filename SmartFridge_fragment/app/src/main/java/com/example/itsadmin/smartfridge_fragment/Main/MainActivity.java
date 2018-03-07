@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             cambiaFragment(nFrag);
         }
 
+
+
         fragCorrente = nFrag;
     }
 
@@ -183,14 +185,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {//gestione del click del soft touch back
 
-        if (fragCorrente != 0) {
+
+        if (fragCorrente == 0) {
+
+
+            super.onBackPressed();
+        } else {
 
             cambiaFragment(0);
             navigation.setSelectedItemId(R.id.navigation_home);
-
-        } else {
-
-            super.onBackPressed();
         }
     }
 

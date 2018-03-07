@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.itsadmin.smartfridge_fragment.Main.Adapters.AdapterList;
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ListItem;
+import com.example.itsadmin.smartfridge_fragment.Main.MainActivity;
 import com.example.itsadmin.smartfridge_fragment.Models.Alimento;
 import com.example.itsadmin.smartfridge_fragment.R;
 import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.AlimentiAPI;
@@ -212,6 +213,5 @@ public class FrigoFragment extends Fragment {
 
         adapterAlimenti.notifyDataSetChanged();
     }
-
 
 }
