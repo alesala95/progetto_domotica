@@ -17,11 +17,14 @@ public class Alimento {
     String quantita;
     @SerializedName("scadenza")
     Date scadenza;
+    @SerializedName("immagine")
+    String immagineUrl;
 
-    public Alimento(String nome, String quantita, Date scadenza) {
+    public Alimento(String nome, String quantita, Date scadenza, String immagineUrl) {
         this.nome = nome;
         this.quantita = quantita;
         this.scadenza = scadenza;
+        this.immagineUrl = immagineUrl;
     }
 
     public Alimento (Alimento alimento){
@@ -29,6 +32,15 @@ public class Alimento {
         this.nome = alimento.getNome();
         this.quantita = alimento.getQuantita();
         this.scadenza = alimento.getScadenza();
+        this.immagineUrl = alimento.getImmagineUrl();
+    }
+
+    public String getImmagineUrl() {
+        return immagineUrl;
+    }
+
+    public void setImmagineUrl(String immagineUrl) {
+        this.immagineUrl = immagineUrl;
     }
 
     public String getNome() {

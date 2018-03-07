@@ -11,7 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.itsadmin.smartfridge_fragment.Main.Items.ListItem;
+import com.example.itsadmin.smartfridge_fragment.Models.Alimento;
 import com.example.itsadmin.smartfridge_fragment.R;
+import com.example.itsadmin.smartfridge_fragment.Singleton.RetrofitService;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -20,12 +23,12 @@ import java.util.ArrayList;
  * Created by itsadmin on 31/01/2018.
  */
 
-public class AdapterList extends ArrayAdapter<ListItem> {
+public class AdapterList extends ArrayAdapter<Alimento> {
 
     Context ctx;
-    ArrayList<ListItem> values;
+    ArrayList<Alimento> values;
 
-    public AdapterList(Context ctx, ArrayList<ListItem> values) {
+    public AdapterList(Context ctx, ArrayList<Alimento> values) {
 
         super(ctx, R.layout.item_lista_prodotto, values);
 
@@ -45,20 +48,21 @@ public class AdapterList extends ArrayAdapter<ListItem> {
 
             ViewHolder holder = new ViewHolder();
 
-            holder.imageF = (ImageView) rowView.findViewById(R.id.imageF);
-            holder.nomeF = (TextView) rowView.findViewById(R.id.nomeF);
+            holder.imageF = rowView.findViewById(R.id.imageF);
+            holder.nomeF = rowView.findViewById(R.id.nomeF);
 
-            holder.nomeB = (TextView) rowView.findViewById(R.id.nomeB);
-            holder.quantitaB = (TextView) rowView.findViewById(R.id.quantitaB);
-            holder.scadenzaB = (TextView) rowView.findViewById(R.id.scadenzaB);
-            holder.back = (RelativeLayout) rowView.findViewById(R.id.back);
+            holder.nomeB = rowView.findViewById(R.id.nomeB);
+            holder.quantitaB = rowView.findViewById(R.id.quantitaB);
+            holder.scadenzaB = rowView.findViewById(R.id.scadenzaB);
+            holder.back = rowView.findViewById(R.id.back);
 
             rowView.setTag(holder);
         }
 
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
-        holder.imageF.setImageResource(values.get(position).getImg());
+        Picasso.get().load(RetrofitService.getInstance().getRetrofit().baseUrl()+""+values.get(position).getImmagineUrl()).into(holder.imageF);
+
         holder.nomeF.setText(values.get(position).getNome());
 
         holder.nomeB.setText(values.get(position).getNome());

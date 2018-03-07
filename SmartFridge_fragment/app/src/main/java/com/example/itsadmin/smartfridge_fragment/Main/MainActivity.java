@@ -28,6 +28,8 @@ import com.example.itsadmin.smartfridge_fragment.R;
 import com.example.itsadmin.smartfridge_fragment.Main.Fragments.RecipeFragment;
 import com.example.itsadmin.smartfridge_fragment.Setting.SettingActivity;
 import com.example.itsadmin.smartfridge_fragment.Main.Fragments.ShopFragment;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.PicassoProvider;
 
 import java.lang.reflect.Field;
 

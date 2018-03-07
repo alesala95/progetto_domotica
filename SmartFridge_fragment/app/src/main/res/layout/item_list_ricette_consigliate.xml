@@ -13,6 +13,11 @@
     app:cardCornerRadius="6dp"
     >
 
+    <ImageView
+        android:id="@+id/sfondoCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <RelativeLayout
 
         android:layout_width="match_parent"
@@ -20,6 +25,8 @@
         android:orientation="horizontal"
         android:layout_gravity="bottom"
         android:background="@color/transparent">
+
+
 
         <TextView
             android:id="@+id/textP"
@@ -29,22 +36,11 @@
             android:textColor="@android:color/white"
             android:gravity="bottom"
             android:paddingLeft="5dp"
-            android:text="Nome"/>
-
-        <RatingBar
-
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textP"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@+id/textP"
-            android:max="5"
-            android:numStars="5"
-            android:paddingLeft="5dp"
             android:paddingBottom="3dp"
-            android:rating="3"
-            android:stepSize=".5" />
+            android:text="Nome"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
 
     </RelativeLayout>
 

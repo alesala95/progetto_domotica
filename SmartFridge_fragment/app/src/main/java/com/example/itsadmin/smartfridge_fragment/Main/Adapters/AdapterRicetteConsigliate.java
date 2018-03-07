@@ -3,18 +3,18 @@ package com.example.itsadmin.smartfridge_fragment.Main.Adapters;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.itsadmin.smartfridge_fragment.Main.Fragments.RecipeItemFragment;
-import com.example.itsadmin.smartfridge_fragment.Main.Items.ItemListRicetteConsigliate;
 import com.example.itsadmin.smartfridge_fragment.Models.Ricetta;
 import com.example.itsadmin.smartfridge_fragment.R;
+import com.example.itsadmin.smartfridge_fragment.Singleton.RetrofitService;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicetteConsigliate.AdapterRicetteConsigliateHolder> {
 
-    //ArrayList<ItemListRicetteConsigliate> ls;
     ArrayList<Ricetta> lsr;
     Context context;
     FragmentManager FragManager;
@@ -52,26 +51,20 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
     public void onBindViewHolder(AdapterRicetteConsigliate.AdapterRicetteConsigliateHolder holder, int position)  {
 
         holder.txt.setText(lsr.get(position).getNome());
-        holder.foodIcon.setBackgroundResource(R.drawable.pollo);
-
-        System.out.println("Adapter "+lsr.get(position).getNome());
+        Picasso.get().load(RetrofitService.getInstance().getRetrofit().baseUrl()+""+lsr.get(position).getUrlImage()).into(holder.sfondo);
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                if(isLongClick){
-                    //Toast.makeText(context,"long click"+ls.get(position).getTesto(),Toast.LENGTH_LONG).show();
-                }else {
 
-                    Bundle b = new Bundle();
-                    b.putInt("id",lsr.get(position).getId());
-                    RecipeItemFragment recipeItemFragment=new RecipeItemFragment();
-                    recipeItemFragment.setArguments(b);
-                    android.support.v4.app.FragmentTransaction fragmentTransactionH=FragManager.beginTransaction();
-                    fragmentTransactionH.replace(R.id.fram,recipeItemFragment,"RecipeItemFragment");
-                    fragmentTransactionH.addToBackStack(null);
-                    fragmentTransactionH.commit();
-                }
+                Bundle b = new Bundle();
+                b.putInt("id",lsr.get(position).getId());
+                RecipeItemFragment recipeItemFragment=new RecipeItemFragment();
+                recipeItemFragment.setArguments(b);
+                android.support.v4.app.FragmentTransaction fragmentTransactionH=FragManager.beginTransaction();
+                fragmentTransactionH.replace(R.id.fram,recipeItemFragment,"RecipeItemFragment");
+                fragmentTransactionH.addToBackStack(null);
+                fragmentTransactionH.commit();
             }
         });
     }
@@ -87,15 +80,15 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
     public class AdapterRicetteConsigliateHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
 
         public TextView txt;
-        public CardView foodIcon;
+        public ImageView sfondo;
 
         private ItemClickListener itemClickListener;
 
         public AdapterRicetteConsigliateHolder(View itemView) {
 
             super(itemView);
-            txt = (TextView) itemView.findViewById(R.id.textP);
-            foodIcon=(CardView) itemView.findViewById(R.id.card);
+            txt = itemView.findViewById(R.id.textP);
+            sfondo = itemView.findViewById(R.id.sfondoCard);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

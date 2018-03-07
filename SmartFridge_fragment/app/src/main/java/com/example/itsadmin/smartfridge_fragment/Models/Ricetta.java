@@ -21,8 +21,10 @@ public class Ricetta {
     String ingredienti;
     @SerializedName("procedimento")
     String procedimento;
+    @SerializedName("urlImage")
+    String urlImage;
 
-    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento) {
+    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento, String urlImage) {
         this.id = id;
         this.nome = nome;
         this.difficolta = difficolta;
@@ -30,8 +32,8 @@ public class Ricetta {
         this.autore = autore;
         this.ingredienti = ingredienti;
         this.procedimento = procendimento;
+        this.urlImage = urlImage;
     }
-
 
 
     public Ricetta (Ricetta r){
@@ -43,6 +45,17 @@ public class Ricetta {
         this.autore = r.getAutore();
         this.ingredienti = r.getIngredienti();
         this.procedimento = r.getProcedimento();
+        this.urlImage = r.getUrlImage();
+    }
+
+    public String getUrlImage(){
+
+        return urlImage;
+    }
+
+    public void setUrlImage (String urlImage){
+
+        this.urlImage = urlImage;
     }
 
     public int getId() {

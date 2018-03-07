@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -40,8 +41,8 @@ import retrofit2.Response;
  */
 public class FrigoFragment extends Fragment {
 
-    ArrayList<ListItem> list;
     ArrayList<Alimento> listAlimenti;
+    ArrayList<Boolean> flags;
 
     GridView gw;
     AdapterList adapterAlimenti;
@@ -56,15 +57,15 @@ public class FrigoFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_frigo, container, false);
 
-        list = new ArrayList<>();
         listAlimenti = new ArrayList<>();
+        flags = new ArrayList<>();
 
         // si riempie l'array list alimenti (listAlimenti) con gli alimenti con retrofit
 
         // con listAlimenti si costruisce l'arrayList di listItem (ila)
 
         gw = (GridView) view.findViewById(R.id.gw);
-        adapterAlimenti = new AdapterList(getActivity(), list);
+        adapterAlimenti = new AdapterList(getActivity(), listAlimenti);
 
         gw.setAdapter(adapterAlimenti);
 
@@ -89,9 +90,9 @@ public class FrigoFragment extends Fragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        if (!list.get(position).isFlag()) {
+                        if (!flags.get(position)) {
                             //retro
-                            list.get(position).setFlag(true);
+                            flags.set(position,true);
                             back.setVisibility(View.VISIBLE);
                             ima.setVisibility(View.INVISIBLE);
                             txt.setVisibility(View.INVISIBLE);
@@ -99,7 +100,7 @@ public class FrigoFragment extends Fragment {
 
                         } else {
                             //fronte
-                            list.get(position).setFlag(false);
+                            flags.set(position,false);
                             back.setVisibility(View.INVISIBLE);
                             ima.setVisibility(View.VISIBLE);
                             txt.setVisibility(View.VISIBLE);
@@ -130,15 +131,26 @@ public class FrigoFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Alimento>> call, Response<ArrayList<Alimento>> response) {
 
-                listAlimenti = response.body();
+                listAlimenti.clear();
+                flags.clear();
 
-                for(Alimento a : listAlimenti)
+                adapterAlimenti.notifyDataSetChanged();
 
-                    System.out.println(a.toString());
+                if(response.body() != null){
 
+                    if(response.body().size()>0){
+
+                        for (Alimento a : response.body()){
+
+                            listAlimenti.add(a);
+                            flags.add(false);
+                        }
+                    }
+                }
+
+                adapterAlimenti.notifyDataSetChanged();
 
                 System.out.println("RESPONSE");
-                aggiorna();
             }
 
             @Override
@@ -196,22 +208,5 @@ public class FrigoFragment extends Fragment {
 
     }
 
-    private void convertiAlimenti() {
-
-        list.clear();
-
-        for (Alimento a : listAlimenti) {
-
-            list.add(new ListItem(a.getNome(), a.getQuantita(), a.getScadenza(), R.drawable.pollo));
-        }
-    }
-
-    private void aggiorna() {
-
-
-        convertiAlimenti();
-
-        adapterAlimenti.notifyDataSetChanged();
-    }
 
 }

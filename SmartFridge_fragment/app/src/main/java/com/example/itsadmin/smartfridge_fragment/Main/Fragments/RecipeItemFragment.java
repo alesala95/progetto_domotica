@@ -2,6 +2,7 @@ package com.example.itsadmin.smartfridge_fragment.Main.Fragments;
 
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import com.example.itsadmin.smartfridge_fragment.Models.Ricetta;
 import com.example.itsadmin.smartfridge_fragment.R;
 import com.example.itsadmin.smartfridge_fragment.Singleton.RetrofitService;
 import com.example.itsadmin.smartfridge_fragment.SmartFridgeAPI.RicetteAPI;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +66,8 @@ public class RecipeItemFragment extends Fragment {
 
     RatingBar difficoltaRate;
 
+    ImageView imgRic;
+
     public RecipeItemFragment() {
         // Required empty public constructor
     }
@@ -93,6 +98,7 @@ public class RecipeItemFragment extends Fragment {
         testoIngredienti = view.findViewById(R.id.testoIngredienti);
         testoProcedimento = view.findViewById(R.id.testoProcedimento);
 
+        imgRic = view.findViewById(R.id.imgRic);
 
         aggiornaUI(idR);
 
@@ -263,6 +269,8 @@ public class RecipeItemFragment extends Fragment {
                 testoIngredienti.setText(arl.get(0).getIngredienti());
                 testoProcedimento.setText(arl.get(0).getProcedimento());
                 difficoltaRate.setRating(arl.get(0).getDifficolta());
+
+                Picasso.get().load(RetrofitService.getInstance().getRetrofit().baseUrl()+""+arl.get(0).getUrlImage()).into(imgRic);
 
                 System.out.println("Response");
             }
