@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerEventi;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.OnItemClickListener;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
@@ -21,18 +22,18 @@ import java.util.ArrayList;
  * Created by LoreAleRick on 08/03/2018.
  */
 
-public class AdapterListaCategorie extends ArrayAdapter <Categoria> implements OnItemClickListener{
+public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
 
     private Activity c;
     private ArrayList <Categoria> categorie;
-    private ListenerEventi listenerEventi;
+    private ListenerApriRicetta listenerApriRicetta;
 
-    public AdapterListaCategorie(Activity context, int resource, ArrayList <Categoria> categorie, ListenerEventi listenerEventi) {
+    public AdapterListaCategorie(Activity context, int resource, ArrayList <Categoria> categorie, ListenerApriRicetta listenerApriRicetta) {
         super(context, resource, categorie);
 
         this.c = context;
         this.categorie = categorie;
-        this.listenerEventi = listenerEventi;
+        this.listenerApriRicetta = listenerApriRicetta;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria> implements O
 
             viewHolder.listaCategorie.setLayoutManager(new LinearLayoutManager(c,LinearLayoutManager.HORIZONTAL,false));
             viewHolder.listaCategorie.addItemDecoration(new RecyclerDivider(c,R.dimen.offset));
-            viewHolder.listaCategorie.setAdapter(new AdapterRicetta(c,categorie.get(position).getRicette(),this));
+            viewHolder.listaCategorie.setAdapter(new AdapterRicetta(c,categorie.get(position).getRicette(),listenerApriRicetta));
 
             view.setTag(viewHolder);
         }
@@ -63,12 +64,6 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria> implements O
 
 
         return view;
-    }
-
-    @Override
-    public void onItemClick(View v, int position) {
-
-        listenerEventi.selezionaRicetta(position);
     }
 
     static class ViewHolder{

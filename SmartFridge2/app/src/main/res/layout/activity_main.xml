@@ -12,18 +12,25 @@
 
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
-        app:title="@string/app_name"
-        android:layout_height="?attr/actionBarSize">
-    </android.support.v7.widget.Toolbar>
-
-
+        app:title="@string/app_name"/>
     <FrameLayout
 
         android:id="@+id/contenitore"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@id/navigation"/>
+
+    <android.support.design.widget.BottomNavigationView
+
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        app:menu="@menu/bottom_nav"/>
 
 </RelativeLayout>

@@ -1,29 +1,33 @@
 package com.example.lorealerick.smartfridge2.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by LoreAleRick on 08/03/2018.
  */
 
 public class Ricetta {
 
-    //@SerializedName("idRicetta")
+    @SerializedName("idRicetta")
     int id;
-    //@SerializedName("nome")
+    @SerializedName("nome")
     String nome;
-    //@SerializedName("difficolta")
+    @SerializedName("difficolta")
     int difficolta;
-    //@SerializedName("durata")
+    @SerializedName("durata")
     String durata;
-    //@SerializedName("autore")
+    @SerializedName("autore")
     String autore;
-    //@SerializedName("ingredienti")
+    @SerializedName("ingredienti")
     String ingredienti;
-    //@SerializedName("procedimento")
+    @SerializedName("procedimento")
     String procedimento;
-    //@SerializedName("urlImage")
+    @SerializedName("categoria")
+    String categoria;
+    @SerializedName("urlImage")
     String urlImage;
 
-    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento, String urlImage) {
+    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento, String urlImage, String categoria) {
         this.id = id;
         this.nome = nome;
         this.difficolta = difficolta;
@@ -32,6 +36,11 @@ public class Ricetta {
         this.ingredienti = ingredienti;
         this.procedimento = procendimento;
         this.urlImage = urlImage;
+        this.categoria = categoria;
+    }
+
+    public Ricetta (){
+
     }
 
     public Ricetta (Ricetta r){
@@ -44,6 +53,14 @@ public class Ricetta {
         this.ingredienti = r.getIngredienti();
         this.procedimento = r.getProcedimento();
         this.urlImage = r.getUrlImage();
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getUrlImage(){

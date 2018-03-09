@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SmartFridge2</string>
+    <string name="transizione_ricetta"/>
 </resources>

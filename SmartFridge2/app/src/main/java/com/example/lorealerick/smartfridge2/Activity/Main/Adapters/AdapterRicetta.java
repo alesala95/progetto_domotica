@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerEventi;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.OnItemClickListener;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
@@ -25,14 +27,13 @@ public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHol
 
     public ArrayList <Ricetta> ricette;
     private Context context;
-    private OnItemClickListener listener;
+    private ListenerApriRicetta listenerApriRicetta;
 
-
-    public AdapterRicetta(Context context, ArrayList<Ricetta> ricette, OnItemClickListener listener) {
+    public AdapterRicetta(Context context, ArrayList<Ricetta> ricette, ListenerApriRicetta listenerApriRicetta) {
 
         this.ricette = ricette;
         this.context = context;
-        this.listener = listener;
+        this.listenerApriRicetta = listenerApriRicetta;
     }
 
     @Override
@@ -45,14 +46,21 @@ public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.nome.setText(ricette.get(position).getNome());
+
+        holder.nome.setTransitionName("trNome"+ricette.get(position).getId());
+        holder.immagine.setTransitionName("trImmagine"+ricette.get(position).getId());
+
+        final String tagNomeT = holder.nome.getTransitionName();
+        final String tagImmagineT = holder.immagine.getTransitionName();
+
         holder.setItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
 
-                listener.onItemClick(v,ricette.get(position).getId());
+                listenerApriRicetta.apriRicetta(ricette.get(position).getId());
             }
         });
     }

@@ -9,7 +9,8 @@
         android:id="@+id/immagine"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CCC"/>
+        android:background="#CCC"
+        android:transitionName="@string/transizione_ricetta"/>
 
 
     <TextView
