@@ -1,0 +1,91 @@
+package com.example.lorealerick.smartfridge2.Activity.Main.Adapters;
+
+import android.content.Context;
+import android.icu.text.UnicodeSetSpanner;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.OnItemClickListener;
+import com.example.lorealerick.smartfridge2.Models.Ricetta;
+import com.example.lorealerick.smartfridge2.R;
+
+import java.util.ArrayList;
+
+/**
+ * Created by LoreAleRick on 08/03/2018.
+ */
+
+public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHolder>{
+
+    public ArrayList <Ricetta> ricette;
+    private Context context;
+    private OnItemClickListener listener;
+
+
+    public AdapterRicetta(Context context, ArrayList<Ricetta> ricette, OnItemClickListener listener) {
+
+        this.ricette = ricette;
+        this.context = context;
+        this.listener = listener;
+    }
+
+    @Override
+    public AdapterRicetta.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View v = inflater.inflate(R.layout.item_ricetta,parent,false);
+
+        return new AdapterRicetta.ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+        holder.nome.setText(ricette.get(position).getNome());
+        holder.setItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+
+                listener.onItemClick(v,ricette.get(position).getId());
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return ricette.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        public TextView nome;
+        public ImageView immagine;
+
+        private OnItemClickListener onItemClickListener;
+
+        public ViewHolder(View itemView) {
+
+            super(itemView);
+            nome = itemView.findViewById(R.id.nome);
+            immagine = itemView.findViewById(R.id.immagine);
+
+            itemView.setOnClickListener(this);
+        }
+
+        public void setItemClickListener(OnItemClickListener itemClickListener){
+            this.onItemClickListener=itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            onItemClickListener.onItemClick(view,getAdapterPosition());
+        }
+    }
+}

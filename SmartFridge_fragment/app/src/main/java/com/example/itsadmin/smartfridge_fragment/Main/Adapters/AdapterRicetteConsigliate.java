@@ -33,8 +33,6 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
         this.lsr = lsr;
         this.context=context;
         this.FragManager = fragmentManager;
-
-        System.out.println("Adapter");
     }
 
     @Override
@@ -52,7 +50,6 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
 
         holder.txt.setText(lsr.get(position).getNome());
         Picasso.get().load(RetrofitService.getInstance().getRetrofit().baseUrl()+""+lsr.get(position).getUrlImage()).into(holder.sfondo);
-
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
@@ -62,7 +59,7 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
                 RecipeItemFragment recipeItemFragment=new RecipeItemFragment();
                 recipeItemFragment.setArguments(b);
                 android.support.v4.app.FragmentTransaction fragmentTransactionH=FragManager.beginTransaction();
-                fragmentTransactionH.replace(R.id.fram,recipeItemFragment,"RecipeItemFragment");
+                fragmentTransactionH.replace(R.id.fram,recipeItemFragment);
                 fragmentTransactionH.addToBackStack(null);
                 fragmentTransactionH.commit();
             }
@@ -71,8 +68,6 @@ public class AdapterRicetteConsigliate extends RecyclerView.Adapter<AdapterRicet
 
     @Override
     public int getItemCount() {
-
-        System.out.println(lsr.size());
 
         return lsr.size();
     }
