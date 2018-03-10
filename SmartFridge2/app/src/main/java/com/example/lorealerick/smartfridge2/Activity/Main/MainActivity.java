@@ -39,12 +39,14 @@ public class MainActivity extends AppCompatActivity{
                 aggiungiFragment(0,false);
 
 
-        DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+        /*DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
         dbAdapter.addRicetta(new Ricetta(1,"Pasta",3,"3h","Lore","Spaghetti","Metti l'acqua","","primo"));
         dbAdapter.addRicetta(new Ricetta(2,"Pollo",3,"3h","Lore","Spaghetti","Metti l'acqua","","secondo"));
         dbAdapter.addRicetta(new Ricetta(3,"Lasagne",3,"3h","Lore","Spaghetti","Metti l'acqua","","terzo"));
         dbAdapter.addRicetta(new Ricetta(4,"Brasato",3,"3h","Lore","Spaghetti","Metti l'acqua","","primo"));
         dbAdapter.addRicetta(new Ricetta(5,"Ossobuco",3,"3h","Lore","Spaghetti","Metti l'acqua","","quarto"));
+        dbAdapter.addRicetta(new Ricetta(6,"Ossobuco",3,"3h","Lore","Spaghetti","Metti l'acqua","","sesto"));
+        dbAdapter.addRicetta(new Ricetta(7,"Ossobuco",3,"3h","Lore","Spaghetti","Metti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acqua","","nono"));*/
     }
 
     private void inizializzaFragment (){

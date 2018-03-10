@@ -1,21 +1,18 @@
 package com.example.lorealerick.smartfridge2.Activity.Main.Adapters;
 
 import android.content.Context;
-import android.icu.text.UnicodeSetSpanner;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerEventi;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.OnItemClickListener;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
 
 import java.util.ArrayList;
 
@@ -40,7 +37,7 @@ public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHol
     public AdapterRicetta.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.item_ricetta,parent,false);
+        View v = inflater.inflate(R.layout.item_ricetta_alimento,parent,false);
 
         return new AdapterRicetta.ViewHolder(v);
     }
@@ -49,12 +46,7 @@ public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHol
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.nome.setText(ricette.get(position).getNome());
-
-        holder.nome.setTransitionName("trNome"+ricette.get(position).getId());
-        holder.immagine.setTransitionName("trImmagine"+ricette.get(position).getId());
-
-        final String tagNomeT = holder.nome.getTransitionName();
-        final String tagImmagineT = holder.immagine.getTransitionName();
+        holder.immagine.setImageBitmap(BitmapHandle.getBitmap(ricette.get(position).getImage()));
 
         holder.setItemClickListener(new OnItemClickListener() {
             @Override
@@ -80,6 +72,7 @@ public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHol
         public ViewHolder(View itemView) {
 
             super(itemView);
+
             nome = itemView.findViewById(R.id.nome);
             immagine = itemView.findViewById(R.id.immagine);
 

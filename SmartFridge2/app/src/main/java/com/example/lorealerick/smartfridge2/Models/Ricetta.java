@@ -24,10 +24,10 @@ public class Ricetta {
     String procedimento;
     @SerializedName("categoria")
     String categoria;
-    @SerializedName("urlImage")
-    String urlImage;
+    @SerializedName("image")
+    byte [] image;
 
-    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento, String urlImage, String categoria) {
+    public Ricetta(int id, String nome, int difficolta, String durata, String autore, String ingredienti, String procendimento, byte [] image, String categoria) {
         this.id = id;
         this.nome = nome;
         this.difficolta = difficolta;
@@ -35,7 +35,7 @@ public class Ricetta {
         this.autore = autore;
         this.ingredienti = ingredienti;
         this.procedimento = procendimento;
-        this.urlImage = urlImage;
+        this.image = image;
         this.categoria = categoria;
     }
 
@@ -52,7 +52,15 @@ public class Ricetta {
         this.autore = r.getAutore();
         this.ingredienti = r.getIngredienti();
         this.procedimento = r.getProcedimento();
-        this.urlImage = r.getUrlImage();
+        this.image = r.getImage();
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getCategoria() {
@@ -61,16 +69,6 @@ public class Ricetta {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public String getUrlImage(){
-
-        return urlImage;
-    }
-
-    public void setUrlImage (String urlImage){
-
-        this.urlImage = urlImage;
     }
 
     public int getId() {
@@ -132,6 +130,6 @@ public class Ricetta {
     @Override
     public String toString (){
 
-        return "";
+        return nome+"";
     }
 }

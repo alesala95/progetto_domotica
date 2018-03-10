@@ -12,15 +12,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_NAME = "contactsManager";
-
-    public static final String TABLE_CONTACTS = "contacts";
+    private static final String DATABASE_NAME = "smartFridge";
 
     public static final String TABELLA_RICETTA = "ricetta";
-
-    public static final String KEY_CONTACT_ID = "_id";
-    public static final String KEY_CONTACT_NAME = "name";
-    public static final String KEY_CONTACT_PHONE = "phone_number";
+    public static final String TABELLA_ALIMENTO = "alimento";
 
     public static final String KEY_RICETTA_ID = "_idRicetta";
     public static final String KEY_RICETTA_NOME = "nomeRicetta";
@@ -30,10 +25,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_RICETTA_INGREDIENTI = "ingredientiRicetta";
     public static final String KEY_RICETTA_PROCEDIMENTO = "procedimentoRicetta";
     public static final String KEY_RICETTA_CATEGORIA = "categoriaRicetta";
+    public static final String KEY_RICETTA_IMMAGINE = "immagineRicetta";
 
-    private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
-            + KEY_CONTACT_ID + " INTEGER PRIMARY KEY," + KEY_CONTACT_NAME + " TEXT,"
-            + KEY_CONTACT_PHONE + " TEXT" + ")";
+    public static final String KEY_ALIMENTO_ID_RECORD = "_id";
+    public static final String KEY_ALIMENTO_ID = "_idAlimento";
+    public static final String KEY_ALIMENTO_NOME = "nomeAlimento";
+    public static final String KEY_ALIMENTO_DATA_INSERIMENTO = "dataInserimento";
+    public static final String KEY_ALIMENTO_STIMA_SCADENZA = "stimaScadenzaAlimento";
+    public static final String KEY_ALIMENTO_IMMAGINE = "immagineAlimento";
 
     private static final String CREAZIONE_TABELLA_RICETTA = "CREATE TABLE " + TABELLA_RICETTA + " ("
             +" "+ KEY_RICETTA_ID + " INTEGER PRIMARY KEY,"
@@ -43,7 +42,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_RICETTA_DIFFICOLTA + " INTEGER,"
             + KEY_RICETTA_INGREDIENTI + " TEXT,"
             + KEY_RICETTA_CATEGORIA + " TEXT,"
+            + KEY_RICETTA_IMMAGINE + " BLOB,"
             + KEY_RICETTA_PROCEDIMENTO + " TEXT)";
+
+    private static final String CREAZIONE_TABELLA_ALIMENTO = "CREATE TABLE " + TABELLA_ALIMENTO + "("
+            +" "+ KEY_ALIMENTO_ID_RECORD + " INTEGER PRIMARY KEY,"
+            + KEY_ALIMENTO_ID + " INTEGER,"
+            + KEY_ALIMENTO_NOME + " TEXT,"
+            + KEY_ALIMENTO_DATA_INSERIMENTO + " TEXT,"
+            + KEY_ALIMENTO_IMMAGINE + " BLOB,"
+            + KEY_ALIMENTO_STIMA_SCADENZA + " INTEGER)";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -52,11 +60,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREAZIONE_TABELLA_RICETTA);
+        db.execSQL(CREAZIONE_TABELLA_ALIMENTO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABELLA_RICETTA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELLA_ALIMENTO);
 
         onCreate(db);
     }

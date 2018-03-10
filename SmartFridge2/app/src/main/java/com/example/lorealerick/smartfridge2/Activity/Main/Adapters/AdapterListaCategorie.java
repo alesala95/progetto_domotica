@@ -53,14 +53,17 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
 
             viewHolder.listaCategorie.setLayoutManager(new LinearLayoutManager(c,LinearLayoutManager.HORIZONTAL,false));
             viewHolder.listaCategorie.addItemDecoration(new RecyclerDivider(c,R.dimen.offset));
-            viewHolder.listaCategorie.setAdapter(new AdapterRicetta(c,categorie.get(position).getRicette(),listenerApriRicetta));
 
             view.setTag(viewHolder);
         }
 
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        holder.nomeCategoria.setText(categorie.get(position).getNome());
+        String m = categorie.get(position).getNome().substring(0,1).toUpperCase();
+        m = m + categorie.get(position).getNome().substring(1);
+
+        holder.nomeCategoria.setText(m);
+        holder.listaCategorie.setAdapter(new AdapterRicetta(c,categorie.get(position).getRicette(),listenerApriRicetta));
 
 
         return view;

@@ -7,8 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,40 @@ public class DatabaseAdapter {
         database.close();
     }
 
+    public void svuotaTabellaRicette (){
+
+        open();
+
+        database.execSQL("delete from " + DatabaseHelper.TABELLA_RICETTA);
+
+        close();
+    }
+
+    public void svuotaTabellaAlimenti (){
+
+        open();
+
+        database.execSQL("delete from " + DatabaseHelper.TABELLA_ALIMENTO);
+
+        close();
+    }
+
+    public void addAlimento(Alimento alimento){
+
+        open();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.KEY_ALIMENTO_ID, alimento.getIdAlimento());
+        values.put(DatabaseHelper.KEY_ALIMENTO_NOME, alimento.getNome());
+        values.put(DatabaseHelper.KEY_ALIMENTO_DATA_INSERIMENTO, alimento.getData_inserimento()+toString());
+        values.put(DatabaseHelper.KEY_ALIMENTO_STIMA_SCADENZA, alimento.getStima_scadenza());
+        values.put(DatabaseHelper.KEY_ALIMENTO_IMMAGINE, alimento.getImage());
+
+        database.insert(DatabaseHelper.TABELLA_ALIMENTO, null, values);
+
+        close();
+    }
+
     public void addRicetta(Ricetta ricetta) {
         open();
 
@@ -51,6 +87,7 @@ public class DatabaseAdapter {
         values.put(DatabaseHelper.KEY_RICETTA_INGREDIENTI, ricetta.getIngredienti());
         values.put(DatabaseHelper.KEY_RICETTA_PROCEDIMENTO, ricetta.getProcedimento());
         values.put(DatabaseHelper.KEY_RICETTA_CATEGORIA, ricetta.getCategoria());
+        values.put(DatabaseHelper.KEY_RICETTA_IMMAGINE, ricetta.getImage());
 
         database.insert(DatabaseHelper.TABELLA_RICETTA, null, values);
 
@@ -79,8 +116,9 @@ public class DatabaseAdapter {
                 ricetta.setDurata(cursor.getString(3));
                 ricetta.setDifficolta(Integer.parseInt(cursor.getString(4)));
                 ricetta.setIngredienti(cursor.getString(5));
-                ricetta.setProcedimento(cursor.getString(6));
-                ricetta.setCategoria(cursor.getString(7));
+                ricetta.setProcedimento(cursor.getString(8));
+                ricetta.setImage(cursor.getBlob(7));
+                ricetta.setCategoria(cursor.getString(6));
 
                 listaRicette.add(ricetta);
             } while (cursor.moveToNext());
@@ -91,11 +129,42 @@ public class DatabaseAdapter {
         return listaRicette;
     }
 
-    public ArrayList <Ricetta> getAllRicetteForCategoria (String categoria) {
+    public ArrayList <Alimento> getAllAlimenti () {
+
+        ArrayList<Alimento> listaAlimenti = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + DatabaseHelper.TABELLA_ALIMENTO;
+
+        open();
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Alimento alimento = new Alimento();
+
+                alimento.setIdAlimento(Integer.parseInt(cursor.getString(1)));
+                alimento.setNome(cursor.getString(2));
+                alimento.setData_inserimento(cursor.getString(3));
+                alimento.setImage(cursor.getBlob(4));
+                alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
+
+                listaAlimenti.add(alimento);
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return listaAlimenti;
+    }
+
+    public ArrayList <Ricetta> getAllRicetteForCategoria (String categoria, int limite) {
 
         ArrayList<Ricetta> listaRicette = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + DatabaseHelper.TABELLA_RICETTA + " WHERE " + DatabaseHelper.KEY_RICETTA_CATEGORIA + " = '" + categoria +"'";
+        String selectQuery = "SELECT  * FROM " + DatabaseHelper.TABELLA_RICETTA + " WHERE " + DatabaseHelper.KEY_RICETTA_CATEGORIA + " = '" + categoria +"' LIMIT " + limite +" ";
 
         open();
 
@@ -113,8 +182,9 @@ public class DatabaseAdapter {
                 ricetta.setDurata(cursor.getString(3));
                 ricetta.setDifficolta(Integer.parseInt(cursor.getString(4)));
                 ricetta.setIngredienti(cursor.getString(5));
-                ricetta.setProcedimento(cursor.getString(6));
-                ricetta.setCategoria(cursor.getString(7));
+                ricetta.setProcedimento(cursor.getString(8));
+                ricetta.setCategoria(cursor.getString(6));
+                ricetta.setImage(cursor.getBlob(7));
 
                 listaRicette.add(ricetta);
             } while (cursor.moveToNext());
@@ -125,20 +195,58 @@ public class DatabaseAdapter {
         return listaRicette;
     }
 
-    /*
-    Ricetta getRicetta (int idRicetta) {
+    public ArrayList <String> getAllCategorie (){
+
+        ArrayList <String> listaCategorie = new ArrayList<>();
+
+        String selectQuery = "SELECT DISTINCT " + DatabaseHelper.KEY_RICETTA_CATEGORIA + " FROM " + DatabaseHelper.TABELLA_RICETTA + "; ";
+
         open();
 
-        Cursor cursor = database.query(DatabaseHelper.TABELLA_RICETTA, new String[] {DatabaseHelper.KEY_RICETTA_ID,
-                        DatabaseHelper.KEY_CONTACT_NAME, DatabaseHelper.KEY_CONTACT_PHONE }, DatabaseHelper.KEY_CONTACT_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+        Cursor cursor = database.rawQuery(selectQuery, null);
 
-        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
+        if(cursor.moveToFirst()){
 
-        return contact;
+            do{
+
+                listaCategorie.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+
+        close();
+
+        return listaCategorie;
+    }
+
+
+    public Ricetta getRicetta (int idRicetta) {
+
+        String query = "SELECT * FROM " + DatabaseHelper.TABELLA_RICETTA + " WHERE " + DatabaseHelper.KEY_RICETTA_ID + " = " + idRicetta + ";";
+
+        open();
+
+        Cursor cursor = database.rawQuery(query,null);
+
+        Ricetta ricetta = null;
+
+        if (cursor.moveToFirst()) {
+
+            ricetta = new Ricetta();
+
+            ricetta.setId(Integer.parseInt(cursor.getString(0)));
+            ricetta.setNome(cursor.getString(1));
+            ricetta.setAutore(cursor.getString(2));
+            ricetta.setDurata(cursor.getString(3));
+            ricetta.setDifficolta(Integer.parseInt(cursor.getString(4)));
+            ricetta.setIngredienti(cursor.getString(5));
+            ricetta.setCategoria(cursor.getString(6));
+            ricetta.setImage(cursor.getBlob(7));
+            ricetta.setProcedimento(cursor.getString(8));
+        }
+
+        close();
+
+        return ricetta;
     }
 
     /**

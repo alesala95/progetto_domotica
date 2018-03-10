@@ -2,29 +2,30 @@ package com.example.lorealerick.smartfridge2.Activity.Main.Fragments;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterListaCategorie;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerEventi;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.OnItemClickListener;
-import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.SmartFridgeAPI.RicetteAPI;
+import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
+import com.example.lorealerick.smartfridge2.Utils.Services;
+import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
+import java.io.IOException;
 import java.util.ArrayList;
+
+import retrofit2.Call;
 
 /**
  * Created by LoreAleRick on 08/03/2018.
@@ -33,6 +34,10 @@ import java.util.ArrayList;
 public class FragRicettario extends Fragment implements ListenerApriRicetta{
 
     DatabaseAdapter dbAdapter;
+    ArrayList <Categoria> categorie;
+    AdapterListaCategorie adapterListaCategorie;
+    DownloadRicetteManager downloadRicetteManager;
+    ProgressBar progressBarRicettario;
 
     @Override
     public void onAttach(Context context) {
@@ -46,17 +51,23 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
 
         View view = inflater.inflate(R.layout.frag_ricettario, container, false);
 
-        ArrayList <Categoria> categorie = new ArrayList<>();
-        ArrayList <Ricetta> ricette = new ArrayList<>();
+        categorie = new ArrayList<>();
+        progressBarRicettario = view.findViewById(R.id.progressRicettario);
 
-        ricette = dbAdapter.getAllRicette();
+        if(!Services.getInstance().isScaricatoAnteprimaRicette()){
 
-        categorie.add(new Categoria("Primi",dbAdapter.getAllRicetteForCategoria("primo")));
-        categorie.add(new Categoria("Secondi",dbAdapter.getAllRicetteForCategoria("secondo")));
-        categorie.add(new Categoria("Terzi",dbAdapter.getAllRicetteForCategoria("terzo")));
-        categorie.add(new Categoria("Quarti",dbAdapter.getAllRicetteForCategoria("quarto")));
+            dbAdapter.svuotaTabellaRicette();
 
-        AdapterListaCategorie adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,this);
+            downloadRicetteManager = new DownloadRicetteManager();
+            downloadRicetteManager.execute();
+
+            Services.getInstance().setScaricatoAnteprimaRicette(true);
+        }else{
+
+            aggiornaDati();
+        }
+
+        adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,this);
         ListView listaCategorie = view.findViewById(R.id.listaCategorie);
         listaCategorie.setAdapter(adapterListaCategorie);
 
@@ -80,5 +91,66 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
 
         getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
                 .replace(R.id.contenitore,fragRicetta).commit();
+    }
+
+    private class DownloadRicetteManager extends AsyncTask <Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressBarRicettario.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+            Call <ArrayList<Ricetta>> call = ricetteAPI.getVetrinaRicette();
+
+            ArrayList <Ricetta> ricette = new ArrayList<>();
+
+            try {
+                ricette = call.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            for (Ricetta r : ricette){
+
+                try {
+                    r.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+r.getId()+".jpg").get()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                dbAdapter.addRicetta(r);
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            aggiornaDati();
+            progressBarRicettario.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void aggiornaDati (){
+
+        categorie.clear();
+        adapterListaCategorie.notifyDataSetChanged();
+
+        for (String s : dbAdapter.getAllCategorie()){
+
+            categorie.add(new Categoria(s,dbAdapter.getAllRicetteForCategoria(s,5)));
+        }
+
+        adapterListaCategorie.notifyDataSetChanged();
     }
 }
