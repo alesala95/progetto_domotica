@@ -2,7 +2,6 @@ package com.example.lorealerick.smartfridge2.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Date;
 
 /**
  * Created by LoreAleRick on 10/03/2018.

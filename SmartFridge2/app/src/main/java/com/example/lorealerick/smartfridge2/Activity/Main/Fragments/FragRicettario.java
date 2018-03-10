@@ -1,7 +1,6 @@
 package com.example.lorealerick.smartfridge2.Activity.Main.Fragments;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

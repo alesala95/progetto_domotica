@@ -2,11 +2,9 @@ package com.example.lorealerick.smartfridge2.Utils;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.DimenRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.lorealerick.smartfridge2.R;
 
 /**
  * Created by LoreAleRick on 09/03/2018.

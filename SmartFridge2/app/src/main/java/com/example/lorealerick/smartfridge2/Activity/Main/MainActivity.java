@@ -13,9 +13,6 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerEventi;
-import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
-import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 
 
@@ -37,16 +34,6 @@ public class MainActivity extends AppCompatActivity{
         if(findViewById(R.id.container) != null)
             if(savedInstanceState != null)
                 aggiungiFragment(0,false);
-
-
-        /*DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
-        dbAdapter.addRicetta(new Ricetta(1,"Pasta",3,"3h","Lore","Spaghetti","Metti l'acqua","","primo"));
-        dbAdapter.addRicetta(new Ricetta(2,"Pollo",3,"3h","Lore","Spaghetti","Metti l'acqua","","secondo"));
-        dbAdapter.addRicetta(new Ricetta(3,"Lasagne",3,"3h","Lore","Spaghetti","Metti l'acqua","","terzo"));
-        dbAdapter.addRicetta(new Ricetta(4,"Brasato",3,"3h","Lore","Spaghetti","Metti l'acqua","","primo"));
-        dbAdapter.addRicetta(new Ricetta(5,"Ossobuco",3,"3h","Lore","Spaghetti","Metti l'acqua","","quarto"));
-        dbAdapter.addRicetta(new Ricetta(6,"Ossobuco",3,"3h","Lore","Spaghetti","Metti l'acqua","","sesto"));
-        dbAdapter.addRicetta(new Ricetta(7,"Ossobuco",3,"3h","Lore","Spaghetti","Metti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acquaMetti l'acqua","","nono"));*/
     }
 
     private void inizializzaFragment (){

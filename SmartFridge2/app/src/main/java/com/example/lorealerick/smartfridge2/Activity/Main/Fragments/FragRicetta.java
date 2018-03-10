@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
-import com.example.lorealerick.smartfridge2.Database.DatabaseHelper;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;

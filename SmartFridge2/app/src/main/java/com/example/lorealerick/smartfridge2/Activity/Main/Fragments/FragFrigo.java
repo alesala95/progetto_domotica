@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterGrigliaAlimenti;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
@@ -36,7 +37,7 @@ public class FragFrigo extends Fragment {
     ArrayList <Alimento> alimenti;
     AdapterGrigliaAlimenti adapterGrigliaAlimenti;
     DownloadAlimentiManager downloadAlimentiManager;
-
+    ProgressBar progressBarfrigo;
 
     @Override
     public void onAttach(Context context) {
@@ -51,6 +52,7 @@ public class FragFrigo extends Fragment {
         View view = inflater.inflate(R.layout.frag_frigo, container, false);
 
         alimenti = new ArrayList<>();
+        progressBarfrigo = view.findViewById(R.id.progressFrigo);
 
         GridView grigliaAlimenti = view.findViewById(R.id.grigliaAlimenti);
         adapterGrigliaAlimenti = new AdapterGrigliaAlimenti(getActivity(),R.layout.item_ricetta_alimento,alimenti);
@@ -75,7 +77,12 @@ public class FragFrigo extends Fragment {
 
     private class DownloadAlimentiManager extends AsyncTask <Void, Void, Void>{
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
+            progressBarfrigo.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -119,6 +126,7 @@ public class FragFrigo extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
+            progressBarfrigo.setVisibility(View.INVISIBLE);
             aggiorna();
         }
     }

@@ -1,7 +1,6 @@
 package com.example.lorealerick.smartfridge2.SmartFridgeAPI;
 
 import com.example.lorealerick.smartfridge2.Models.Alimento;
-import com.example.lorealerick.smartfridge2.Models.Ricetta;
 
 import java.util.ArrayList;
 import java.util.Map;

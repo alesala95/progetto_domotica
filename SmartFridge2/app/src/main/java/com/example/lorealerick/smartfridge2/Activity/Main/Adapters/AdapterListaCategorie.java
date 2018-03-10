@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerEventi;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.OnItemClickListener;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.RecyclerDivider;
