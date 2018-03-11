@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,16 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterGrigliaAlimenti;
+import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
+import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.AlimentiAPI;
 import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
+import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import com.example.lorealerick.smartfridge2.Utils.Services;
 import com.example.lorealerick.smartfridge2.Utils.Utente;
 import com.squareup.picasso.Picasso;
@@ -31,13 +37,14 @@ import retrofit2.Call;
  * Created by LoreAleRick on 09/03/2018.
  */
 
-public class FragFrigo extends Fragment {
+public class FragFrigo extends Fragment{
 
     DatabaseAdapter databaseAdapter;
     ArrayList <Alimento> alimenti;
     AdapterGrigliaAlimenti adapterGrigliaAlimenti;
     DownloadAlimentiManager downloadAlimentiManager;
     ProgressBar progressBarfrigo;
+
 
     @Override
     public void onAttach(Context context) {
@@ -51,10 +58,12 @@ public class FragFrigo extends Fragment {
 
         View view = inflater.inflate(R.layout.frag_frigo, container, false);
 
-        alimenti = new ArrayList<>();
         progressBarfrigo = view.findViewById(R.id.progressFrigo);
 
+        alimenti = new ArrayList<>();
+
         GridView grigliaAlimenti = view.findViewById(R.id.grigliaAlimenti);
+
         adapterGrigliaAlimenti = new AdapterGrigliaAlimenti(getActivity(),R.layout.item_alimento,alimenti);
 
         grigliaAlimenti.setAdapter(adapterGrigliaAlimenti);
@@ -75,6 +84,8 @@ public class FragFrigo extends Fragment {
         return view;
     }
 
+
+
     private class DownloadAlimentiManager extends AsyncTask <Void, Void, Void>{
 
         @Override
@@ -87,37 +98,7 @@ public class FragFrigo extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            final AlimentiAPI alimentiAPI = Services.getInstance().getRetrofit().create(AlimentiAPI.class);
-
-            Map <String, Object> map = new HashMap<>();
-
-            map.put("codiceFrigo", Utente.getInstance().getCodiceFrigo());
-
-            Call<ArrayList<Alimento>> call = alimentiAPI.getAlimenti(map);
-
-            ArrayList <Alimento> alimenti = new ArrayList<>();
-
-            try {
-                alimenti = call.execute().body();
-
-                System.out.println("Response");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            for (Alimento a : alimenti){
-
-                try {
-                    a.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimento/"+a.getIdAlimento()+".jpg").get()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println(a.toString());
-
-                databaseAdapter.addAlimento(a);
-            }
-
+            new DownloadDati(getActivity()).scaricaAlimenti();
 
             return null;
         }

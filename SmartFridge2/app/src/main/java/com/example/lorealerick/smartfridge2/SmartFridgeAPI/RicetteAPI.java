@@ -18,6 +18,9 @@ public interface RicetteAPI {
     @GET("/smartfridge2/ricette.php")
     Call<ArrayList<Ricetta>> getVetrinaRicette ();
 
-    @GET("/ricette.php")
-    Call<ArrayList<Ricetta>> getRicetta (@QueryMap Map<String,Object> values);
+    @GET("/smartfridge2/getRicetta.php")
+    Call<Ricetta> getRicetta (@QueryMap Map<String,Object> values);
+
+    @GET("/smartfridge2/ricetteConsigliate.php")
+    Call<ArrayList<Ricetta>> getRicetteConsigliate (@QueryMap Map<String,Object> values);
 }

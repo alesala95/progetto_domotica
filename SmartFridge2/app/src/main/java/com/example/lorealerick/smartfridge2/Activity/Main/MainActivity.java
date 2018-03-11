@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity{
         fragmentManager = getSupportFragmentManager();
         inizializzaFragment();
 
-        if(findViewById(R.id.container) != null)
-            if(savedInstanceState != null)
-                aggiungiFragment(0,false);
+
+        aggiungiFragment(0,false);
     }
 
     private void inizializzaFragment (){
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
             fragmentManager.beginTransaction().replace(R.id.contenitore,fragment).commit();
         else
             fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.contenitore,fragment).commit();
+
     }
 
     private void cambiaFragment (int nFrag, boolean addToBackStack){
@@ -62,12 +62,13 @@ public class MainActivity extends AppCompatActivity{
             fragmentManager.beginTransaction().replace(R.id.contenitore,frags[nFrag]).commit();
         else
             fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.contenitore,frags[nFrag]).commit();
+
     }
 
     private void aggiungiFragment (int nFrag, boolean addToBackStack){
 
         if(!addToBackStack)
-            fragmentManager.beginTransaction().add(R.id.container, frags[nFrag]).commit();
+            fragmentManager.beginTransaction().add(R.id.contenitore, frags[nFrag]).commit();
         else
             fragmentManager.beginTransaction().addToBackStack(null).add(R.id.container, frags[nFrag]).commit();
     }
@@ -109,13 +110,8 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    public BottomNavigationView getNavigation (){
 
-    public void selezionaRicetta(int idRicetta) {
-
-        FragRicetta r = new FragRicetta();
-        r.setArguments(new Bundle());
-
-
-        cambiaFragment(r,true);
+        return navigation;
     }
 }

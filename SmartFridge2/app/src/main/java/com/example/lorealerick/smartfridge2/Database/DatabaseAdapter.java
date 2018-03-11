@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -70,6 +71,43 @@ public class DatabaseAdapter {
         database.insert(DatabaseHelper.TABELLA_ALIMENTO, null, values);
 
         close();
+    }
+
+    public ArrayList <Ricetta> getRicetteConsigliate (ArrayList <Alimento> alimenti){
+
+        ArrayList <Ricetta> ricette = new ArrayList<>();
+        String sql = "";
+
+        open();
+
+        for (Alimento a : alimenti){
+
+            sql = "SELECT * FROM " + DatabaseHelper.TABELLA_RICETTA + " WHERE " + DatabaseHelper.KEY_RICETTA_INGREDIENTI + " LIKE '%" + a.getNome().toLowerCase() + "%';";
+            Cursor cursor = database.rawQuery(sql, null);
+            if (cursor.moveToFirst()) {
+
+                do {
+
+                    Ricetta ricetta = new Ricetta();
+
+                    ricetta.setId(Integer.parseInt(cursor.getString(0)));
+                    ricetta.setNome(cursor.getString(1));
+                    ricetta.setAutore(cursor.getString(2));
+                    ricetta.setDurata(cursor.getString(3));
+                    ricetta.setDifficolta(Integer.parseInt(cursor.getString(4)));
+                    ricetta.setIngredienti(cursor.getString(5));
+                    ricetta.setProcedimento(cursor.getString(8));
+                    ricetta.setImage(cursor.getBlob(7));
+                    ricetta.setCategoria(cursor.getString(6));
+
+                    ricette.add(ricetta);
+                } while (cursor.moveToNext());
+            }
+        }
+
+        close();
+
+        return ricette;
     }
 
     public void addRicetta(Ricetta ricetta) {

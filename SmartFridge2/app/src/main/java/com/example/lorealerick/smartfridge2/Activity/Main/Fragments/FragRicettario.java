@@ -12,12 +12,14 @@ import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterListaCategorie;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.RicetteAPI;
 import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
+import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import com.example.lorealerick.smartfridge2.Utils.Services;
 import com.squareup.picasso.Picasso;
 
@@ -104,29 +106,7 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
         @Override
         protected Void doInBackground(Void... voids) {
 
-            RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
-
-            Call <ArrayList<Ricetta>> call = ricetteAPI.getVetrinaRicette();
-
-            ArrayList <Ricetta> ricette = new ArrayList<>();
-
-            try {
-                ricette = call.execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            for (Ricetta r : ricette){
-
-                try {
-                    r.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+r.getId()+".jpg").get()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                dbAdapter.addRicetta(r);
-            }
-
+            new DownloadDati(getActivity()).scaricaVetrinaRicette();
 
             return null;
         }
@@ -152,4 +132,5 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
 
         adapterListaCategorie.notifyDataSetChanged();
     }
+    
 }

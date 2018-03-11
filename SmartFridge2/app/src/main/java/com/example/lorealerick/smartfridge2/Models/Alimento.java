@@ -94,6 +94,12 @@ public class Alimento {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Calendar calendar = new GregorianCalendar();
 
+        String dataFormattataInserimento = "";
+        dataFormattataInserimento += (data_inserimento.substring(8,10)+"-");
+        dataFormattataInserimento += (data_inserimento.substring(5,7)+"-");
+        dataFormattataInserimento += (data_inserimento.substring(0,4));
+
+        /*
         System.out.println("----------------------");
         System.out.println(nome);
         String dataFormattataInserimento = "";
@@ -104,6 +110,7 @@ public class Alimento {
         System.out.println();
         System.out.println("Stima scadenza "+stima_scadenza);
         System.out.println();
+        */
 
         try {
 
@@ -115,8 +122,6 @@ public class Alimento {
         calendar.add(Calendar.DAY_OF_MONTH, stima_scadenza);
 
         String scadenza = calendar.get(Calendar.DAY_OF_MONTH)+"-"+((calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.YEAR));
-
-        System.out.println("L'alimento scadrà il giorno "+calendar.get(Calendar.DAY_OF_MONTH)+"-"+((calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.YEAR)));
 
         return scadenza;
     }
@@ -191,7 +196,6 @@ public class Alimento {
         DateTime start = new DateTime(calendar.getTimeInMillis());
 
         int diffe = Days.daysBetween(start.toLocalDate(),end.toLocalDate()).getDays();
-        System.out.println ("DaysJoda: " + diffe);
 
         if(diffe > 0){
 
@@ -217,7 +221,6 @@ public class Alimento {
         DateTime start = new DateTime(calendar.getTimeInMillis());
 
         int diffe = Days.daysBetween(start.toLocalDate(),end.toLocalDate()).getDays();
-        System.out.println ("DaysJoda: " + diffe);
 
         if(diffe >= 0){
 
