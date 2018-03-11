@@ -55,7 +55,7 @@ public class FragFrigo extends Fragment {
         progressBarfrigo = view.findViewById(R.id.progressFrigo);
 
         GridView grigliaAlimenti = view.findViewById(R.id.grigliaAlimenti);
-        adapterGrigliaAlimenti = new AdapterGrigliaAlimenti(getActivity(),R.layout.item_ricetta_alimento,alimenti);
+        adapterGrigliaAlimenti = new AdapterGrigliaAlimenti(getActivity(),R.layout.item_alimento,alimenti);
 
         grigliaAlimenti.setAdapter(adapterGrigliaAlimenti);
 

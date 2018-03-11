@@ -37,7 +37,7 @@ public class AdapterRicetta extends RecyclerView.Adapter <AdapterRicetta.ViewHol
     public AdapterRicetta.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.item_ricetta_alimento,parent,false);
+        View v = inflater.inflate(R.layout.item_ricetta,parent,false);
 
         return new AdapterRicetta.ViewHolder(v);
     }

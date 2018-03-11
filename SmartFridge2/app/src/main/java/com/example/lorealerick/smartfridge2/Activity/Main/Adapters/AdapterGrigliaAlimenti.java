@@ -38,11 +38,13 @@ public class AdapterGrigliaAlimenti extends ArrayAdapter <Alimento> {
         if(view == null){
 
             LayoutInflater inflater = c.getLayoutInflater();
-            view = inflater.inflate(R.layout.item_ricetta_alimento, null);
+            view = inflater.inflate(R.layout.item_alimento, null);
 
             AdapterGrigliaAlimenti.ViewHolder viewHolder = new AdapterGrigliaAlimenti.ViewHolder();
 
             viewHolder.nomeAlimento = view.findViewById(R.id.nome);
+            viewHolder.qntAlimento = view.findViewById(R.id.quantita);
+            viewHolder.dataScadenza = view.findViewById(R.id.dataScadenza);
             viewHolder.immagine = view.findViewById(R.id.immagine);
 
             view.setTag(viewHolder);
@@ -51,6 +53,19 @@ public class AdapterGrigliaAlimenti extends ArrayAdapter <Alimento> {
         AdapterGrigliaAlimenti.ViewHolder holder = (AdapterGrigliaAlimenti.ViewHolder) view.getTag();
 
         holder.nomeAlimento.setText(alimenti.get(position).getNome());
+        holder.qntAlimento.setText(alimenti.get(position).getStatoString());
+
+        int aux = alimenti.get(position).giorniScaduto();
+
+        if(aux != -1){
+
+            if(aux == 1)
+                holder.qntAlimento.append(" da un giorno");
+            else
+                holder.qntAlimento.append(" da "+alimenti.get(position).giorniScaduto()+" giorni");
+        }
+
+        holder.dataScadenza.setText(alimenti.get(position).getDataScadenza());
         holder.immagine.setImageBitmap(BitmapHandle.getBitmap(alimenti.get(position).getImage()));
 
         return view;
@@ -59,6 +74,8 @@ public class AdapterGrigliaAlimenti extends ArrayAdapter <Alimento> {
     static class ViewHolder{
 
         public TextView nomeAlimento;
+        public TextView qntAlimento;
+        public TextView dataScadenza;
         public ImageView immagine;
     }
 }

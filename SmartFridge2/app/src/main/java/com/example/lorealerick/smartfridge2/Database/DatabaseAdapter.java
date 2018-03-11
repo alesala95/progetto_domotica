@@ -63,7 +63,7 @@ public class DatabaseAdapter {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.KEY_ALIMENTO_ID, alimento.getIdAlimento());
         values.put(DatabaseHelper.KEY_ALIMENTO_NOME, alimento.getNome());
-        values.put(DatabaseHelper.KEY_ALIMENTO_DATA_INSERIMENTO, alimento.getData_inserimento()+toString());
+        values.put(DatabaseHelper.KEY_ALIMENTO_DATA_INSERIMENTO, alimento.getData_inserimento());
         values.put(DatabaseHelper.KEY_ALIMENTO_STIMA_SCADENZA, alimento.getStima_scadenza());
         values.put(DatabaseHelper.KEY_ALIMENTO_IMMAGINE, alimento.getImage());
 

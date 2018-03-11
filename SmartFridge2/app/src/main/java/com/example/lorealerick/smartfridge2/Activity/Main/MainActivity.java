@@ -15,6 +15,8 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
 import com.example.lorealerick.smartfridge2.R;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 
 public class MainActivity extends AppCompatActivity{
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        JodaTimeAndroid.init(this);
         setUpViews();
 
         fragmentManager = getSupportFragmentManager();
