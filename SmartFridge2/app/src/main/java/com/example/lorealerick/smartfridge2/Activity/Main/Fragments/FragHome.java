@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,10 +31,11 @@ import java.util.ArrayList;
  * Created by LoreAleRick on 09/03/2018.
  */
 
-public class FragHome extends Fragment implements ListenerApriRicetta{
+public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefreshLayout.OnRefreshListener{
 
     DatabaseAdapter databaseAdapter;
     DownloadAlimentiManager downloadAlimentiManager;
+    DownloadRicetteConsigliateManager downloadRicetteConsigliateManager;
     DownloadDati downloadDati;
 
     ArrayList <Alimento> listaAlimentiInScadenza;
@@ -42,7 +44,7 @@ public class FragHome extends Fragment implements ListenerApriRicetta{
     AdapterAlimentoScadenza adapterAlimentiInScadenza;
     AdapterRicetta adapterRicetteConsigliate;
 
-    ProgressBar progressBarAlimentiInScadenza;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onAttach(Context context) {
@@ -60,7 +62,7 @@ public class FragHome extends Fragment implements ListenerApriRicetta{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        progressBarAlimentiInScadenza = view.findViewById(R.id.progressBarAlimentiInScadenza);
+        swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
 
         RecyclerView alimentiInScadenza = view.findViewById(R.id.alimentiInScadenza);
         RecyclerView ricetteConsigliate = view.findViewById(R.id.ricetteConsigliate);
@@ -95,13 +97,19 @@ public class FragHome extends Fragment implements ListenerApriRicetta{
         return view;
     }
 
+    @Override
+    public void onRefresh() {
+
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     private class DownloadAlimentiManager extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressBarAlimentiInScadenza.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(true);
         }
 
         @Override
@@ -115,19 +123,21 @@ public class FragHome extends Fragment implements ListenerApriRicetta{
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            progressBarAlimentiInScadenza.setVisibility(View.INVISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
             aggiorna();
         }
     }
 
     private class DownloadRicetteConsigliateManager extends AsyncTask <ArrayList<Alimento>, Void, Void> {
 
-        ArrayList <Ricetta> ricetteConsigliate;
+        ArrayList <Ricetta> ricetteConsigliate = new ArrayList<>();
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBarAlimentiInScadenza.setVisibility(View.VISIBLE);
+            System.out.println("SAS");
+            if(!swipeRefreshLayout.isRefreshing())
+                swipeRefreshLayout.setRefreshing(true);
         }
 
         @Override
@@ -140,8 +150,19 @@ public class FragHome extends Fragment implements ListenerApriRicetta{
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            progressBarAlimentiInScadenza.setVisibility(View.INVISIBLE);
+
+            System.out.println("Stoppo refresh");
+            if(swipeRefreshLayout.isRefreshing())
+                swipeRefreshLayout.setRefreshing(false);
             feedRicetteConsigliate(ricetteConsigliate);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+
+            swipeRefreshLayout.setRefreshing(false);
+            System.out.println("Stoppo refresh");
         }
     }
 
@@ -159,7 +180,9 @@ public class FragHome extends Fragment implements ListenerApriRicetta{
             }
         }
 
-        new DownloadRicetteConsigliateManager().execute(listaAlimentiInScadenza);
+        downloadRicetteConsigliateManager = null;
+        downloadRicetteConsigliateManager = new DownloadRicetteConsigliateManager();
+        downloadRicetteConsigliateManager.execute(listaAlimentiInScadenza);
 
         adapterAlimentiInScadenza.notifyDataSetChanged();
     }

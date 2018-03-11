@@ -132,5 +132,5 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
 
         adapterListaCategorie.notifyDataSetChanged();
     }
-    
+
 }

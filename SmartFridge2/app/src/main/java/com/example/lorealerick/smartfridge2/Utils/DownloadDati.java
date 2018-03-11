@@ -120,6 +120,8 @@ public class DownloadDati {
 
     public ArrayList <Ricetta> scaricaFeedRicetteConsigliate (ArrayList<Alimento>alimentiInScadenza){
 
+
+
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 
         Map<String, Object> map = new HashMap<>();
