@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#007ac1</color>
     <color name="colorAccent">#67daff</color>
     <color name="transparent">#40000000</color>
+
+
+    <color name="AzzurroMin" id="AzzurroMin" >#00e5ff</color>
+    <color name="NavColor">#40C4FF</color>
+    <color name="BlueColor">#01579B</color>
+
+    <color name="register">#03A9F4</color>
 </resources>

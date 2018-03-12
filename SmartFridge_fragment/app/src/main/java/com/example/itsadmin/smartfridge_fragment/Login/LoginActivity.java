@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
 
 import com.example.itsadmin.smartfridge_fragment.Main.MainActivity;
 import com.example.itsadmin.smartfridge_fragment.R;
@@ -17,7 +16,6 @@ import com.example.itsadmin.smartfridge_fragment.Singleton.Utente;
 
 public class LoginActivity extends AppCompatActivity implements LoginFragment.FragmentLoginListener{
 
-    Button btnAccedi,btnRegistrati;
     SharedPreferences preferences;
     Fragment frag [];
 
