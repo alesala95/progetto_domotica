@@ -195,6 +195,39 @@ public class DatabaseAdapter {
         return listaAlimenti;
     }
 
+    public ArrayList <Alimento> getAllAlimentiInScadenza (){
+
+        ArrayList<Alimento> listaAlimenti = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + DatabaseHelper.TABELLA_ALIMENTO;
+
+        open();
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Alimento alimento = new Alimento();
+
+                alimento.setIdAlimento(Integer.parseInt(cursor.getString(1)));
+                alimento.setNome(cursor.getString(2));
+                alimento.setData_inserimento(cursor.getString(3));
+                alimento.setImage(cursor.getBlob(4));
+                alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
+
+                if(alimento.isInScadenza())
+                    listaAlimenti.add(alimento);
+
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return listaAlimenti;
+    }
+
     public ArrayList <Ricetta> getAllRicetteForCategoria (String categoria, int limite) {
 
         ArrayList<Ricetta> listaRicette = new ArrayList<>();

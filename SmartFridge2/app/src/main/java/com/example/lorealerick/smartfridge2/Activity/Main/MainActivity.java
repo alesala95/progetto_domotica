@@ -13,12 +13,13 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerFragmentFrigo;
 import com.example.lorealerick.smartfridge2.R;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements ListenerFragmentFrigo{
 
     private BottomNavigationView navigation;
     private Toolbar toolbar;
@@ -110,8 +111,10 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public BottomNavigationView getNavigation (){
+    @Override
+    public void fragmentFrigoAttivo() {
 
-        return navigation;
+        //navigation.setSelectedItemId(R.id.navigation_frigo);
+        //toolbar.setTitle("Frigo");
     }
 }

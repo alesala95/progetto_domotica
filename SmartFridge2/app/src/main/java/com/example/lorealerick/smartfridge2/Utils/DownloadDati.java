@@ -75,6 +75,8 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
+        databaseAdapter.svuotaTabellaAlimenti();
+
         for (Alimento a : alimenti){
 
             try {
@@ -88,6 +90,40 @@ public class DownloadDati {
             databaseAdapter.addAlimento(a);
         }
 
+    }
+
+    public ArrayList <Ricetta> getRicetteForCategoryOffset (String categoria, int nRis, int page){
+
+        final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("categoria",categoria);
+        map.put("nRes",categoria);
+        map.put("page",categoria);
+
+        Call <ArrayList<Ricetta>> call = ricetteAPI.getRicetteForCategoryOffset(map);
+
+        ArrayList <Ricetta> ricette = new ArrayList<>();
+
+        try {
+            ricette = call.execute().body();
+
+            System.out.println("Response");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Ricetta r : ricette){
+
+            try {
+                r.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+r.getId()+".jpg").get()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ricette;
     }
 
     public Ricetta scaricaRicetta (int id){

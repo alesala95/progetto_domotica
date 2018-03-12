@@ -12,10 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterAlimentoScadenza;
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerFragmentFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
@@ -34,8 +37,6 @@ import java.util.ArrayList;
 public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefreshLayout.OnRefreshListener{
 
     DatabaseAdapter databaseAdapter;
-    DownloadAlimentiManager downloadAlimentiManager;
-    DownloadRicetteConsigliateManager downloadRicetteConsigliateManager;
     DownloadDati downloadDati;
 
     ArrayList <Alimento> listaAlimentiInScadenza;
@@ -46,12 +47,19 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
 
     SwipeRefreshLayout swipeRefreshLayout;
 
+    RelativeLayout maskCaricamento;
+
+    ListenerFragmentFrigo listenerFragmentFrigo;
+
+    private Refresh refresh;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         databaseAdapter = new DatabaseAdapter(context);
         downloadDati = new DownloadDati(context);
+        listenerFragmentFrigo = (MainActivity) context;
     }
 
     @Override
@@ -63,6 +71,9 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         StrictMode.setThreadPolicy(policy);
 
         swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        maskCaricamento = view.findViewById(R.id.maskCaricamento);
 
         RecyclerView alimentiInScadenza = view.findViewById(R.id.alimentiInScadenza);
         RecyclerView ricetteConsigliate = view.findViewById(R.id.ricetteConsigliate);
@@ -81,18 +92,10 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         ricetteConsigliate.setAdapter(adapterRicetteConsigliate);
         alimentiInScadenza.setAdapter(adapterAlimentiInScadenza);
 
-        if(!Services.getInstance().isScaricatoAlimenti()){
+        launchRefresh();
 
-            databaseAdapter.svuotaTabellaAlimenti();
+        Services.getInstance().setScaricatoAlimenti(true);
 
-            downloadAlimentiManager = new DownloadAlimentiManager();
-            downloadAlimentiManager.execute();
-
-            Services.getInstance().setScaricatoAlimenti(true);
-        }else{
-
-            aggiorna();
-        }
 
         return view;
     }
@@ -100,22 +103,45 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
     @Override
     public void onRefresh() {
 
-        swipeRefreshLayout.setRefreshing(false);
+        launchRefresh();
     }
 
-    private class DownloadAlimentiManager extends AsyncTask<Void, Void, Void> {
+    private void launchRefresh (){
+
+        if(refresh == null){
+
+            refresh = new Refresh();
+        }
+
+        if (refresh.getStatus() != AsyncTask.Status.RUNNING){
+
+            refresh = new Refresh();
+            refresh.execute();
+        }
+    }
+
+
+
+
+    class Refresh extends AsyncTask <Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
+            clearDataSets();
             swipeRefreshLayout.setRefreshing(true);
+            maskCaricamento.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
             downloadDati.scaricaAlimenti();
+            listaAlimentiInScadenza.addAll(databaseAdapter.getAllAlimentiInScadenza());
+
+            listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(listaAlimentiInScadenza));
+
             return null;
         }
 
@@ -124,82 +150,23 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
             super.onPostExecute(aVoid);
 
             swipeRefreshLayout.setRefreshing(false);
-            aggiorna();
+            maskCaricamento.setVisibility(View.INVISIBLE);
+            notifyDataChanged();
         }
     }
 
-    private class DownloadRicetteConsigliateManager extends AsyncTask <ArrayList<Alimento>, Void, Void> {
-
-        ArrayList <Ricetta> ricetteConsigliate = new ArrayList<>();
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            System.out.println("SAS");
-            if(!swipeRefreshLayout.isRefreshing())
-                swipeRefreshLayout.setRefreshing(true);
-        }
-
-        @Override
-        protected Void doInBackground(ArrayList<Alimento>... alims) {
-
-            ricetteConsigliate = downloadDati.scaricaFeedRicetteConsigliate(alims[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            System.out.println("Stoppo refresh");
-            if(swipeRefreshLayout.isRefreshing())
-                swipeRefreshLayout.setRefreshing(false);
-            feedRicetteConsigliate(ricetteConsigliate);
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-
-            swipeRefreshLayout.setRefreshing(false);
-            System.out.println("Stoppo refresh");
-        }
-    }
-
-    private void aggiorna (){
-
+    private void clearDataSets (){
 
         listaAlimentiInScadenza.clear();
-        adapterAlimentiInScadenza.notifyDataSetChanged();
-
-        for (Alimento a : databaseAdapter.getAllAlimenti()){
-
-            if(a.isInScadenza()) {
-                listaAlimentiInScadenza.add(a);
-                System.out.println(a.toString()+" è in scadenza");
-            }
-        }
-
-        downloadRicetteConsigliateManager = null;
-        downloadRicetteConsigliateManager = new DownloadRicetteConsigliateManager();
-        downloadRicetteConsigliateManager.execute(listaAlimentiInScadenza);
-
-        adapterAlimentiInScadenza.notifyDataSetChanged();
-    }
-
-    private void feedRicetteConsigliate (ArrayList<Ricetta>ricetteConsigliate){
-
         listaRicetteConsigliate.clear();
-        adapterRicetteConsigliate.notifyDataSetChanged();
-
-        for (Ricetta r : ricetteConsigliate){
-
-            listaRicetteConsigliate.add(r);
-        }
-
-        adapterRicetteConsigliate.notifyDataSetChanged();
+        notifyDataChanged();
     }
 
+    private void notifyDataChanged (){
+
+        adapterAlimentiInScadenza.notifyDataSetChanged();
+        adapterRicetteConsigliate.notifyDataSetChanged();
+    }
 
     @Override
     public void apriRicetta(int idRicetta) {
@@ -220,6 +187,10 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
                 .replace(R.id.contenitore,fragRicetta).commit();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
-
+        listenerFragmentFrigo.fragmentFrigoAttivo();
+    }
 }
