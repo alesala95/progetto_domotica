@@ -5,11 +5,19 @@
     android:layout_height="match_parent">
 
     <GridView
+
         android:id="@+id/grigliaRicetteCategoria"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:verticalSpacing="20dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:horizontalSpacing="20dp"
+        android:gravity="center">
     </GridView>
 
 </RelativeLayout>

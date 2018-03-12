@@ -99,8 +99,8 @@ public class DownloadDati {
         Map<String, Object> map = new HashMap<>();
 
         map.put("categoria",categoria);
-        map.put("nRes",categoria);
-        map.put("page",categoria);
+        map.put("nRes",nRis);
+        map.put("page",page);
 
         Call <ArrayList<Ricetta>> call = ricetteAPI.getRicetteForCategoryOffset(map);
 
@@ -114,10 +114,10 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
-        for (Ricetta r : ricette){
+        for (int i = 0; i < ricette.size(); i++){
 
             try {
-                r.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+r.getId()+".jpg").get()));
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -155,8 +155,6 @@ public class DownloadDati {
     }
 
     public ArrayList <Ricetta> scaricaFeedRicetteConsigliate (ArrayList<Alimento>alimentiInScadenza){
-
-
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 

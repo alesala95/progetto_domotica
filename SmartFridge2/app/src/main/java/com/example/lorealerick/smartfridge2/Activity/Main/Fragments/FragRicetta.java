@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
@@ -32,11 +33,14 @@ public class FragRicetta extends Fragment {
     TextView procedimento;
     ImageView immagine;
 
+    ListenerRefreshUI listenerRefreshUI;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         dbAdapter = new DatabaseAdapter(context);
+        listenerRefreshUI = (MainActivity)context;
     }
 
     @Override
@@ -59,6 +63,7 @@ public class FragRicetta extends Fragment {
 
             new DownloadDettagliRicetta().execute(ricetta.getId());
         }
+
 
 
         return view;
@@ -85,6 +90,8 @@ public class FragRicetta extends Fragment {
 
     private void aggiorna (Ricetta ricetta){
 
+        listenerRefreshUI.onRefreshUI("Ricetta",ricetta.getNome());
+
         nomeRicetta.setText(ricetta.getNome());
         autoreRicetta.setText(ricetta.getAutore());
         durataRicetta.setText("Durata: " + ricetta.getDurata());
@@ -110,5 +117,12 @@ public class FragRicetta extends Fragment {
         ingredienti.setText(ricetta.getIngredienti());
         procedimento.setText(ricetta.getProcedimento());
         immagine.setImageBitmap(BitmapHandle.getBitmap(ricetta.getImage()));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        listenerRefreshUI.onRefreshUI("Ricetta",nomeRicetta.getText()+"");
     }
 }

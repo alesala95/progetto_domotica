@@ -7,24 +7,27 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
-import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerFragmentFrigo;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.R;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 
-public class MainActivity extends AppCompatActivity implements ListenerFragmentFrigo{
+public class MainActivity extends AppCompatActivity implements ListenerRefreshUI{
 
     private BottomNavigationView navigation;
     private Toolbar toolbar;
     private Fragment frags [];
     private FragmentManager fragmentManager;
+    private TextView titoloApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ListenerFragmentF
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle("Smart Fridge");
+        getSupportActionBar().setTitle("");
         toolbar.setTitleTextColor(Color.WHITE);
 
         navigation = findViewById(R.id.navigation);
@@ -109,12 +112,51 @@ public class MainActivity extends AppCompatActivity implements ListenerFragmentF
             }
         });
 
+        titoloApp = findViewById(R.id.titoloToolbar);
+    }
+
+    private void setTitleToolbar (String titolo){
+
+        titoloApp.setText(titolo);
     }
 
     @Override
-    public void fragmentFrigoAttivo() {
+    public void onRefreshUI(String tipoFrag, String dett) {
 
-        //navigation.setSelectedItemId(R.id.navigation_frigo);
-        //toolbar.setTitle("Frigo");
+        Menu menu = navigation.getMenu();
+
+        switch (tipoFrag){
+
+            case "Categoria":
+
+                setTitleToolbar(dett);
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "Home":
+
+                setTitleToolbar("SmartFridge");
+                menu.getItem(0).setChecked(true);
+                break;
+
+            case "Frigo":
+
+                setTitleToolbar("I Miei Alimenti");
+                menu.getItem(1).setChecked(true);
+                break;
+
+            case "Ricettario":
+
+                setTitleToolbar("Vetrina Ricette");
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "Ricetta":
+
+                setTitleToolbar(dett);
+                menu.getItem(2).setChecked(true);
+                break;
+        }
+
     }
 }

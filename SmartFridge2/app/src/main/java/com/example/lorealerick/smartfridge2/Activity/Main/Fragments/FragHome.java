@@ -11,14 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterAlimentoScadenza;
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerFragmentFrigo;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
@@ -49,9 +47,9 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
 
     RelativeLayout maskCaricamento;
 
-    ListenerFragmentFrigo listenerFragmentFrigo;
-
     private Refresh refresh;
+
+    ListenerRefreshUI listenerRefreshUI;
 
     @Override
     public void onAttach(Context context) {
@@ -59,7 +57,8 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
 
         databaseAdapter = new DatabaseAdapter(context);
         downloadDati = new DownloadDati(context);
-        listenerFragmentFrigo = (MainActivity) context;
+        listenerRefreshUI = (MainActivity)context;
+        listenerRefreshUI.onRefreshUI("Home",null);
     }
 
     @Override
@@ -120,9 +119,6 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         }
     }
 
-
-
-
     class Refresh extends AsyncTask <Void, Void, Void> {
 
         @Override
@@ -181,6 +177,11 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         cambiaRicetta(fragRicetta);
     }
 
+    @Override
+    public void apriCategoriaRicetta(String category) {
+
+    }
+
     private void cambiaRicetta (FragRicetta fragRicetta){
 
         getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
@@ -191,6 +192,6 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
     public void onResume() {
         super.onResume();
 
-        listenerFragmentFrigo.fragmentFrigoAttivo();
+        listenerRefreshUI.onRefreshUI("Home",null);
     }
 }

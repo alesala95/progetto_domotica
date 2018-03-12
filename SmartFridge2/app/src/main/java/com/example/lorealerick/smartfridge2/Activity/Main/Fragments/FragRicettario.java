@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterListaCategorie;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
@@ -40,11 +41,15 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
     DownloadRicetteManager downloadRicetteManager;
     ProgressBar progressBarRicettario;
 
+    ListenerRefreshUI listenerRefreshUI;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         dbAdapter = new DatabaseAdapter(context);
+        listenerRefreshUI = (MainActivity)context;
+        listenerRefreshUI.onRefreshUI("Ricettario",null);
     }
 
     @Override
@@ -86,6 +91,25 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
         fragRicetta.setArguments(bundle);
 
         cambiaRicetta(fragRicetta);
+    }
+
+    @Override
+    public void apriCategoriaRicetta(String category) {
+
+        FragCategoria fragCategoria = new FragCategoria();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("category",category);
+
+        fragCategoria.setArguments(bundle);
+
+        cambiaCategoria(fragCategoria);
+    }
+
+    private void cambiaCategoria (FragCategoria fragCategoria){
+
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                .replace(R.id.contenitore,fragCategoria).commit();
     }
 
     private void cambiaRicetta (FragRicetta fragRicetta){
@@ -133,4 +157,10 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
         adapterListaCategorie.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        listenerRefreshUI.onRefreshUI("Ricettario",null);
+    }
 }

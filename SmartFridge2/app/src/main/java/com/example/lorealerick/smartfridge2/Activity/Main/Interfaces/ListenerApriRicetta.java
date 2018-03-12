@@ -8,4 +8,6 @@ package com.example.lorealerick.smartfridge2.Activity.Main.Interfaces;
 public interface ListenerApriRicetta {
 
     void apriRicetta (int idRicetta);
+
+    void apriCategoriaRicetta (String category);
 }

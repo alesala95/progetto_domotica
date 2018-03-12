@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterGrigliaAlimenti;
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
@@ -45,12 +46,15 @@ public class FragFrigo extends Fragment{
     DownloadAlimentiManager downloadAlimentiManager;
     ProgressBar progressBarfrigo;
 
+    ListenerRefreshUI listenerRefreshUI;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         databaseAdapter = new DatabaseAdapter(context);
+        listenerRefreshUI = (MainActivity)context;
+        listenerRefreshUI.onRefreshUI("Frigo",null);
     }
 
     @Override
@@ -125,4 +129,10 @@ public class FragFrigo extends Fragment{
         adapterGrigliaAlimenti.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        listenerRefreshUI.onRefreshUI("Frigo",null);
+    }
 }

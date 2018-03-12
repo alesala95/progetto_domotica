@@ -28,13 +28,14 @@
                     android:id="@+id/cardMonitoring"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="2dp"
-                    app:contentPadding="10dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    app:cardBackgroundColor="@color/colorAccent">
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/colorAccent"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="4dp"
+                    app:contentPadding="10dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -45,8 +46,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textColor="#FFF"
                             android:text="Real Time Monitoring"
+                            android:textColor="#FFF"
                             android:textSize="20sp" />
 
                         <TextView
@@ -55,8 +56,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tagStatus"
                             android:layout_marginTop="15dp"
-                            android:textColor="#FFF"
                             android:text="Il frigo è acceso"
+                            android:textColor="#FFF"
                             android:textSize="18sp" />
 
                         <TextView
@@ -65,9 +66,9 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/statusFrigo"
                             android:layout_marginTop="3dp"
-                            android:textColor="#FFF"
                             android:paddingLeft="10dp"
                             android:text="Temperatura: 3 gradi"
+                            android:textColor="#FFF"
                             android:textSize="18sp" />
 
                         <TextView
@@ -76,19 +77,19 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tempFrigo"
                             android:layout_marginTop="7dp"
-                            android:textColor="#FFF"
                             android:text="Il freezer è acceso"
+                            android:textColor="#FFF"
                             android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/tempFreezer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#FFF"
-                            android:paddingLeft="10dp"
                             android:layout_below="@id/statusFreezer"
                             android:layout_marginTop="3dp"
+                            android:paddingLeft="10dp"
                             android:text="Temperatura: -3 gradi"
+                            android:textColor="#FFF"
                             android:textSize="18sp" />
 
                     </RelativeLayout>

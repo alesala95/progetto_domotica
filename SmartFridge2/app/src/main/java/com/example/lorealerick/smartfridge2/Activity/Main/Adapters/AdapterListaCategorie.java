@@ -35,7 +35,7 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
 
@@ -48,6 +48,13 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
 
             viewHolder.listaCategorie = view.findViewById(R.id.anteprimaCategoria);
             viewHolder.nomeCategoria = view.findViewById(R.id.nomeCategoria);
+            viewHolder.nomeCategoria.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    listenerApriRicetta.apriCategoriaRicetta(categorie.get(position).getNome());
+                }
+            });
 
             viewHolder.listaCategorie.setLayoutManager(new LinearLayoutManager(c,LinearLayoutManager.HORIZONTAL,false));
             viewHolder.listaCategorie.addItemDecoration(new RecyclerDivider(c,R.dimen.offset));
