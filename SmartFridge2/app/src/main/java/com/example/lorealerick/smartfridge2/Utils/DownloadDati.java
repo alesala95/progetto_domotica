@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
+import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.AlimentiAPI;
+import com.example.lorealerick.smartfridge2.SmartFridgeAPI.FrigoAPI;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.RicetteAPI;
 import com.squareup.picasso.Picasso;
 
@@ -27,6 +29,29 @@ public class DownloadDati {
     public DownloadDati (Context context){
 
         databaseAdapter = new DatabaseAdapter(context);
+    }
+
+    public Frigo scaricaInfoFrigo (){
+
+
+        final FrigoAPI ricetteAPI = Services.getInstance().getRetrofit().create(FrigoAPI.class);
+        Frigo frigo = null;
+
+        Map <String, Object> map = new HashMap<>();
+
+        map.put("codice",Utente.getInstance().getCodiceFrigo());
+
+        Call <Frigo> call = ricetteAPI.getInfoFrigo(map);
+
+        try {
+            frigo = call.execute().body();
+
+            System.out.println("Response");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return frigo;
     }
 
     public void scaricaVetrinaRicette (){
@@ -75,6 +100,8 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
+        databaseAdapter.svuotaTabellaAlimenti();
+
         for (Alimento a : alimenti){
 
             try {
@@ -88,6 +115,40 @@ public class DownloadDati {
             databaseAdapter.addAlimento(a);
         }
 
+    }
+
+    public ArrayList <Ricetta> getRicetteForCategoryOffset (String categoria, int nRis, int page){
+
+        final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("categoria",categoria);
+        map.put("nRes",nRis);
+        map.put("page",page);
+
+        Call <ArrayList<Ricetta>> call = ricetteAPI.getRicetteForCategoryOffset(map);
+
+        ArrayList <Ricetta> ricette = new ArrayList<>();
+
+        try {
+            ricette = call.execute().body();
+
+            System.out.println("Response");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < ricette.size(); i++){
+
+            try {
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ricette;
     }
 
     public Ricetta scaricaRicetta (int id){
@@ -119,8 +180,6 @@ public class DownloadDati {
     }
 
     public ArrayList <Ricetta> scaricaFeedRicetteConsigliate (ArrayList<Alimento>alimentiInScadenza){
-
-
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 

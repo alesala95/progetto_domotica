@@ -13,6 +13,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApr
 import com.example.lorealerick.smartfridge2.Models.Categoria;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.RecyclerDivider;
+import com.example.lorealerick.smartfridge2.Utils.UtilsTesto;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,7 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
 
@@ -48,6 +49,13 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
 
             viewHolder.listaCategorie = view.findViewById(R.id.anteprimaCategoria);
             viewHolder.nomeCategoria = view.findViewById(R.id.nomeCategoria);
+            viewHolder.nomeCategoria.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    listenerApriRicetta.apriCategoriaRicetta(categorie.get(position).getNome());
+                }
+            });
 
             viewHolder.listaCategorie.setLayoutManager(new LinearLayoutManager(c,LinearLayoutManager.HORIZONTAL,false));
             viewHolder.listaCategorie.addItemDecoration(new RecyclerDivider(c,R.dimen.offset));
@@ -57,10 +65,7 @@ public class AdapterListaCategorie extends ArrayAdapter <Categoria>{
 
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        String m = categorie.get(position).getNome().substring(0,1).toUpperCase();
-        m = m + categorie.get(position).getNome().substring(1);
-
-        holder.nomeCategoria.setText(m);
+        holder.nomeCategoria.setText(UtilsTesto.letteraMaiuscola(categorie.get(position).getNome()));
         holder.listaCategorie.setAdapter(new AdapterRicetta(c,categorie.get(position).getRicette(),listenerApriRicetta));
 
 

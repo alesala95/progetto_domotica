@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterListaCategorie;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
@@ -32,7 +33,7 @@ import retrofit2.Call;
  * Created by LoreAleRick on 08/03/2018.
  */
 
-public class FragRicettario extends Fragment implements ListenerApriRicetta{
+public class FragRicettario extends Fragment{
 
     DatabaseAdapter dbAdapter;
     ArrayList <Categoria> categorie;
@@ -40,11 +41,17 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
     DownloadRicetteManager downloadRicetteManager;
     ProgressBar progressBarRicettario;
 
+    ListenerRefreshUI listenerRefreshUI;
+    ListenerApriRicetta listenerApriRicetta;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         dbAdapter = new DatabaseAdapter(context);
+        listenerRefreshUI = (MainActivity)context;
+        listenerRefreshUI.onRefreshUI("Ricettario",null);
+        listenerApriRicetta = (MainActivity)context;
     }
 
     @Override
@@ -68,31 +75,13 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
             aggiornaDati();
         }
 
-        adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,this);
+        adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,listenerApriRicetta);
         ListView listaCategorie = view.findViewById(R.id.listaCategorie);
         listaCategorie.setAdapter(adapterListaCategorie);
 
         return view;
     }
 
-    @Override
-    public void apriRicetta(int idRicetta) {
-
-        FragRicetta fragRicetta = new FragRicetta();
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("id",idRicetta);
-
-        fragRicetta.setArguments(bundle);
-
-        cambiaRicetta(fragRicetta);
-    }
-
-    private void cambiaRicetta (FragRicetta fragRicetta){
-
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                .replace(R.id.contenitore,fragRicetta).commit();
-    }
 
     private class DownloadRicetteManager extends AsyncTask <Void, Void, Void>{
 
@@ -133,4 +122,10 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
         adapterListaCategorie.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        listenerRefreshUI.onRefreshUI("Ricettario",null);
+    }
 }

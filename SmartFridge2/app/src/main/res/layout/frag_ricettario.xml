@@ -3,23 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tagRicettario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        android:gravity="center"
-        android:text="Ricettario"
-        android:textSize="22sp" />
-
     <ListView
         android:id="@+id/listaCategorie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tagRicettario" />
+        android:layout_alignParentStart="true" />
 
     <ProgressBar
         android:id="@+id/progressRicettario"
