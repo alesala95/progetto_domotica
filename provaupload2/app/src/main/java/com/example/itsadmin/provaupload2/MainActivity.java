@@ -1,52 +1,27 @@
-package com.example.itsadmin.provaupload;
+package com.example.itsadmin.provaupload2;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
+import org.jibble.simpleftp.SimpleFTP;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
-
     private RelativeLayout photos_layout;
     private static Bitmap scaledphoto=null;
     private String filePath=null;
@@ -61,26 +36,26 @@ public class MainActivity extends AppCompatActivity {
         photos_layout=(RelativeLayout)findViewById(R.id.photos);
         //button with onClickListener to turn on camera for taking picture
         ((Button)photos_layout.findViewById(R.id.capture_photo)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
+            @Override
+            public void onClick(View arg0) {
 
-                        String pictureName="Test";//here you can get picture name from user. I supposed Test name
-                        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        File photo = new File(Environment.getExternalStorageDirectory(),  pictureName+".jpg");//save picture (.jpg) on SD Card
-                        u=Uri.fromFile(photo);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT,u);
-                        filePath = photo.getAbsolutePath();
-                        startActivityForResult(intent, RESULT_FIRST_USER);
-                    }
-                });
+                String pictureName="Test";//here you can get picture name from user. I supposed Test name
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                File photo = new File(Environment.getExternalStorageDirectory(),  pictureName+".jpg");//save picture (.jpg) on SD Card
+                u=Uri.fromFile(photo);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,u);
+                filePath = photo.getAbsolutePath();
+                startActivityForResult(intent, RESULT_FIRST_USER);
+            }
+        });
 
         ((Button)photos_layout.findViewById(R.id.upload_picture)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
+            @Override
+            public void onClick(View arg0) {
 
-                        upLoadPicture();
-                    }
-                });
+                upLoadPicture();
+            }
+        });
 
     }
 
@@ -143,12 +118,12 @@ public class MainActivity extends AppCompatActivity {
                         pd.dismiss();
             }.start();
 
-    }
-            else
-    {
-        Toast.makeText(getApplicationContext(), "Please Take Picture First than Upload.", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Please Take Picture First than Upload.", Toast.LENGTH_LONG).show();
 
+        }
     }
-}
 
 }
