@@ -33,7 +33,7 @@ import retrofit2.Call;
  * Created by LoreAleRick on 08/03/2018.
  */
 
-public class FragRicettario extends Fragment implements ListenerApriRicetta{
+public class FragRicettario extends Fragment{
 
     DatabaseAdapter dbAdapter;
     ArrayList <Categoria> categorie;
@@ -42,6 +42,7 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
     ProgressBar progressBarRicettario;
 
     ListenerRefreshUI listenerRefreshUI;
+    ListenerApriRicetta listenerApriRicetta;
 
     @Override
     public void onAttach(Context context) {
@@ -50,6 +51,7 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
         dbAdapter = new DatabaseAdapter(context);
         listenerRefreshUI = (MainActivity)context;
         listenerRefreshUI.onRefreshUI("Ricettario",null);
+        listenerApriRicetta = (MainActivity)context;
     }
 
     @Override
@@ -73,50 +75,13 @@ public class FragRicettario extends Fragment implements ListenerApriRicetta{
             aggiornaDati();
         }
 
-        adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,this);
+        adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,listenerApriRicetta);
         ListView listaCategorie = view.findViewById(R.id.listaCategorie);
         listaCategorie.setAdapter(adapterListaCategorie);
 
         return view;
     }
 
-    @Override
-    public void apriRicetta(int idRicetta) {
-
-        FragRicetta fragRicetta = new FragRicetta();
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("id",idRicetta);
-
-        fragRicetta.setArguments(bundle);
-
-        cambiaRicetta(fragRicetta);
-    }
-
-    @Override
-    public void apriCategoriaRicetta(String category) {
-
-        FragCategoria fragCategoria = new FragCategoria();
-
-        Bundle bundle = new Bundle();
-        bundle.putString("category",category);
-
-        fragCategoria.setArguments(bundle);
-
-        cambiaCategoria(fragCategoria);
-    }
-
-    private void cambiaCategoria (FragCategoria fragCategoria){
-
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                .replace(R.id.contenitore,fragCategoria).commit();
-    }
-
-    private void cambiaRicetta (FragRicetta fragRicetta){
-
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                .replace(R.id.contenitore,fragRicetta).commit();
-    }
 
     private class DownloadRicetteManager extends AsyncTask <Void, Void, Void>{
 

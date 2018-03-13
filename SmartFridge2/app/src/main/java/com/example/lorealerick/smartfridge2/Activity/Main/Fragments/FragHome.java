@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterAlimentoScadenza;
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterRicetta;
@@ -20,6 +21,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRef
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
+import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
@@ -32,7 +34,7 @@ import java.util.ArrayList;
  * Created by LoreAleRick on 09/03/2018.
  */
 
-public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefreshLayout.OnRefreshListener{
+public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     DatabaseAdapter databaseAdapter;
     DownloadDati downloadDati;
@@ -50,6 +52,14 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
     private Refresh refresh;
 
     ListenerRefreshUI listenerRefreshUI;
+    ListenerApriRicetta listenerApriRicetta;
+
+    Frigo frigo;
+
+    TextView statusfrigo;
+    TextView tempFrigo;
+    TextView statusFreezer;
+    TextView tempFreezer;
 
     @Override
     public void onAttach(Context context) {
@@ -59,6 +69,7 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         downloadDati = new DownloadDati(context);
         listenerRefreshUI = (MainActivity)context;
         listenerRefreshUI.onRefreshUI("Home",null);
+        listenerApriRicetta = (MainActivity)context;
     }
 
     @Override
@@ -68,6 +79,11 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        statusfrigo = view.findViewById(R.id.statusFrigo);
+        statusFreezer = view.findViewById(R.id.statusFreezer);
+        tempFrigo = view.findViewById(R.id.tempFrigo);
+        tempFreezer = view.findViewById(R.id.tempFreezer);
 
         swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -86,7 +102,7 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         listaRicetteConsigliate = new ArrayList<>();
 
         adapterAlimentiInScadenza = new AdapterAlimentoScadenza(getActivity(),listaAlimentiInScadenza);
-        adapterRicetteConsigliate = new AdapterRicetta(getActivity(),listaRicetteConsigliate,this);
+        adapterRicetteConsigliate = new AdapterRicetta(getActivity(),listaRicetteConsigliate,listenerApriRicetta);
 
         ricetteConsigliate.setAdapter(adapterRicetteConsigliate);
         alimentiInScadenza.setAdapter(adapterAlimentiInScadenza);
@@ -138,6 +154,8 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
 
             listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(listaAlimentiInScadenza));
 
+            frigo = downloadDati.scaricaInfoFrigo();
+
             return null;
         }
 
@@ -148,6 +166,7 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
             swipeRefreshLayout.setRefreshing(false);
             maskCaricamento.setVisibility(View.INVISIBLE);
             notifyDataChanged();
+            refreshRealTimeMonitoring();
         }
     }
 
@@ -164,28 +183,24 @@ public class FragHome extends Fragment implements ListenerApriRicetta, SwipeRefr
         adapterRicetteConsigliate.notifyDataSetChanged();
     }
 
-    @Override
-    public void apriRicetta(int idRicetta) {
+    private void refreshRealTimeMonitoring (){
 
-        FragRicetta fragRicetta = new FragRicetta();
+        System.out.println(frigo.toString());
 
-        Bundle bundle = new Bundle();
-        bundle.putInt("id",idRicetta);
+        if(frigo.getFrigoAcceso())
 
-        fragRicetta.setArguments(bundle);
+            statusfrigo.setText("Il frigo è acceso");
+        else
+            statusfrigo.setText("Il frigo è spento");
 
-        cambiaRicetta(fragRicetta);
-    }
+        if(frigo.getFreezerAcceso())
 
-    @Override
-    public void apriCategoriaRicetta(String category) {
+            statusFreezer.setText("Il freezer è acceso");
+        else
+            statusFreezer.setText("Il freezer è spento");
 
-    }
-
-    private void cambiaRicetta (FragRicetta fragRicetta){
-
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                .replace(R.id.contenitore,fragRicetta).commit();
+        tempFrigo.setText("Temperatura: "+frigo.getFrigoTemp()+"°");
+        tempFreezer.setText("Temperatura: "+frigo.getFreezerTemp()+"°");
     }
 
     @Override

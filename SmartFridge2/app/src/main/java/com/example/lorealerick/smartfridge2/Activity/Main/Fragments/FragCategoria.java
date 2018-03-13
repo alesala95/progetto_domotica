@@ -8,15 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterGrigliaRicette;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
+import com.example.lorealerick.smartfridge2.Utils.UtilsTesto;
 
 import java.util.ArrayList;
 
@@ -44,6 +47,7 @@ public class FragCategoria extends Fragment {
     int pagina;
 
     ListenerRefreshUI listenerRefreshUI;
+    ListenerApriRicetta listenerApriRicetta;
 
     @Override
     public void onAttach(Context context) {
@@ -51,6 +55,7 @@ public class FragCategoria extends Fragment {
 
         downloadDati = new DownloadDati(context);
         listenerRefreshUI = (MainActivity)context;
+        listenerApriRicetta = (MainActivity) context;
     }
 
     @Override
@@ -61,12 +66,19 @@ public class FragCategoria extends Fragment {
          itemPerPagina = 10;
          pagina = 0;
          categoria = getArguments().getString("category");
-         listenerRefreshUI.onRefreshUI("Categoria",categoria);
+         listenerRefreshUI.onRefreshUI("Categoria",UtilsTesto.letteraMaiuscola(categoria));
          listaRicette = new ArrayList<>();
 
          grigliaRicetteCategoria = view.findViewById(R.id.grigliaRicetteCategoria);
          adapterGrigliaRicette = new AdapterGrigliaRicette(getActivity(),R.layout.item_ricetta,listaRicette);
          grigliaRicetteCategoria.setAdapter(adapterGrigliaRicette);
+         grigliaRicetteCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                 listenerApriRicetta.apriRicetta(listaRicette.get(position).getId());
+             }
+         });
 
          isScrolling = false;
          fineItem = false;
@@ -166,6 +178,6 @@ public class FragCategoria extends Fragment {
     public void onResume() {
         super.onResume();
 
-        listenerRefreshUI.onRefreshUI("Categoria",categoria);
+        listenerRefreshUI.onRefreshUI("Categoria", UtilsTesto.letteraMaiuscola(categoria));
     }
 }

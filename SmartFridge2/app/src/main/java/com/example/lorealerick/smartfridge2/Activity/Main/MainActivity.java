@@ -12,16 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCategoria;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
+import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.R;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 
-public class MainActivity extends AppCompatActivity implements ListenerRefreshUI{
+public class MainActivity extends AppCompatActivity implements ListenerRefreshUI,ListenerApriRicetta{
 
     private BottomNavigationView navigation;
     private Toolbar toolbar;
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
             case "Ricettario":
 
-                setTitleToolbar("Vetrina Ricette");
+                setTitleToolbar("Ricettario");
                 menu.getItem(2).setChecked(true);
                 break;
 
@@ -158,5 +161,31 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
                 break;
         }
 
+    }
+
+    @Override
+    public void apriRicetta(int idRicetta) {
+
+        FragRicetta fragRicetta = new FragRicetta();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("id",idRicetta);
+
+        fragRicetta.setArguments(bundle);
+
+        cambiaFragment(fragRicetta,true);
+    }
+
+    @Override
+    public void apriCategoriaRicetta(String category) {
+
+        FragCategoria fragCategoria = new FragCategoria();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("category",category);
+
+        fragCategoria.setArguments(bundle);
+
+        cambiaFragment(fragCategoria,true);
     }
 }

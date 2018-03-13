@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
+import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.AlimentiAPI;
+import com.example.lorealerick.smartfridge2.SmartFridgeAPI.FrigoAPI;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.RicetteAPI;
 import com.squareup.picasso.Picasso;
 
@@ -27,6 +29,29 @@ public class DownloadDati {
     public DownloadDati (Context context){
 
         databaseAdapter = new DatabaseAdapter(context);
+    }
+
+    public Frigo scaricaInfoFrigo (){
+
+
+        final FrigoAPI ricetteAPI = Services.getInstance().getRetrofit().create(FrigoAPI.class);
+        Frigo frigo = null;
+
+        Map <String, Object> map = new HashMap<>();
+
+        map.put("codice",Utente.getInstance().getCodiceFrigo());
+
+        Call <Frigo> call = ricetteAPI.getInfoFrigo(map);
+
+        try {
+            frigo = call.execute().body();
+
+            System.out.println("Response");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return frigo;
     }
 
     public void scaricaVetrinaRicette (){
