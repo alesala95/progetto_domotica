@@ -8,7 +8,43 @@
     android:layout_height="match_parent"
     tools:context="com.example.lorealerick.smartfridge2.Activity.Main.MainActivity">
 
+<<<<<<< HEAD
     <include layout="@layout/app_toolbar"/>
+=======
+    <FrameLayout
+
+        android:id="@+id/toolbarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+
+        <android.support.v7.widget.Toolbar
+
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:elevation="2dp"
+            android:background="@color/colorPrimary">
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titoloToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="cursive"
+                android:gravity="center"
+                android:text="SmartFridge"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+    </FrameLayout>
+>>>>>>> 60ec492cec2d56f012eaaa64bbcf0c07d50baf1b
 
     <FrameLayout
 
@@ -24,7 +60,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"
+
+        app:itemIconTint="@drawable/item_selected"
+        app:itemTextColor="@drawable/item_selected"
         app:menu="@menu/bottom_nav"/>
 
 </RelativeLayout>
