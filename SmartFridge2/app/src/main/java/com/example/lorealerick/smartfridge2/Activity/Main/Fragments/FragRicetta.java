@@ -7,7 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
@@ -17,6 +20,7 @@ import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
+import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
 
 /**
  * Created by LoreAleRick on 09/03/2018.
@@ -24,16 +28,18 @@ import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 
 public class FragRicetta extends Fragment {
 
-    DatabaseAdapter dbAdapter;
-    TextView nomeRicetta;
-    TextView autoreRicetta;
-    TextView durataRicetta;
-    TextView difficoltaRicetta;
-    TextView ingredienti;
-    TextView procedimento;
-    ImageView immagine;
+    private DatabaseAdapter dbAdapter;
+    private TextView nomeRicetta;
+    private TextView autoreRicetta;
+    private TextView durataRicetta;
+    private TextView difficoltaRicetta;
+    private TextView ingredienti;
+    private TextView procedimento;
+    private ImageView immagine;
 
-    ListenerRefreshUI listenerRefreshUI;
+    private ListenerRefreshUI listenerRefreshUI;
+
+    private RelativeLayout content;
 
     @Override
     public void onAttach(Context context) {
@@ -47,6 +53,8 @@ public class FragRicetta extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_ricetta, container, false);
+
+        content = view.findViewById(R.id.content);
 
         Ricetta ricetta = dbAdapter.getRicetta(getArguments().getInt("id"));
 
@@ -74,6 +82,14 @@ public class FragRicetta extends Fragment {
         Ricetta ricetta = null;
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            content.setVisibility(View.INVISIBLE);
+            listenerRefreshUI.onRefreshUI("Ricetta","Caricamento ... ");
+        }
+
+        @Override
         protected Void doInBackground(Integer... ints) {
 
             ricetta = new DownloadDati(getActivity()).scaricaRicetta(ints[0]);
@@ -85,12 +101,15 @@ public class FragRicetta extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             aggiorna(ricetta);
+
+            content.setVisibility(View.VISIBLE);
+            UtilsAnimation.startFadeInAnimation(content,getActivity());
         }
     }
 
     private void aggiorna (Ricetta ricetta){
 
-        listenerRefreshUI.onRefreshUI("Ricetta",ricetta.getNome());
+
 
         nomeRicetta.setText(ricetta.getNome());
         autoreRicetta.setText(ricetta.getAutore());
@@ -117,6 +136,7 @@ public class FragRicetta extends Fragment {
         ingredienti.setText(ricetta.getIngredienti());
         procedimento.setText(ricetta.getProcedimento());
         immagine.setImageBitmap(BitmapHandle.getBitmap(ricetta.getImage()));
+        listenerRefreshUI.onRefreshUI("Ricetta",ricetta.getNome());
     }
 
     @Override
@@ -125,4 +145,6 @@ public class FragRicetta extends Fragment {
 
         listenerRefreshUI.onRefreshUI("Ricetta",nomeRicetta.getText()+"");
     }
+
+
 }

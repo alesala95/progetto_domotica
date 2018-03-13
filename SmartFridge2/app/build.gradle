@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
 
     compile 'net.gotev:uploadservice:2.1'//upload image to server
+    compile 'com.steelkiwi:dots-loader-view:1.0.0'
 }

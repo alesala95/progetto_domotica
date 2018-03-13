@@ -1,5 +1,6 @@
 package com.example.lorealerick.smartfridge2.Activity.Main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCategoria;
@@ -20,6 +22,8 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettar
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Settings.Impostazioni;
+import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
     private Fragment frags [];
     private FragmentManager fragmentManager;
     private TextView titoloApp;
+    private Button goToSettings;
+    private Button goToMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +122,17 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         });
 
         titoloApp = findViewById(R.id.titoloToolbar);
+        goToSettings = findViewById(R.id.goToSettings);
+        goToSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity.this, Impostazioni.class));
+            }
+        });
+        goToMain = findViewById(R.id.goToMain);
+
+        setUpToolbar();
     }
 
     private void setTitleToolbar (String titolo){
@@ -156,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
             case "Ricetta":
 
+                UtilsAnimation.startFadeInAnimation(titoloApp,this);
                 setTitleToolbar(dett);
                 menu.getItem(2).setChecked(true);
                 break;
@@ -188,4 +206,19 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
         cambiaFragment(fragCategoria,true);
     }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        setUpToolbar();
+    }
+
+    private void setUpToolbar(){
+
+        goToSettings.setVisibility(View.VISIBLE);
+        goToMain.setVisibility(View.GONE);
+    }
+
+
 }
