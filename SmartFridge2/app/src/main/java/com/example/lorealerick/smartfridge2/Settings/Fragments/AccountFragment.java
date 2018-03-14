@@ -26,9 +26,7 @@ import com.example.lorealerick.smartfridge2.R;
 public class AccountFragment extends Fragment {
 
     TextView nome,cognome, email, password;
-    Button confirm;
 
-    boolean flag=false;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -55,14 +53,17 @@ public class AccountFragment extends Fragment {
                 (R.layout.changepass_dialog, null);
         final View titleView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_layout, null);
 
+
         dialog = new AlertDialog.Builder(getContext())
                 .setView(alertDialogView)
                 .setCancelable(true)
+                .setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
                 .create();
-
-        confirm=(Button)dialog.findViewById(R.id.confirm);
-
-
 
 
         password.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +71,6 @@ public class AccountFragment extends Fragment {
            public void onClick(View v) {
 
                dialog.show();
-
 
            }
        });
