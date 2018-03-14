@@ -7,10 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.lorealerick.smartfridge2.Activity.Main.MainActivity">
-
-<<<<<<< HEAD
+    
     <include layout="@layout/app_toolbar"/>
-=======
+
     <FrameLayout
 
         android:id="@+id/toolbarContainer"
@@ -44,7 +43,6 @@
         </RelativeLayout>
 
     </FrameLayout>
->>>>>>> 60ec492cec2d56f012eaaa64bbcf0c07d50baf1b
 
     <FrameLayout
 
