@@ -27,6 +27,7 @@ public class Impostazioni extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpViews();
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         fragmentManager = getSupportFragmentManager();
 
