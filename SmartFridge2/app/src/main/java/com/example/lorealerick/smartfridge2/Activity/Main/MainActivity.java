@@ -1,5 +1,6 @@
 package com.example.lorealerick.smartfridge2.Activity.Main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.BottomNavigationView;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         super.onCreate(savedInstanceState);
         JodaTimeAndroid.init(this);
         setUpViews();
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         fragmentManager = getSupportFragmentManager();
         inizializzaFragment();
