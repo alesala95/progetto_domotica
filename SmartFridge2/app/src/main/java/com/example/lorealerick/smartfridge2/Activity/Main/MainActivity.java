@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("SmartFrdige");
         toolbar.setTitleTextColor(Color.WHITE);
 
         navigation = findViewById(R.id.navigation);
