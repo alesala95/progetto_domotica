@@ -11,9 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Settings.Fragments.AccountFragment;
 import com.example.lorealerick.smartfridge2.Settings.Fragments.FragSettingsHome;
+import com.example.lorealerick.smartfridge2.Settings.Interfaces.ListenerImpostazioni;
 
-public class Impostazioni extends AppCompatActivity {
+public class Impostazioni extends AppCompatActivity implements ListenerImpostazioni{
 
     private Toolbar toolbar;
     private Button goToSettings;
@@ -22,6 +24,7 @@ public class Impostazioni extends AppCompatActivity {
     private FragmentManager fragmentManager;
 
     private Fragment frags [];
+    private Fragment fragsSettings [];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +65,14 @@ public class Impostazioni extends AppCompatActivity {
 
     private void inizializzaFragment (){
 
-        frags = new Fragment[1];
-
+        frags = new Fragment[2];
         frags [0] = new FragSettingsHome();
+
+        fragsSettings = new Fragment[4];
+        fragsSettings [0] = new AccountFragment();
+        fragsSettings [1] = new AccountFragment();
+        fragsSettings [2] = new AccountFragment();
+        fragsSettings [3] = new AccountFragment();
     }
 
     private void cambiaFragment (Fragment fragment, boolean addToBackStack ){
@@ -110,5 +118,11 @@ public class Impostazioni extends AppCompatActivity {
         setTitleToolbar("Impostazioni");
         goToSettings.setVisibility(View.GONE);
         goToMain.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onImpostazioneSelezionata(int index) {
+
+        cambiaFragment(fragsSettings[index],true);
     }
 }
