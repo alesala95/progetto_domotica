@@ -62,22 +62,11 @@ public class FragRicettario extends Fragment{
         categorie = new ArrayList<>();
         progressBarRicettario = view.findViewById(R.id.progressRicettario);
 
-        if(!Services.getInstance().isScaricatoAnteprimaRicette()){
-
-            dbAdapter.svuotaTabellaRicette();
-
-            downloadRicetteManager = new DownloadRicetteManager();
-            downloadRicetteManager.execute();
-
-            Services.getInstance().setScaricatoAnteprimaRicette(true);
-        }else{
-
-            aggiornaDati();
-        }
-
         adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,listenerApriRicetta);
         ListView listaCategorie = view.findViewById(R.id.listaCategorie);
         listaCategorie.setAdapter(adapterListaCategorie);
+
+        new DownloadRicetteManager().execute();
 
         return view;
     }
@@ -89,13 +78,18 @@ public class FragRicettario extends Fragment{
         protected void onPreExecute() {
             super.onPreExecute();
 
+            categorie.clear();
+            adapterListaCategorie.notifyDataSetChanged();
             progressBarRicettario.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            new DownloadDati(getActivity()).scaricaVetrinaRicette();
+            for (String s : dbAdapter.getAllCategorie())
+
+                categorie.add(new Categoria(s,dbAdapter.getAllRicetteForCategoria(s,5)));
+
 
             return null;
         }
@@ -110,14 +104,6 @@ public class FragRicettario extends Fragment{
     }
 
     private void aggiornaDati (){
-
-        categorie.clear();
-        adapterListaCategorie.notifyDataSetChanged();
-
-        for (String s : dbAdapter.getAllCategorie()){
-
-            categorie.add(new Categoria(s,dbAdapter.getAllRicetteForCategoria(s,5)));
-        }
 
         adapterListaCategorie.notifyDataSetChanged();
     }

@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABELLA_RICETTA = "ricetta";
     public static final String TABELLA_ALIMENTO = "alimento";
+    public static final String TABELLA_FRIGO = "frigo";
 
     public static final String KEY_RICETTA_ID = "_idRicetta";
     public static final String KEY_RICETTA_NOME = "nomeRicetta";
@@ -33,6 +34,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_ALIMENTO_DATA_INSERIMENTO = "dataInserimento";
     public static final String KEY_ALIMENTO_STIMA_SCADENZA = "stimaScadenzaAlimento";
     public static final String KEY_ALIMENTO_IMMAGINE = "immagineAlimento";
+
+    public static final String KEY_FRIGO_ID = "_id";
+    public static final String KEY_FRIGO_MODELLO = "modelloFrigo";
+    public static final String KEY_FRIGO_FRIGO_ACCESO = "frigoAcceso";
+    public static final String KEY_FRIGO_FREEZER_ACCESO = "freezerAcceso";
+    public static final String KEY_FRIGO_FRIGO_TEMPERATURA = "frigoTemperatura";
+    public static final String KEY_FRIGO_FREEZER_TEMPERATURA = "freezerTemperatura";
+    public static final String KEY_FRIGO_CAPACITA_FRIGO = "capacitaFrigo";
+    public static final String KEY_FRIGO_CAPACITA_FREEZER = "capacitaFreezer";
+    public static final String KEY_FRIGO_N_PORTE = "nPorte";
+    public static final String KEY_FRIGO_TIPO_RAFFREDDAMENTO = "tipoRaffreddamento";
+    public static final String KEY_FRIGO_CLASSE_ENERGETICA = "classeEnergetica";
+    public static final String KEY_FRIGO_LAMPADINA_ACCESA = "lampadinaAccesa";
+    public static final String KEY_FRIGO_ALLARME_ATTIVO = "allarmeAttivo";
+    public static final String KEY_FRIGO_VACATION_MODE = "vacationMode";
 
     private static final String CREAZIONE_TABELLA_RICETTA = "CREATE TABLE " + TABELLA_RICETTA + " ("
             +" "+ KEY_RICETTA_ID + " INTEGER PRIMARY KEY,"
@@ -53,6 +69,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_ALIMENTO_IMMAGINE + " BLOB,"
             + KEY_ALIMENTO_STIMA_SCADENZA + " INTEGER)";
 
+    private static final String CREAZIONE_TABELLA_FRIGO = "CREATE TABLE " + TABELLA_FRIGO + "("
+            +" "+KEY_FRIGO_ID + " TEXT PRIMARY KEY,"
+            +KEY_FRIGO_MODELLO + " TEXT,"
+            +KEY_FRIGO_FRIGO_ACCESO + " INTEGER,"
+            +KEY_FRIGO_FREEZER_ACCESO + " INTEGER,"
+            +KEY_FRIGO_FRIGO_TEMPERATURA + " REAL,"
+            +KEY_FRIGO_FREEZER_TEMPERATURA + " REAL,"
+            +KEY_FRIGO_CAPACITA_FRIGO + " INTEGER,"
+            +KEY_FRIGO_CAPACITA_FREEZER + " INTEGER,"
+            +KEY_FRIGO_N_PORTE + " INTEGER,"
+            +KEY_FRIGO_TIPO_RAFFREDDAMENTO + " TEXT,"
+            +KEY_FRIGO_CLASSE_ENERGETICA + " TEXT,"
+            +KEY_FRIGO_LAMPADINA_ACCESA + " INTEGER,"
+            +KEY_FRIGO_ALLARME_ATTIVO + " INTEGER,"
+            +KEY_FRIGO_VACATION_MODE + " INTEGER)";
+
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -60,12 +93,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREAZIONE_TABELLA_RICETTA);
+        db.execSQL(CREAZIONE_TABELLA_FRIGO);
         db.execSQL(CREAZIONE_TABELLA_ALIMENTO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABELLA_RICETTA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELLA_FRIGO);
         db.execSQL("DROP TABLE IF EXISTS " + TABELLA_ALIMENTO);
 
         onCreate(db);

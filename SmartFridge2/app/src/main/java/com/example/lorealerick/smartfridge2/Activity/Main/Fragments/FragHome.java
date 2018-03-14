@@ -27,6 +27,7 @@ import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import com.example.lorealerick.smartfridge2.Utils.RecyclerDivider;
 import com.example.lorealerick.smartfridge2.Utils.Services;
+import com.example.lorealerick.smartfridge2.Utils.Utente;
 
 import java.util.ArrayList;
 
@@ -145,9 +146,9 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         protected Void doInBackground(Void... voids) {
 
             listaAlimentiInScadenza.addAll(databaseAdapter.getAllAlimentiInScadenza());
+            listaAlimentiInScadenza.addAll(databaseAdapter.getAllAlimentiScadonoOggi());
             listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(listaAlimentiInScadenza));
-
-            frigo = downloadDati.scaricaInfoFrigo();
+            frigo = databaseAdapter.getFrigo(Utente.getInstance().getCodiceFrigo());
 
             return null;
         }
@@ -157,6 +158,7 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
             super.onPostExecute(aVoid);
 
             swipeRefreshLayout.setRefreshing(false);
+
             notifyDataChanged();
             refreshRealTimeMonitoring();
         }

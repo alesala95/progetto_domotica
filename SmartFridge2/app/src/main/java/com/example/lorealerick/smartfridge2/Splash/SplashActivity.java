@@ -11,6 +11,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
+import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
@@ -42,6 +43,7 @@ public class SplashActivity extends AppCompatActivity {
 
             databaseAdapter.svuotaTabellaAlimenti();
             databaseAdapter.svuotaTabellaRicette();
+            databaseAdapter.svuotaTabellaFrigo();
         }
 
         @Override
@@ -49,6 +51,7 @@ public class SplashActivity extends AppCompatActivity {
 
             ArrayList <Alimento> alimenti = downloadDati.scaricaAlimenti();
             ArrayList <Ricetta> ricette = downloadDati.scaricaVetrinaRicette();
+            Frigo frigo = downloadDati.scaricaInfoFrigo();
 
             for(Alimento a : alimenti)
 
@@ -57,6 +60,8 @@ public class SplashActivity extends AppCompatActivity {
             for(Ricetta r : ricette)
 
                 databaseAdapter.addRicetta(r);
+
+            databaseAdapter.addFrigo(frigo);
 
             return null;
         }

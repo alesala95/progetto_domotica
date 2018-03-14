@@ -7,7 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.lorealerick.smartfridge2.Models.Alimento;
+import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
+import com.example.lorealerick.smartfridge2.Utils.UtilsBool;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -39,6 +41,17 @@ public class DatabaseAdapter {
         database.close();
     }
 
+
+    public void svuotaTabellaFrigo (){
+
+        open();
+
+        database.execSQL("delete from " + DatabaseHelper.TABELLA_FRIGO);
+
+        close();
+    }
+
+
     public void svuotaTabellaRicette (){
 
         open();
@@ -56,6 +69,70 @@ public class DatabaseAdapter {
 
         close();
     }
+
+    public void addFrigo (Frigo frigo){
+
+        open();
+
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseHelper.KEY_FRIGO_ID, frigo.getCodice());
+        values.put(DatabaseHelper.KEY_FRIGO_MODELLO, frigo.getModello());
+        values.put(DatabaseHelper.KEY_FRIGO_FRIGO_ACCESO, UtilsBool.boolToInt(frigo.getFrigoAcceso()));
+        values.put(DatabaseHelper.KEY_FRIGO_FREEZER_ACCESO, UtilsBool.boolToInt(frigo.getFreezerAcceso()));
+        values.put(DatabaseHelper.KEY_FRIGO_FRIGO_TEMPERATURA, frigo.getFrigoTemp());
+        values.put(DatabaseHelper.KEY_FRIGO_FREEZER_TEMPERATURA, frigo.getFreezerTemp());
+        values.put(DatabaseHelper.KEY_FRIGO_CAPACITA_FRIGO, frigo.getCapacitaFrigo());
+        values.put(DatabaseHelper.KEY_FRIGO_CAPACITA_FREEZER, frigo.getCapacitaFreezer());
+        values.put(DatabaseHelper.KEY_FRIGO_N_PORTE, frigo.getnPorte());
+        values.put(DatabaseHelper.KEY_FRIGO_TIPO_RAFFREDDAMENTO, frigo.getTipoRaffreddamento());
+        values.put(DatabaseHelper.KEY_FRIGO_CLASSE_ENERGETICA, frigo.getClasseEnergetica());
+        values.put(DatabaseHelper.KEY_FRIGO_LAMPADINA_ACCESA, UtilsBool.boolToInt(frigo.getLampadinaAccesa()));
+        values.put(DatabaseHelper.KEY_FRIGO_ALLARME_ATTIVO, UtilsBool.boolToInt(frigo.getAllarmeAttivo()));
+        values.put(DatabaseHelper.KEY_FRIGO_VACATION_MODE, UtilsBool.boolToInt(frigo.getVacationMode()));
+
+        database.insert(DatabaseHelper.TABELLA_FRIGO, null, values);
+
+        close();
+    }
+
+    public Frigo getFrigo (String codice) {
+
+        String query = "SELECT * FROM " + DatabaseHelper.TABELLA_FRIGO + " WHERE " + DatabaseHelper.KEY_FRIGO_ID + " = '" + codice + "';";
+
+        open();
+
+        Cursor cursor = database.rawQuery(query,null);
+
+        Frigo frigo = null;
+
+        if (cursor.moveToFirst()) {
+
+            frigo = new Frigo();
+
+
+            frigo.setCodice(cursor.getString(0));
+            frigo.setModello(cursor.getString(1));
+            frigo.setFrigoAcceso(UtilsBool.intToBool((Integer.parseInt(cursor.getString(2)))));
+            frigo.setFreezerAcceso(UtilsBool.intToBool((Integer.parseInt(cursor.getString(3)))));
+            frigo.setFrigoTemp(cursor.getDouble(4));
+            frigo.setFreezerTemp(cursor.getDouble(5));
+            frigo.setCapacitaFrigo(Integer.parseInt(cursor.getString(6)));
+            frigo.setCapacitaFreezer(Integer.parseInt(cursor.getString(7)));
+            frigo.setnPorte(Integer.parseInt(cursor.getString(8)));
+            frigo.setTipoRaffreddamento(cursor.getString(9));
+            frigo.setClasseEnergetica(cursor.getString(10));
+            frigo.setLampadinaAccesa(UtilsBool.intToBool(Integer.parseInt(cursor.getString(11))));
+            frigo.setAllarmeAttivo(UtilsBool.intToBool(Integer.parseInt(cursor.getString(12))));
+            frigo.setVacationMode(UtilsBool.intToBool(Integer.parseInt(cursor.getString(13))));
+        }
+
+        close();
+
+        return frigo;
+    }
+
+
 
     public void addAlimento(Alimento alimento){
 
@@ -218,6 +295,39 @@ public class DatabaseAdapter {
                 alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
 
                 if(alimento.isInScadenza())
+                    listaAlimenti.add(alimento);
+
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return listaAlimenti;
+    }
+
+    public ArrayList <Alimento> getAllAlimentiScadonoOggi (){
+
+        ArrayList<Alimento> listaAlimenti = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + DatabaseHelper.TABELLA_ALIMENTO;
+
+        open();
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Alimento alimento = new Alimento();
+
+                alimento.setIdAlimento(Integer.parseInt(cursor.getString(1)));
+                alimento.setNome(cursor.getString(2));
+                alimento.setData_inserimento(cursor.getString(3));
+                alimento.setImage(cursor.getBlob(4));
+                alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
+
+                if(alimento.getStato() == Alimento.SCADE_OGGI)
                     listaAlimenti.add(alimento);
 
             } while (cursor.moveToNext());

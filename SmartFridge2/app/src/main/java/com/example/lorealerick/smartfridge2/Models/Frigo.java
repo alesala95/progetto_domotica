@@ -54,6 +54,10 @@ public class Frigo {
         this.vacationMode = vacationMode;
     }
 
+    public Frigo(){
+
+    }
+
     public String getCodice() {
         return codice;
     }
@@ -118,7 +122,7 @@ public class Frigo {
         return frigoTemp;
     }
 
-    public void setFrigoTemp(int frigoTemp) {
+    public void setFrigoTemp(double frigoTemp) {
         this.frigoTemp = frigoTemp;
     }
 
@@ -126,7 +130,7 @@ public class Frigo {
         return freezerTemp;
     }
 
-    public void setFreezerTemp(int freezerTemp) {
+    public void setFreezerTemp(double freezerTemp) {
         this.freezerTemp = freezerTemp;
     }
 
