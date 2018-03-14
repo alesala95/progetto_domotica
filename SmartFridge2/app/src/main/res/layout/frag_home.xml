@@ -144,15 +144,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/maskCaricamento"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/mask_caricamento"
-                android:visibility="invisible">
-
-            </RelativeLayout>
-
         </FrameLayout>
 
     </ScrollView>

@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         super.onCreate(savedInstanceState);
         JodaTimeAndroid.init(this);
         setUpViews();
+
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-
         fragmentManager = getSupportFragmentManager();
-        inizializzaFragment();
 
+        inizializzaFragment();
 
         aggiungiFragment(0,false);
     }
@@ -62,13 +62,12 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         frags [2] = new FragRicettario();
     }
 
-    private void cambiaFragment (Fragment fragment, boolean addToBackStack ){
+    private void cambiaFragment (Fragment fragment, boolean addToBackStack){
 
         if(!addToBackStack)
             fragmentManager.beginTransaction().replace(R.id.contenitore,fragment).commit();
         else
             fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.contenitore,fragment).commit();
-
     }
 
     private void cambiaFragment (int nFrag, boolean addToBackStack){
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
             fragmentManager.beginTransaction().replace(R.id.contenitore,frags[nFrag]).commit();
         else
             fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.contenitore,frags[nFrag]).commit();
-
     }
 
     private void aggiungiFragment (int nFrag, boolean addToBackStack){
@@ -180,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
                 menu.getItem(2).setChecked(true);
                 break;
         }
-
     }
 
     @Override
@@ -221,6 +218,4 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         goToSettings.setVisibility(View.VISIBLE);
         goToMain.setVisibility(View.GONE);
     }
-
-
 }

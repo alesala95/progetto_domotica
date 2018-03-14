@@ -35,6 +35,7 @@ public class Services {
 
         scaricatoAnteprimaRicette = false;
         scaricatoAlimenti = false;
+
     }
 
     public Retrofit getRetrofit (){

@@ -54,7 +54,7 @@ public class DownloadDati {
         return frigo;
     }
 
-    public void scaricaVetrinaRicette (){
+    public ArrayList<Ricetta> scaricaVetrinaRicette (){
 
         RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 
@@ -75,12 +75,13 @@ public class DownloadDati {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            databaseAdapter.addRicetta(r);
+            //databaseAdapter.addRicetta(r);
         }
+
+        return ricette;
     }
 
-    public void scaricaAlimenti (){
+    public ArrayList<Alimento> scaricaAlimenti (){
 
         final AlimentiAPI alimentiAPI = Services.getInstance().getRetrofit().create(AlimentiAPI.class);
 
@@ -100,7 +101,7 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
-        databaseAdapter.svuotaTabellaAlimenti();
+        //databaseAdapter.svuotaTabellaAlimenti();
 
         for (Alimento a : alimenti){
 
@@ -112,9 +113,10 @@ public class DownloadDati {
 
             System.out.println(a.toString());
 
-            databaseAdapter.addAlimento(a);
+            //databaseAdapter.addAlimento(a);
         }
 
+        return alimenti;
     }
 
     public ArrayList <Ricetta> getRicetteForCategoryOffset (String categoria, int nRis, int page){

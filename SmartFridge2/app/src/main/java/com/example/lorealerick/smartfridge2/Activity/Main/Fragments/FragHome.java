@@ -47,8 +47,6 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
     SwipeRefreshLayout swipeRefreshLayout;
 
-    RelativeLayout maskCaricamento;
-
     private Refresh refresh;
 
     ListenerRefreshUI listenerRefreshUI;
@@ -87,8 +85,6 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
         swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
-
-        maskCaricamento = view.findViewById(R.id.maskCaricamento);
 
         RecyclerView alimentiInScadenza = view.findViewById(R.id.alimentiInScadenza);
         RecyclerView ricetteConsigliate = view.findViewById(R.id.ricetteConsigliate);
@@ -143,15 +139,12 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
             clearDataSets();
             swipeRefreshLayout.setRefreshing(true);
-            maskCaricamento.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            downloadDati.scaricaAlimenti();
             listaAlimentiInScadenza.addAll(databaseAdapter.getAllAlimentiInScadenza());
-
             listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(listaAlimentiInScadenza));
 
             frigo = downloadDati.scaricaInfoFrigo();
@@ -164,7 +157,6 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
             super.onPostExecute(aVoid);
 
             swipeRefreshLayout.setRefreshing(false);
-            maskCaricamento.setVisibility(View.INVISIBLE);
             notifyDataChanged();
             refreshRealTimeMonitoring();
         }
