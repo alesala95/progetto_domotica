@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Settings.Fragments.AccountFragment;
+import com.example.lorealerick.smartfridge2.Settings.Fragments.AskFragment;
 import com.example.lorealerick.smartfridge2.Settings.Fragments.FragSettingsHome;
 import com.example.lorealerick.smartfridge2.Settings.Fragments.FrigoInfoFragment;
 import com.example.lorealerick.smartfridge2.Settings.Interfaces.ListenerImpostazioni;
@@ -78,7 +79,7 @@ public class Impostazioni extends AppCompatActivity implements ListenerImpostazi
         fragsSettings = new Fragment[4];
         fragsSettings [0] = new AccountFragment();
         fragsSettings [1] = new FrigoInfoFragment();
-        fragsSettings [2] = new AccountFragment();
+        fragsSettings [2] = new AskFragment();
         fragsSettings [3] = new AccountFragment();
     }
 
