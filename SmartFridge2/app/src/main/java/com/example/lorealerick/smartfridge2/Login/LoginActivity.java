@@ -67,6 +67,10 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.Fr
     }
 
     private void cambiaFragment(int frg){
+        //verificare
+        if(frg==1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_login,frag[frg]).addToBackStack(null).commit();
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_login,frag[frg]).commit();
     }
