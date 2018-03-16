@@ -7,12 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;

@@ -1,6 +1,5 @@
 package com.example.lorealerick.smartfridge2.Activity.Main;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.BottomNavigationView;

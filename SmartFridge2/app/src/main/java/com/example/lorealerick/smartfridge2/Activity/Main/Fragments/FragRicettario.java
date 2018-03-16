@@ -16,18 +16,10 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRef
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
-import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
-import com.example.lorealerick.smartfridge2.SmartFridgeAPI.RicetteAPI;
-import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
-import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
-import com.example.lorealerick.smartfridge2.Utils.Services;
-import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
+;
 import java.util.ArrayList;
 
-import retrofit2.Call;
 
 /**
  * Created by LoreAleRick on 08/03/2018.
