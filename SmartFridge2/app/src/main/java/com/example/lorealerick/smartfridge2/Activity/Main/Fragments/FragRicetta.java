@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
@@ -40,6 +41,7 @@ public class FragRicetta extends Fragment {
     private ListenerRefreshUI listenerRefreshUI;
 
     private RelativeLayout content;
+    private Ricetta ricetta;
 
     @Override
     public void onAttach(Context context) {
@@ -56,30 +58,23 @@ public class FragRicetta extends Fragment {
 
         content = view.findViewById(R.id.content);
 
-        Ricetta ricetta = dbAdapter.getRicetta(getArguments().getInt("id"));
+        nomeRicetta = view.findViewById(R.id.titoloRicetta);
+        autoreRicetta = view.findViewById(R.id.autoreRicetta);
+        durataRicetta = view.findViewById(R.id.durataRicetta);
+        difficoltaRicetta = view.findViewById(R.id.difficoltaRicetta);
+        ingredienti = view.findViewById(R.id.testoIngredienti);
+        procedimento = view.findViewById(R.id.testoProcedimento);
 
-        if(ricetta != null){
+        immagine = view.findViewById(R.id.immagine);
 
-            nomeRicetta = view.findViewById(R.id.titoloRicetta);
-            autoreRicetta = view.findViewById(R.id.autoreRicetta);
-            durataRicetta = view.findViewById(R.id.durataRicetta);
-            difficoltaRicetta = view.findViewById(R.id.difficoltaRicetta);
-            ingredienti = view.findViewById(R.id.testoIngredienti);
-            procedimento = view.findViewById(R.id.testoProcedimento);
-
-            immagine = view.findViewById(R.id.immagine);
-
-            new DownloadDettagliRicetta().execute(ricetta.getId());
-        }
-
-
+        new DownloadDettagliRicetta().execute(getArguments().getInt("id"));
 
         return view;
     }
 
     private class DownloadDettagliRicetta extends AsyncTask <Integer,Void,Void>{
 
-        Ricetta ricetta = null;
+
 
         @Override
         protected void onPreExecute() {
@@ -104,6 +99,7 @@ public class FragRicetta extends Fragment {
 
             content.setVisibility(View.VISIBLE);
             UtilsAnimation.startFadeInAnimation(content,getActivity());
+            Toast.makeText(getActivity(),ricetta.getNome()+"",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -143,7 +139,7 @@ public class FragRicetta extends Fragment {
     public void onResume() {
         super.onResume();
 
-        listenerRefreshUI.onRefreshUI("Ricetta",nomeRicetta.getText()+"");
+        listenerRefreshUI.onRefreshUI("Ricetta","");
     }
 
 
