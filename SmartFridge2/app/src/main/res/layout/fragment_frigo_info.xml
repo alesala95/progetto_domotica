@@ -233,15 +233,15 @@
         android:textSize="17dp"
         />
 
-    <Switch
-        android:id="@+id/swtLight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView7"
-        android:clickable="true"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
+        <Switch
+            android:id="@+id/swtLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView7"
+            android:layout_below="@+id/textView7"
+            android:clickable="true"
+            android:textColor="@android:color/black"
+            android:textSize="17dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/div7"
@@ -266,15 +266,15 @@
         android:textSize="17dp"
         />
 
-    <Switch
-        android:id="@+id/swtDoor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView8"
-        android:clickable="true"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
+        <Switch
+            android:id="@+id/swtDoor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_below="@+id/textView8"
+            android:clickable="true"
+            android:textColor="@android:color/black"
+            android:textSize="17dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/div8"
@@ -300,15 +300,15 @@
         android:textSize="17dp"
         />
 
-    <Switch
-        android:id="@+id/swtMode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9"
-        android:clickable="true"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
+        <Switch
+            android:id="@+id/swtMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView9"
+            android:layout_below="@+id/textView9"
+            android:clickable="true"
+            android:textColor="@android:color/black"
+            android:textSize="17dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/div9"
@@ -319,7 +319,7 @@
         android:layout_below="@+id/swtMode"
         android:layout_marginTop="11dp"
         android:background="#607D8B" />
-         
+
      </RelativeLayout>
  </ScrollView>
 </RelativeLayout>
