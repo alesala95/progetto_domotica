@@ -7,24 +7,35 @@
  <ScrollView
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:id="@+id/scrollView2">
+     android:id="@+id/scrollView2"
+     android:scrollbars="none"
+     >
 
      <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
 
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Modello"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
+         <TextView
+             android:id="@+id/headerInfo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentTop="true"
+             android:layout_alignStart="@+id/textView1"
+             android:layout_marginTop="10dp"
+             android:layout_marginBottom="10dp"
+             android:text="Informazioni"
+             android:textColor="@color/colorPrimary"
+             android:textSize="20dp" />
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignStart="@+id/textView2"
+             android:layout_below="@+id/headerInfo"
+             android:text="Modello"
+             android:textColor="@android:color/darker_gray"
+             android:textSize="17dp" />
 
     <TextView
         android:id="@+id/modelloFrigo"
@@ -45,7 +56,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/modelloFrigo"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
 
@@ -80,7 +91,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/capacitaFrigo"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
 
@@ -115,7 +126,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/capacitaFreezer"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
     <TextView
@@ -149,7 +160,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/numPorte"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
 
@@ -184,7 +195,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tipoRaff"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
     <TextView
@@ -213,21 +224,32 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/div6"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="1dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/classeEn"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
+
+         <TextView
+             android:id="@+id/headerSet"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignEnd="@+id/headerInfo"
+             android:layout_below="@+id/div6"
+             android:layout_marginTop="10dp"
+             android:text="Impostazioni"
+             android:textColor="@color/colorPrimary"
+             android:textSize="20dp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/div6"
+        android:layout_below="@+id/headerSet"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Lampadina"
         android:textColor="@android:color/darker_gray"
         android:textSize="17dp"
@@ -251,7 +273,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/swtLight"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
     <TextView
@@ -284,7 +306,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/swtDoor"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
 
 
@@ -318,7 +340,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/swtMode"
         android:layout_marginTop="11dp"
-        android:background="#607D8B" />
+        android:background="#ECEFF1" />
 
      </RelativeLayout>
  </ScrollView>

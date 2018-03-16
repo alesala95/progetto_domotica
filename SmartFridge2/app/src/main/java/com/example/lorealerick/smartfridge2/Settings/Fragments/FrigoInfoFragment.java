@@ -53,8 +53,6 @@ public class FrigoInfoFragment extends Fragment implements View.OnClickListener 
 
 
 
-
-
     private void initialize() {//inizializzazione degli switch
         String setSwitch = prefs.getString("light", "accesa");
 
@@ -100,7 +98,6 @@ public class FrigoInfoFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
 
         int id=v.getId();
-        Toast.makeText(getContext(),id,Toast.LENGTH_LONG).show();
 
         switch (id){
             case R.id.swtLight:
@@ -187,13 +184,11 @@ public class FrigoInfoFragment extends Fragment implements View.OnClickListener 
             editor.commit();
 
             String light = prefs.getString("light", "accesa");
-            Toast.makeText(getContext(),light,Toast.LENGTH_LONG).show();
             swtLight.setText(light);
             swtLight.setChecked(false);
         }
 
     }
-
 
 
 }
