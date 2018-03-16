@@ -5,13 +5,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterAlimentoScadenza;
@@ -26,8 +25,6 @@ import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import com.example.lorealerick.smartfridge2.Utils.RecyclerDivider;
-import com.example.lorealerick.smartfridge2.Utils.Services;
-import com.example.lorealerick.smartfridge2.Utils.Utente;
 
 import java.util.ArrayList;
 
@@ -35,30 +32,30 @@ import java.util.ArrayList;
  * Created by LoreAleRick on 09/03/2018.
  */
 
-public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragHome extends Fragment{
 
-    DatabaseAdapter databaseAdapter;
-    DownloadDati downloadDati;
+    private DatabaseAdapter databaseAdapter;
+    private DownloadDati downloadDati;
 
-    ArrayList <Alimento> listaAlimentiInScadenza;
-    ArrayList <Ricetta> listaRicetteConsigliate;
+    private ArrayList <Alimento> listaAlimentiInScadenza;
+    private ArrayList <Ricetta> listaRicetteConsigliate;
 
-    AdapterAlimentoScadenza adapterAlimentiInScadenza;
-    AdapterRicetta adapterRicetteConsigliate;
+    private AdapterAlimentoScadenza adapterAlimentiInScadenza;
+    private AdapterRicetta adapterRicetteConsigliate;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    private Button refreshRtm;
 
     private Refresh refresh;
 
-    ListenerRefreshUI listenerRefreshUI;
-    ListenerApriRicetta listenerApriRicetta;
+    private ListenerRefreshUI listenerRefreshUI;
+    private ListenerApriRicetta listenerApriRicetta;
 
-    Frigo frigo;
+    private Frigo frigo;
 
-    TextView statusfrigo;
-    TextView tempFrigo;
-    TextView statusFreezer;
-    TextView tempFreezer;
+    private TextView statusfrigo;
+    private TextView tempFrigo;
+    private TextView statusFreezer;
+    private TextView tempFreezer;
 
     @Override
     public void onAttach(Context context) {
@@ -84,8 +81,15 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         tempFrigo = view.findViewById(R.id.tempFrigo);
         tempFreezer = view.findViewById(R.id.tempFreezer);
 
-        swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        refreshRtm = view.findViewById(R.id.refreshRTM);
+        refreshRtm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                downloadRTM();
+                refreshRealTimeMonitoring();
+            }
+        });
 
         RecyclerView alimentiInScadenza = view.findViewById(R.id.alimentiInScadenza);
         RecyclerView ricetteConsigliate = view.findViewById(R.id.ricetteConsigliate);
@@ -106,16 +110,7 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
         launchRefresh();
 
-        Services.getInstance().setScaricatoAlimenti(true);
-
-
         return view;
-    }
-
-    @Override
-    public void onRefresh() {
-
-        launchRefresh();
     }
 
     private void launchRefresh (){
@@ -123,6 +118,7 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         if(refresh == null){
 
             refresh = new Refresh();
+            refresh.execute();
         }
 
         if (refresh.getStatus() != AsyncTask.Status.RUNNING){
@@ -132,14 +128,13 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         }
     }
 
-    class Refresh extends AsyncTask <Void, Void, Void> {
+    private class Refresh extends AsyncTask <Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
             clearDataSets();
-            swipeRefreshLayout.setRefreshing(true);
         }
 
         @Override
@@ -147,8 +142,15 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
             listaAlimentiInScadenza.addAll(databaseAdapter.getAllAlimentiInScadenza());
             listaAlimentiInScadenza.addAll(databaseAdapter.getAllAlimentiScadonoOggi());
-            listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(listaAlimentiInScadenza));
-            frigo = databaseAdapter.getFrigo(Utente.getInstance().getCodiceFrigo());
+
+            ArrayList <Alimento> feedRicetteConsigliate = databaseAdapter.getAlimentiScadenzaEBuoni(true);
+            for(int i = 6;i < feedRicetteConsigliate.size();i++){
+
+                feedRicetteConsigliate.remove(i);
+            }
+
+            listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(feedRicetteConsigliate));
+            downloadRTM();
 
             return null;
         }
@@ -157,18 +159,22 @@ public class FragHome extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            swipeRefreshLayout.setRefreshing(false);
-
             notifyDataChanged();
             refreshRealTimeMonitoring();
         }
+    }
+
+    private void downloadRTM (){
+
+        frigo = downloadDati.scaricaInfoFrigo();
+        databaseAdapter.svuotaTabellaFrigo();
+        databaseAdapter.addFrigo(frigo);
     }
 
     private void clearDataSets (){
 
         listaAlimentiInScadenza.clear();
         listaRicetteConsigliate.clear();
-        notifyDataChanged();
     }
 
     private void notifyDataChanged (){

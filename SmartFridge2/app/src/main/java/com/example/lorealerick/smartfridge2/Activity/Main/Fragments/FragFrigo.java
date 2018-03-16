@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,15 +39,16 @@ import retrofit2.Call;
  * Created by LoreAleRick on 09/03/2018.
  */
 
-public class FragFrigo extends Fragment{
+public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
-    DatabaseAdapter databaseAdapter;
-    ArrayList <Alimento> alimenti;
-    AdapterGrigliaAlimenti adapterGrigliaAlimenti;
-    DownloadAlimentiManager downloadAlimentiManager;
-    ProgressBar progressBarfrigo;
+    private DatabaseAdapter databaseAdapter;
+    private ArrayList <Alimento> alimenti;
+    private AdapterGrigliaAlimenti adapterGrigliaAlimenti;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    ListenerRefreshUI listenerRefreshUI;
+    private ListenerRefreshUI listenerRefreshUI;
+    private DownloadAlimentiManager downloadAlimentiManager;
+    private DownloadDati downloadDati;
 
     @Override
     public void onAttach(Context context) {
@@ -55,6 +57,7 @@ public class FragFrigo extends Fragment{
         databaseAdapter = new DatabaseAdapter(context);
         listenerRefreshUI = (MainActivity)context;
         listenerRefreshUI.onRefreshUI("Frigo",null);
+        downloadDati = new DownloadDati(context);
     }
 
     @Override
@@ -62,7 +65,8 @@ public class FragFrigo extends Fragment{
 
         View view = inflater.inflate(R.layout.frag_frigo, container, false);
 
-        progressBarfrigo = view.findViewById(R.id.progressFrigo);
+        swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         alimenti = new ArrayList<>();
 
@@ -72,23 +76,23 @@ public class FragFrigo extends Fragment{
 
         grigliaAlimenti.setAdapter(adapterGrigliaAlimenti);
 
-        if(!Services.getInstance().isScaricatoAlimenti()){
-
-            databaseAdapter.svuotaTabellaAlimenti();
-
-            downloadAlimentiManager = new DownloadAlimentiManager();
-            downloadAlimentiManager.execute();
-
-            Services.getInstance().setScaricatoAlimenti(true);
-        }else{
-
-            aggiorna();
-        }
+        aggiorna();
+        notifyDataChanged();
 
         return view;
     }
 
+    @Override
+    public void onRefresh() {
 
+        riscaricaAlimenti();
+    }
+
+    private void riscaricaAlimenti (){
+
+        downloadAlimentiManager = new DownloadAlimentiManager();
+        downloadAlimentiManager.execute();
+    }
 
     private class DownloadAlimentiManager extends AsyncTask <Void, Void, Void>{
 
@@ -96,13 +100,18 @@ public class FragFrigo extends Fragment{
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressBarfrigo.setVisibility(View.VISIBLE);
+            clearDataSet();
+            swipeRefreshLayout.setRefreshing(true);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            new DownloadDati(getActivity()).scaricaAlimenti();
+            alimenti.addAll(downloadDati.scaricaAlimenti());
+            databaseAdapter.svuotaTabellaFrigo();
+
+            for (Alimento a : alimenti)
+                databaseAdapter.addAlimento(a);
 
             return null;
         }
@@ -111,20 +120,23 @@ public class FragFrigo extends Fragment{
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            progressBarfrigo.setVisibility(View.INVISIBLE);
-            aggiorna();
+            notifyDataChanged();
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 
     private void aggiorna (){
 
+        clearDataSet();
+        alimenti.addAll(databaseAdapter.getAllAlimenti());
+    }
+
+    private void clearDataSet (){
+
         alimenti.clear();
-        adapterGrigliaAlimenti.notifyDataSetChanged();
+    }
 
-        for (Alimento a : databaseAdapter.getAllAlimenti()){
-
-            alimenti.add(a);
-        }
+    private void notifyDataChanged(){
 
         adapterGrigliaAlimenti.notifyDataSetChanged();
     }

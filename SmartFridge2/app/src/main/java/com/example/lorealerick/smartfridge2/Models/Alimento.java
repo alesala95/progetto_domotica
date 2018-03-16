@@ -138,6 +138,30 @@ public class Alimento {
         return isInScadenza;
     }
 
+    public boolean isBuono (){
+
+        boolean buono = false;
+
+        if(getStato() == Alimento.BUONO){
+
+            buono = true;
+        }
+
+        return buono;
+    }
+
+    public boolean scadeOggi (){
+
+        boolean scadeOggi = false;
+
+        if(getStato() == Alimento.SCADE_OGGI){
+
+            scadeOggi = true;
+        }
+
+        return scadeOggi;
+    }
+
     public boolean isScaduto (){
 
         boolean scaduto = false;

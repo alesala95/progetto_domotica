@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 
 import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Frigo;
@@ -264,6 +265,80 @@ public class DatabaseAdapter {
                 alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
 
                 listaAlimenti.add(alimento);
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return listaAlimenti;
+    }
+
+    public ArrayList <Alimento> getAlimentiScadenzaEBuoni (boolean unoPerNome){
+
+        ArrayList<Alimento> listaAlimenti = new ArrayList<>();
+        String selectQuery;
+
+        if(unoPerNome)
+            selectQuery = "SELECT * FROM " + DatabaseHelper.TABELLA_ALIMENTO + " GROUP BY " + DatabaseHelper.KEY_ALIMENTO_NOME;
+        else
+            selectQuery = "SELECT * FROM " + DatabaseHelper.TABELLA_ALIMENTO;
+
+        open();
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Alimento alimento = new Alimento();
+
+                alimento.setIdAlimento(Integer.parseInt(cursor.getString(1)));
+                alimento.setNome(cursor.getString(2));
+                alimento.setData_inserimento(cursor.getString(3));
+                alimento.setImage(cursor.getBlob(4));
+                alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
+
+                if (alimento.isBuono()||alimento.isInScadenza()|| alimento.scadeOggi())
+                    listaAlimenti.add(alimento);
+
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return listaAlimenti;
+    }
+
+    public ArrayList <Alimento> getAllAlimentiBuoni (boolean unoPerNome) {
+
+        ArrayList<Alimento> listaAlimenti = new ArrayList<>();
+        String selectQuery;
+
+        if(unoPerNome)
+            selectQuery = "SELECT * FROM " + DatabaseHelper.TABELLA_ALIMENTO + " GROUP BY " + DatabaseHelper.KEY_ALIMENTO_NOME;
+        else
+            selectQuery = "SELECT * FROM " + DatabaseHelper.TABELLA_ALIMENTO;
+
+        open();
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Alimento alimento = new Alimento();
+
+                alimento.setIdAlimento(Integer.parseInt(cursor.getString(1)));
+                alimento.setNome(cursor.getString(2));
+                alimento.setData_inserimento(cursor.getString(3));
+                alimento.setImage(cursor.getBlob(4));
+                alimento.setStima_scadenza(Integer.parseInt(cursor.getString(5)));
+
+                if (alimento.isBuono())
+                    listaAlimenti.add(alimento);
+
             } while (cursor.moveToNext());
         }
 
