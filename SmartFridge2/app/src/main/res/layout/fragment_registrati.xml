@@ -1,150 +1,158 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.lorealerick.smartfridge2.Login.Fragments.RegistratiFragment"
-    android:orientation="vertical"
+    android:layout_height="match_parent">
 
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    >
+    <ImageView
 
-    <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+        android:id="@+id/logo"
+        android:layout_width="270dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/icon_no_background" />
+
+    <EditText
+
+        android:id="@+id/registratiNome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_account_white_24dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:layout_below="@+id/logo"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:hint="Nome"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#FFF"
+        android:textColorHint="#FFF" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+    <View
 
+        android:id="@+id/regNDivider"
+        android:layout_below="@id/registratiNome"
+        android:layout_width="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_height="1dp"
+        android:background="#E1F5FE" />
 
-            <ImageView
-                android:layout_width="270dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/icon_no_background"
-                />
+    <EditText
 
+        android:id="@+id/registratiCognome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_account_white_24dp"
+        android:drawablePadding="17dp"
+        android:ems="10"
+        android:layout_below="@+id/regNDivider"
+        android:hint="Cognome"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#FFF" />
 
-            <EditText
-                android:id="@+id/registratiNome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@mipmap/ic_account_white_24dp"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:hint="Nome"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="#FFF"
-                android:textColorHint="#FFF" />
+    <View
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E1F5FE"
-                />
-
-            <EditText
-                android:id="@+id/registratiCognome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@mipmap/ic_account_white_24dp"
-                android:drawablePadding="17dp"
-                android:ems="10"
-                android:hint="Cognome"
-                android:inputType="textPersonName"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="#fff"
-                android:textColorHint="#FFF" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E1F5FE"
-                />
+        android:id="@+id/regCRegistrati"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/registratiCognome"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="#E1F5FE" />
 
 
-            <EditText
-                android:id="@+id/registratiMail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@mipmap/ic_at_white_24dp"
-                android:drawablePadding="17dp"
-                android:ems="10"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="#fff"
-                android:textColorHint="#FFF" />
+    <EditText
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E1F5FE"
-                />
+        android:id="@+id/registratiMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/regCRegistrati"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_at_white_24dp"
+        android:drawablePadding="17dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#FFF" />
 
+    <View
 
-            <EditText
-                android:id="@+id/registratiPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@mipmap/ic_lock_white_24dp"
-                android:drawablePadding="17dp"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="#fff"
-                android:textColorHint="#FFF" />
+        android:id="@+id/regMDivider"
+        android:layout_below="@+id/registratiMail"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E1F5FE" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E1F5FE"
-                />
+    <EditText
 
+        android:id="@+id/registratiPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_below="@id/regMDivider"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_lock_white_24dp"
+        android:drawablePadding="17dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#FFF" />
 
-            <Button
-                android:id="@+id/btnRegistrati"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button_registrati"
-                android:text="Registrati"
-                android:textColor="#fff"
-                android:textAllCaps="false"
-                android:textSize="18dp"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:clickable="true"
-                android:elevation="5dp"
-                android:layout_marginBottom="16dp"
-                style="@style/Base.TextAppearance.AppCompat.Body1"
-                />
+    <View
 
+        android:id="@+id/regPDivider"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_below="@id/registratiPassword"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E1F5FE" />
 
-        </LinearLayout>
+    <Button
 
-    </ScrollView>
+        android:id="@+id/btnRegistrati"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_below="@+id/regPDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button_registrati"
+        android:text="Registrati"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:layout_marginBottom="16dp"
+        style="@style/Base.TextAppearance.AppCompat.Body1" />
 
-</FrameLayout>
+</RelativeLayout>

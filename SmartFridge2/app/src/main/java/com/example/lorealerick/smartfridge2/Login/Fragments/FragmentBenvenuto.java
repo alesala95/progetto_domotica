@@ -29,7 +29,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
     SwipeRefreshLayout refreshLayout;
     RecyclerView recSwipe;
     taskRicerca taskR;
-    LoginFragment.FragmentLoginListener listener;
+
 
     public FragmentBenvenuto() {
     }
@@ -38,7 +38,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        listener = (LoginFragment.FragmentLoginListener) context;
+
     }
 
     @Override
@@ -81,7 +81,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
 
                 // retrofit + pingTask
                 // se è giusto
-                listener.cambia(-1);
+                //listener.cambia(-1);
 
             }
         });

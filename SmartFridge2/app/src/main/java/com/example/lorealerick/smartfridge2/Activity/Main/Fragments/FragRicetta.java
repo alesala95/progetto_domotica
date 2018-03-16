@@ -71,8 +71,6 @@ public class FragRicetta extends Fragment {
 
     private class DownloadDettagliRicetta extends AsyncTask <Integer,Void,Void>{
 
-
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -83,7 +81,7 @@ public class FragRicetta extends Fragment {
         @Override
         protected Void doInBackground(Integer... ints) {
 
-            ricetta = new DownloadDati(getActivity()).scaricaRicetta(ints[0]);
+            ricetta = DownloadDati.scaricaRicetta(ints[0]);
 
             return null;
         }

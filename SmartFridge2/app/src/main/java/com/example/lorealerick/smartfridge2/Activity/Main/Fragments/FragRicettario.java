@@ -27,14 +27,14 @@ import java.util.ArrayList;
 
 public class FragRicettario extends Fragment{
 
-    DatabaseAdapter dbAdapter;
-    ArrayList <Categoria> categorie;
-    AdapterListaCategorie adapterListaCategorie;
-    DownloadRicetteManager downloadRicetteManager;
-    ProgressBar progressBarRicettario;
+    private DatabaseAdapter dbAdapter;
+    private ArrayList <Categoria> categorie;
+    private AdapterListaCategorie adapterListaCategorie;
+    private DownloadRicetteManager downloadRicetteManager;
+    private ProgressBar progressBarRicettario;
 
-    ListenerRefreshUI listenerRefreshUI;
-    ListenerApriRicetta listenerApriRicetta;
+    private ListenerRefreshUI listenerRefreshUI;
+    private ListenerApriRicetta listenerApriRicetta;
 
     @Override
     public void onAttach(Context context) {

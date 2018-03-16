@@ -1,17 +1,24 @@
 package com.example.lorealerick.smartfridge2.Login.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lorealerick.*;
+import com.example.lorealerick.smartfridge2.Login.Interfaces.ListenerLogin;
+import com.example.lorealerick.smartfridge2.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Utils.UserControls;
+import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
 /**
  * Created by itsadmin on 22/02/2018.
@@ -19,66 +26,71 @@ import com.example.lorealerick.smartfridge2.R;
 
 public class LoginFragment extends Fragment{
 
-    public interface FragmentLoginListener{
 
-        public void cambia(int i);
-    }
+    private EditText editEMail;
+    private EditText editPassword;
+    private Button btnAccedi;
+    private Button btnRegistrati;
+    private CheckBox ricordami;
+    private TextView dimenticatoPassword;
 
-    Button btnAccedi;
-    Button btnRegistrati;
+    private ListenerLogin listenerLogin;
+    private SharedPreferences sharedPreferences;
 
-    EditText eMail;
-    EditText password;
-
-
-    FragmentLoginListener list;
-
-    public LoginFragment (){
-
-
-    }
+    public LoginFragment (){}
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        list = (FragmentLoginListener)context;
+        listenerLogin = (LoginActivity) context;
+        sharedPreferences = context.getSharedPreferences("SmartFridge",Context.MODE_PRIVATE);
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        btnAccedi=(Button)view.findViewById(R.id.btnAccedi);
-        btnRegistrati=(Button)view.findViewById(R.id.btnRegistrati);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        eMail = view.findViewById(R.id.editLoginMail);
-        password = view.findViewById(R.id.editLoginPassword);
+        editEMail = view.findViewById(R.id.editLoginMail);
+        editPassword = view.findViewById(R.id.editLoginPassword);
+        btnAccedi = view.findViewById(R.id.btnAccedi);
+        btnRegistrati = view.findViewById(R.id.btnRegistrati);
+        ricordami = view.findViewById(R.id.ricordamiChb);
+        dimenticatoPassword = view.findViewById(R.id.dimenticatoPassword);
+        dimenticatoPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
-        //Controlli per l'accesso
+                Toast.makeText(getActivity(),"Cambio password",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnAccedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(true/*(!(eMail.getText()+"").equals(""))&&(!(password.getText()+"").equals(""))*/){
+                if((!(editEMail.getText()+"").equals(""))&&(!(editPassword.getText()+"").equals(""))){
 
-                    // query per vedere se l'utente esiste
+                    if(UserControls.isUserExist(editEMail.getText().toString(),editPassword.getText().toString(),true)){ //se utente esiste
 
-                    if( true ){ //se utente esiste
+                        if(ricordami.isChecked()){
 
-                        list.cambia(2); //apertura fragment per la configurazione del frigo
-                        eMail.setText("");
-                        password.setText("");
-                    }else{//utente non trovato
+                            sharedPreferences.edit().putString("email",UtenteCorrente.getInstance().geteMail()).apply();
+                            sharedPreferences.edit().putString("password",UtenteCorrente.getInstance().getPassword()).apply();
+                        }
 
-                        Toast.makeText(getActivity(),"Utente o password errati",Toast.LENGTH_LONG).show();
+                        listenerLogin.cambiaFragment(-1);
+
+                    }else{
+
+                        Toast.makeText(getActivity(),"UtenteCorrente o password errati",Toast.LENGTH_LONG).show();
                     }
-                }else{//campi vuoti
+
+                }else{
 
                     Toast.makeText(getActivity(),"Compilare i campi",Toast.LENGTH_LONG).show();
                 }
@@ -90,10 +102,7 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                list.cambia(1);//apertura fragment registrazione
-                //Svuoto i campi
-                eMail.setText("");
-                password.setText("");
+                listenerLogin.cambiaFragment(1);
             }
         });
 

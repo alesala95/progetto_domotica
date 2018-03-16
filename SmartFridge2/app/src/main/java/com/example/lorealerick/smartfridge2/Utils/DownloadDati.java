@@ -1,8 +1,5 @@
 package com.example.lorealerick.smartfridge2.Utils;
 
-import android.content.Context;
-
-import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
@@ -24,14 +21,7 @@ import retrofit2.Call;
 
 public class DownloadDati {
 
-    DatabaseAdapter databaseAdapter;
-
-    public DownloadDati (Context context){
-
-        databaseAdapter = new DatabaseAdapter(context);
-    }
-
-    public Frigo scaricaInfoFrigo (){
+    public static Frigo scaricaInfoFrigo (){
 
 
         final FrigoAPI ricetteAPI = Services.getInstance().getRetrofit().create(FrigoAPI.class);
@@ -39,7 +29,7 @@ public class DownloadDati {
 
         Map <String, Object> map = new HashMap<>();
 
-        map.put("codice",Utente.getInstance().getCodiceFrigo());
+        map.put("codice", UtenteCorrente.getInstance().getCodiceFrigo());
 
         Call <Frigo> call = ricetteAPI.getInfoFrigo(map);
 
@@ -54,7 +44,7 @@ public class DownloadDati {
         return frigo;
     }
 
-    public ArrayList<Ricetta> scaricaVetrinaRicette (){
+    public static ArrayList<Ricetta> scaricaVetrinaRicette (){
 
         RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 
@@ -80,13 +70,13 @@ public class DownloadDati {
         return ricette;
     }
 
-    public ArrayList<Alimento> scaricaAlimenti (){
+    public static ArrayList<Alimento> scaricaAlimenti (){
 
         final AlimentiAPI alimentiAPI = Services.getInstance().getRetrofit().create(AlimentiAPI.class);
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("codiceFrigo", Utente.getInstance().getCodiceFrigo());
+        map.put("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo());
 
         Call<ArrayList<Alimento>> call = alimentiAPI.getAlimenti(map);
 
@@ -115,7 +105,7 @@ public class DownloadDati {
         return alimenti;
     }
 
-    public ArrayList <Ricetta> getRicetteForCategoryOffset (String categoria, int nRis, int page){
+    public static ArrayList <Ricetta> getRicetteForCategoryOffset (String categoria, int nRis, int page){
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 
@@ -149,7 +139,7 @@ public class DownloadDati {
         return ricette;
     }
 
-    public Ricetta scaricaRicetta (int id){
+    public static Ricetta scaricaRicetta (int id){
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
         Ricetta ricetta = null;
@@ -177,7 +167,7 @@ public class DownloadDati {
         return ricetta;
     }
 
-    public ArrayList <Ricetta> scaricaFeedRicetteConsigliate (ArrayList<Alimento>alimentiInScadenza){
+    public static ArrayList <Ricetta> scaricaFeedRicetteConsigliate (ArrayList<Alimento>alimentiInScadenza){
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 

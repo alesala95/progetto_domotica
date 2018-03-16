@@ -29,31 +29,29 @@ import java.util.ArrayList;
 
 public class FragCategoria extends Fragment {
 
-    ArrayList <Ricetta> listaRicette;
-    GridView grigliaRicetteCategoria;
-    AdapterGrigliaRicette adapterGrigliaRicette;
-    DownloadDati downloadDati;
+    private ArrayList <Ricetta> listaRicette;
+    private GridView grigliaRicetteCategoria;
+    private AdapterGrigliaRicette adapterGrigliaRicette;
 
-    boolean isScrolling;
-    boolean fineItem;
-    int itemCorrenti;
-    int itemTotali;
-    int itemScrollati;
+    private boolean isScrolling;
+    private boolean fineItem;
+    private int itemCorrenti;
+    private int itemTotali;
+    private int itemScrollati;
 
-    String categoria;
-    FetchRicette fetchRicette;
+    private String categoria;
+    private FetchRicette fetchRicette;
 
-    int itemPerPagina;
-    int pagina;
+    private int itemPerPagina;
+    private int pagina;
 
-    ListenerRefreshUI listenerRefreshUI;
-    ListenerApriRicetta listenerApriRicetta;
+    private ListenerRefreshUI listenerRefreshUI;
+    private ListenerApriRicetta listenerApriRicetta;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        downloadDati = new DownloadDati(context);
         listenerRefreshUI = (MainActivity)context;
         listenerApriRicetta = (MainActivity) context;
     }
@@ -141,7 +139,7 @@ public class FragCategoria extends Fragment {
 
             int cont = listaRicette.size();
 
-            listaRicette.addAll(downloadDati.getRicetteForCategoryOffset(categoria,limite,page));
+            listaRicette.addAll(DownloadDati.getRicetteForCategoryOffset(categoria,limite,page));
 
             if(listaRicette.size()>cont)
 

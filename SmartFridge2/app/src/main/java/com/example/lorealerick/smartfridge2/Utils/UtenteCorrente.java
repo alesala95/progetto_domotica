@@ -4,23 +4,24 @@ package com.example.lorealerick.smartfridge2.Utils;
  * Created by LoreAleRick on 10/03/2018.
  */
 
-public class Utente {
+public class UtenteCorrente {
 
-    private static Utente utente;
+    private static UtenteCorrente utenteCorrente;
     private String nomeUtente;
+    private String cognomeUtente;
     private String eMail;
     private String password;
     private String codiceFrigo;
 
-    public static Utente getInstance() {
+    public static UtenteCorrente getInstance() {
 
-        if(utente == null)
-            utente = new Utente();
+        if(utenteCorrente == null)
+            utenteCorrente = new UtenteCorrente();
 
-        return utente;
+        return utenteCorrente;
     }
 
-    private Utente() {
+    private UtenteCorrente() {
 
         codiceFrigo = "sf0001ma";
     }
@@ -55,5 +56,13 @@ public class Utente {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public String getCognomeUtente() {
+        return cognomeUtente;
+    }
+
+    public void setCognomeUtente(String cognomeUtente) {
+        this.cognomeUtente = cognomeUtente;
     }
 }

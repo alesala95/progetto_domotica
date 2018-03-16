@@ -12,41 +12,37 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.lorealerick.*;
+import com.example.lorealerick.smartfridge2.Login.Interfaces.ListenerLogin;
+import com.example.lorealerick.smartfridge2.Login.LoginActivity;
+import com.example.lorealerick.smartfridge2.Models.Utente;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Utils.UserControls;
+import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RegistratiFragment extends Fragment {
 
+    private Button btnRegistrati;
 
+    private EditText regNome;
+    private EditText regCognome;
+    private EditText regMail;
+    private EditText regPassword;
 
-    Button btnRegistrati;
+    private ListenerLogin listenerLogin;
 
-    EditText regNome;
-    EditText regCognome;
-    EditText regMail;
-    EditText regPassword;
-
-    LoginFragment.FragmentLoginListener listener;
-
-    public RegistratiFragment() {
-        // Required empty public constructor
-    }
+    public RegistratiFragment() {}
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        listener = (LoginFragment.FragmentLoginListener) context;
+        listenerLogin = (LoginActivity) context;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_registrati, container, false);
+        View view = inflater.inflate(R.layout.fragment_registrati, container, false);
 
         regNome = view.findViewById(R.id.registratiNome);
         regCognome = view.findViewById(R.id.registratiCognome);
@@ -59,23 +55,22 @@ public class RegistratiFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //controllo che i campi non siano vuoti
-                if(true/*(!(regNome.getText()+"").equals(""))&&(!(regCognome.getText()+"").equals(""))&&(!(regMail.getText()+"").equals(""))&&(!(regPassword.getText()+"").equals(""))*/){
+                if((!(regNome.getText()+"").equals(""))&&(!(regCognome.getText()+"").equals(""))&&(!(regMail.getText()+"").equals(""))&&(!(regPassword.getText()+"").equals(""))){
 
-                    // Aggungi utente al DB
-                    listener.cambia(0);
-                    regNome.setText("");
-                    regCognome.setText("");
-                    regPassword.setText("");
-                    regMail.setText("");
+                    //listenerLogin.cambiaFragment(0);
+                    if(UserControls.aggiungiUtente(regMail.getText().toString(),regPassword.getText().toString(),regNome.getText().toString(),regCognome.getText().toString())){
 
-                    //Controllare che l'utente non esista prima di aggiungerlo
+                        Toast.makeText(getActivity(),"Registrato",Toast.LENGTH_LONG).show();
+                        listenerLogin.cambiaFragment(0);
+                    }else{
+
+                        Toast.makeText(getActivity(),"Registrazione Fallita",Toast.LENGTH_LONG).show();
+                    }
 
                 }else{
 
                     Toast.makeText(getActivity(),"Compilare tutti i campi",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 

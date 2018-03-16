@@ -34,7 +34,6 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     private ListenerRefreshUI listenerRefreshUI;
     private DownloadAlimentiManager downloadAlimentiManager;
-    private DownloadDati downloadDati;
 
     @Override
     public void onAttach(Context context) {
@@ -43,7 +42,6 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
         databaseAdapter = new DatabaseAdapter(context);
         listenerRefreshUI = (MainActivity)context;
         listenerRefreshUI.onRefreshUI("Frigo",null);
-        downloadDati = new DownloadDati(context);
     }
 
     @Override
@@ -96,8 +94,10 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
             databaseAdapter.svuotaTabellaAlimenti();
 
-            for (Alimento a : downloadDati.scaricaAlimenti())
+            for (Alimento a : DownloadDati.scaricaAlimenti())
                 databaseAdapter.addAlimento(a);
+
+            aggiorna();
 
             return null;
         }
@@ -106,7 +106,6 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            aggiorna();
             notifyDataChanged();
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -114,18 +113,7 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     private void aggiorna (){
 
-        for (Alimento a : alimenti)
-
-            System.out.println("Prima " + a.toString());
-
-
-        for (Alimento a : databaseAdapter.getAllAlimenti())
-
-            alimenti.add(a);
-
-        for (Alimento a : alimenti)
-
-            System.out.println("Dopo " + a.toString());
+        alimenti.addAll(databaseAdapter.getAllAlimenti());
     }
 
     private void clearDataSet (){

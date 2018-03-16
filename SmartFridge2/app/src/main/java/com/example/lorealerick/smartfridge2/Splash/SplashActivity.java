@@ -32,14 +32,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private class DownloadResources extends AsyncTask <Void, Void, Void>{
 
-        DownloadDati downloadDati;
         DatabaseAdapter databaseAdapter;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            downloadDati = new DownloadDati(SplashActivity.this);
             databaseAdapter = new DatabaseAdapter(SplashActivity.this);
 
             databaseAdapter.svuotaTabellaAlimenti();
@@ -50,9 +48,9 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            ArrayList <Alimento> alimenti = downloadDati.scaricaAlimenti();
-            ArrayList <Ricetta> ricette = downloadDati.scaricaVetrinaRicette();
-            Frigo frigo = downloadDati.scaricaInfoFrigo();
+            ArrayList <Alimento> alimenti = DownloadDati.scaricaAlimenti();
+            ArrayList <Ricetta> ricette = DownloadDati.scaricaVetrinaRicette();
+            Frigo frigo = DownloadDati.scaricaInfoFrigo();
 
             for(Alimento a : alimenti)
 

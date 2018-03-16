@@ -35,7 +35,6 @@ import java.util.ArrayList;
 public class FragHome extends Fragment{
 
     private DatabaseAdapter databaseAdapter;
-    private DownloadDati downloadDati;
 
     private ArrayList <Alimento> listaAlimentiInScadenza;
     private ArrayList <Ricetta> listaRicetteConsigliate;
@@ -62,7 +61,6 @@ public class FragHome extends Fragment{
         super.onAttach(context);
 
         databaseAdapter = new DatabaseAdapter(context);
-        downloadDati = new DownloadDati(context);
         listenerRefreshUI = (MainActivity)context;
         listenerRefreshUI.onRefreshUI("Home",null);
         listenerApriRicetta = (MainActivity)context;
@@ -135,6 +133,7 @@ public class FragHome extends Fragment{
             super.onPreExecute();
 
             clearDataSets();
+            notifyDataChanged();
         }
 
         @Override
@@ -149,7 +148,7 @@ public class FragHome extends Fragment{
                 feedRicetteConsigliate.remove(i);
             }
 
-            listaRicetteConsigliate.addAll(downloadDati.scaricaFeedRicetteConsigliate(feedRicetteConsigliate));
+            listaRicetteConsigliate.addAll(DownloadDati.scaricaFeedRicetteConsigliate(feedRicetteConsigliate));
             downloadRTM();
 
             return null;
@@ -166,7 +165,7 @@ public class FragHome extends Fragment{
 
     private void downloadRTM (){
 
-        frigo = downloadDati.scaricaInfoFrigo();
+        frigo = DownloadDati.scaricaInfoFrigo();
         databaseAdapter.svuotaTabellaFrigo();
         databaseAdapter.addFrigo(frigo);
     }
