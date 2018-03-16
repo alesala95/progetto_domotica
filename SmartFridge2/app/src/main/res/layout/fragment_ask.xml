@@ -8,11 +8,250 @@
     <ScrollView
         android:id="@+id/scr"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="Domande frequenti"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignStart="@+id/head"
+                android:layout_below="@+id/head"
+                android:text="Queste FAQ forniscono risposte a domande generali su SmartFridge.\nSe non trovi risposta alla tua domanda scrivici."
+                android:textSize="15dp"
+                />
+
+
+            <TextView
+                android:id="@+id/head1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/desc"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="7dp"
+                android:text="Generali"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17dp"
+                 />
+
+            <TextView
+                android:id="@+id/ask1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/head1"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:text="-Cos'è SmartFridge?" />
+
+            <TextView
+                android:id="@+id/ask2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/ask1"
+                android:layout_below="@+id/ask1"
+                android:text="-Per chi è?"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ask3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask2"
+                android:layout_alignStart="@+id/ask2"
+                android:text="-Chi sono le persone dietro SmartFridge?"
+                android:textSize="15dp"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/head2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/ask3"
+                android:layout_alignStart="@+id/ask3"
+                android:text="Frigo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/ask4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/head2"
+                android:layout_alignStart="@+id/head2"
+                android:text="-Come funziona il frigo?"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ask5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask4"
+                android:layout_alignStart="@+id/ask4"
+                android:text="-Non riconosce alcuni prodotti"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ask6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask5"
+                android:layout_alignStart="@+id/ask5"
+                android:text="-Come richiedo assistenza?"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ask7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask6"
+                android:layout_alignStart="@+id/ask6"
+                android:text="-Durata garanzia"
+                android:textSize="15dp"
+                />
+
+
+
+            <TextView
+                android:id="@+id/head3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/ask7"
+                android:layout_alignStart="@+id/ask7"
+                android:text="Account"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/ask8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/head3"
+                android:layout_alignStart="@+id/head3"
+                android:text="-Come cambio la password?"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ask9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask8"
+                android:layout_alignStart="@+id/ask8"
+                android:text="-Eliminare account"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ask10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask9"
+                android:layout_alignStart="@+id/ask9"
+                android:text="-Privacy"
+                android:textSize="15dp"
+                />
+
+
+
+            <TextView
+                android:id="@+id/head4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/ask10"
+                android:layout_alignStart="@+id/ask10"
+                android:text="Risoluzione problemi"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/ask11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/head4"
+                android:layout_alignStart="@+id/head4"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:text="-Problemi connessione al frigo"
+                />
+
+            <TextView
+                android:id="@+id/ask12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask11"
+                android:layout_alignStart="@+id/ask11"
+                android:text="-Problemi di notifica"
+                android:textSize="15dp"
+                />
+
+
+            <TextView
+                android:id="@+id/head5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ask12"
+                android:layout_alignStart="@+id/ask12"
+                android:layout_marginTop="10dp"
+                android:text="Altro"
+                android:textSize="17dp"
+                android:textColor="@color/colorPrimary"
+
+                />
+
+            <TextView
+                android:id="@+id/scrivici"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/head5"
+                android:layout_alignStart="@+id/head5"
+                android:text="@string/Scrivici"
+                android:textSize="15dp"
+                />
+
+        </RelativeLayout>
 
 
     </ScrollView>
+
+
 
 
 </RelativeLayout>
