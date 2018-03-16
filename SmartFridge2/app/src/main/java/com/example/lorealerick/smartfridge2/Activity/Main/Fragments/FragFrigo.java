@@ -5,35 +5,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterGrigliaAlimenti;
-import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterRicetta;
-import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
-import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
-import com.example.lorealerick.smartfridge2.SmartFridgeAPI.AlimentiAPI;
-import com.example.lorealerick.smartfridge2.Utils.BitmapHandle;
 import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
-import com.example.lorealerick.smartfridge2.Utils.Services;
-import com.example.lorealerick.smartfridge2.Utils.Utente;
-import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-import retrofit2.Call;
 
 /**
  * Created by LoreAleRick on 09/03/2018.
@@ -73,9 +59,9 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
         GridView grigliaAlimenti = view.findViewById(R.id.grigliaAlimenti);
 
         adapterGrigliaAlimenti = new AdapterGrigliaAlimenti(getActivity(),R.layout.item_alimento,alimenti);
-
         grigliaAlimenti.setAdapter(adapterGrigliaAlimenti);
 
+        clearDataSet();
         aggiorna();
         notifyDataChanged();
 
@@ -127,8 +113,10 @@ public class FragFrigo extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     private void aggiorna (){
 
-        clearDataSet();
         alimenti.addAll(databaseAdapter.getAllAlimenti());
+        for (Alimento a : alimenti)
+
+            System.out.println(a.toString());
     }
 
     private void clearDataSet (){

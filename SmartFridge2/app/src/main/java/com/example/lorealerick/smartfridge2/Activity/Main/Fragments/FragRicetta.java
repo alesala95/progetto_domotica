@@ -81,7 +81,6 @@ public class FragRicetta extends Fragment {
             super.onPreExecute();
 
             content.setVisibility(View.INVISIBLE);
-            listenerRefreshUI.onRefreshUI("Ricetta","Caricamento ... ");
         }
 
         @Override
@@ -99,13 +98,10 @@ public class FragRicetta extends Fragment {
 
             content.setVisibility(View.VISIBLE);
             UtilsAnimation.startFadeInAnimation(content,getActivity());
-            Toast.makeText(getActivity(),ricetta.getNome()+"",Toast.LENGTH_SHORT).show();
         }
     }
 
     private void aggiorna (Ricetta ricetta){
-
-
 
         nomeRicetta.setText(ricetta.getNome());
         autoreRicetta.setText(ricetta.getAutore());
@@ -139,7 +135,8 @@ public class FragRicetta extends Fragment {
     public void onResume() {
         super.onResume();
 
-        listenerRefreshUI.onRefreshUI("Ricetta","");
+        if(ricetta!=null)
+            listenerRefreshUI.onRefreshUI("Ricetta",ricetta.getNome());
     }
 
 

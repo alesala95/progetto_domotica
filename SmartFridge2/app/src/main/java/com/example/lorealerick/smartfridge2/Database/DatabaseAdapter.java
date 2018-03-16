@@ -47,7 +47,7 @@ public class DatabaseAdapter {
 
         open();
 
-        database.execSQL("delete from " + DatabaseHelper.TABELLA_FRIGO);
+        database.execSQL("DELETE FROM " + DatabaseHelper.TABELLA_FRIGO);
 
         close();
     }
@@ -57,7 +57,7 @@ public class DatabaseAdapter {
 
         open();
 
-        database.execSQL("delete from " + DatabaseHelper.TABELLA_RICETTA);
+        database.execSQL("DELETE FROM " + DatabaseHelper.TABELLA_RICETTA);
 
         close();
     }
@@ -66,7 +66,7 @@ public class DatabaseAdapter {
 
         open();
 
-        database.execSQL("delete from " + DatabaseHelper.TABELLA_ALIMENTO);
+        database.execSQL("DELETE FROM " + DatabaseHelper.TABELLA_ALIMENTO);
 
         close();
     }
@@ -136,6 +136,8 @@ public class DatabaseAdapter {
 
 
     public void addAlimento(Alimento alimento){
+
+        System.out.println("Aggiungo al DB: "+alimento.toString());
 
         open();
 

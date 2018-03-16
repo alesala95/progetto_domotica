@@ -68,14 +68,13 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
-        for (Ricetta r : ricette){
+        for (int i = 0; i < ricette.size(); i++){
 
             try {
-                r.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+r.getId()+".jpg").get()));
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //databaseAdapter.addRicetta(r);
         }
 
         return ricette;
@@ -101,19 +100,16 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
-        //databaseAdapter.svuotaTabellaAlimenti();
 
-        for (Alimento a : alimenti){
+        for (int i = 0; i < alimenti.size(); i++){
 
             try {
-                a.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimento/"+a.getIdAlimento()+".jpg").get()));
+                alimenti.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimento/"+alimenti.get(i).getIdAlimento()+".jpg").get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            System.out.println(a.toString());
-
-            //databaseAdapter.addAlimento(a);
+            System.out.println(alimenti.get(i).toString());
         }
 
         return alimenti;
@@ -204,10 +200,10 @@ public class DownloadDati {
             e.printStackTrace();
         }
 
-        for (Ricetta r : ricette){
+        for (int i = 0; i < ricette.size(); i++){
 
             try {
-                r.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+r.getId()+".jpg").get()));
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
