@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lorealerick.smartfridge2.Settings.Impostazioni">
+    tools:context="com.example.lorealerick.smartfridge2.Activity.Settings.Impostazioni">
 
     <include layout="@layout/app_toolbar"/>
 

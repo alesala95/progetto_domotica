@@ -1,13 +1,19 @@
 package com.example.lorealerick.smartfridge2.Utils;
 
+import android.content.SharedPreferences;
+
 import com.example.lorealerick.smartfridge2.Models.Utente;
+import com.example.lorealerick.smartfridge2.SmartFridgeAPI.FrigoAPI;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.UtenteAPI;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by LoreAleRick on 16/03/2018.
@@ -85,5 +91,61 @@ public class UserControls {
             aggiunto = false;
 
         return aggiunto;
+    }
+
+    public static void aggiornaImpostazioniFrigo (boolean luce, boolean allarme, boolean vm){
+
+        final FrigoAPI frigoAPI = Services.getInstance().getRetrofit().create(FrigoAPI.class);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("codiceFrigo",UtenteCorrente.getInstance().getCodiceFrigo());
+        map.put("lights", UtilsBool.boolToInt(luce));
+        map.put("alarm", UtilsBool.boolToInt(allarme));
+        map.put("vm", UtilsBool.boolToInt(vm));
+
+        Call <ResponseBody> call = frigoAPI.setFrigo(map);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                System.out.println("Frigo aggiornato");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                System.out.println("Non sono riuscito ad aggiornare");
+            }
+        });
+    }
+
+    public static void aggiornaPassword (final String nuovaPassword, final boolean refreshSingleton, final SharedPreferences sharedPreferences){
+
+        final UtenteAPI utenteAPI = Services.getInstance().getRetrofit().create(UtenteAPI.class);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("email",UtenteCorrente.getInstance().geteMail());
+        map.put("nuovaPassword", nuovaPassword);
+
+        Call <ResponseBody> call = utenteAPI.cambiaPassword(map);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                System.out.println("Password aggiornata");
+                if(refreshSingleton) {
+                    UtenteCorrente.getInstance().setPassword(nuovaPassword);
+                    sharedPreferences.edit().putString("password",nuovaPassword).apply();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                System.out.println("Non sono riuscito ad aggiornare la password");
+            }
+        });
     }
 }

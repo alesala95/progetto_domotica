@@ -3,19 +3,10 @@
 
     <gradient
 
-        android:endColor="@color/AzzurroMin"
-        android:centerColor="@color/NavColor"
-        android:startColor="@color/BlueColor"
-        android:angle="90"
-        >
+        android:endColor="@color/colorPrimary"
+        android:centerColor="@color/colorPrimary"
+        android:startColor="@color/colorPrimaryDark"
+        android:angle="90">
     </gradient>
-
-    <padding
-
-        android:left="7dp"
-        android:right="7dp"
-        android:top="7dp"
-        android:bottom="7dp"
-        />
 
 </shape>

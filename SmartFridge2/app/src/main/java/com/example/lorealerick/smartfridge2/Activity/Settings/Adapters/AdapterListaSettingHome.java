@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Settings.Adapters;
+package com.example.lorealerick.smartfridge2.Activity.Settings.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

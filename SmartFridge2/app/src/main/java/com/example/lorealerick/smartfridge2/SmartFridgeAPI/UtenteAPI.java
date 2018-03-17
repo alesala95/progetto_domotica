@@ -4,6 +4,7 @@ import com.example.lorealerick.smartfridge2.Models.Utente;
 
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
@@ -19,4 +20,7 @@ public interface UtenteAPI {
 
     @GET("/smartfridge2/aggiungiUtente.php")
     Call <Integer> aggiungiUtente (@QueryMap Map <String,Object> values);
+
+    @GET("/smartfridge2/aggiornaPassword.php")
+    Call <ResponseBody> cambiaPassword (@QueryMap Map <String,Object> values);
 }

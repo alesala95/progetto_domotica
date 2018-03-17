@@ -1,20 +1,20 @@
-package com.example.lorealerick.smartfridge2.Login;
+package com.example.lorealerick.smartfridge2.Activity.Login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
-import com.example.lorealerick.smartfridge2.Login.Fragments.FragmentBenvenuto;
-import com.example.lorealerick.smartfridge2.Login.Fragments.LoginFragment;
-import com.example.lorealerick.smartfridge2.Login.Fragments.RegistratiFragment;
-import com.example.lorealerick.smartfridge2.Login.Interfaces.ListenerLogin;
+import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.FragmentBenvenuto;
+import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.LoginFragment;
+import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.RegistratiFragment;
+import com.example.lorealerick.smartfridge2.Activity.Login.Interfaces.ListenerLogin;
 import com.example.lorealerick.smartfridge2.R;
-import com.example.lorealerick.smartfridge2.Splash.SplashActivity;
-import com.example.lorealerick.smartfridge2.Utils.Frigorifero;
+import com.example.lorealerick.smartfridge2.Activity.Splash.SplashActivity;
+import com.example.lorealerick.smartfridge2.Utils.UserControls;
 import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
 
@@ -30,6 +30,9 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         setContentView(R.layout.activity_login);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.BlueColor));//cambia colore navigation bar
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         fragmentManager = getSupportFragmentManager();
 
         frag = new Fragment[3];
@@ -44,6 +47,21 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
         if(UtenteCorrente.getInstance().geteMail()!=null&& UtenteCorrente.getInstance().getPassword()!=null){//
 
+            System.out.println("Un utente ha già effettuato l'accesso");
+
+            if(UserControls.isUserExist(UtenteCorrente.getInstance().geteMail(),UtenteCorrente.getInstance().getPassword(),true)){
+
+                System.out.println("I dati sono corretti");
+                System.out.println("Eseguo l'accesso");
+
+                changeFragment(-1,true);
+            }else{
+
+                System.out.println("I Dati sono incorretti");
+                System.out.println("Vado nella login");
+                changeFragment(0,false);
+            }
+
             /*Frigorifero.getInstance().setNome(preferences.getString("nomeFrigo",null));
             Frigorifero.getInstance().setCodice(preferences.getString("codiceFrigo",null));
 
@@ -56,11 +74,10 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
                 cambiaFragment(2);
             }*/
 
-            changeFragment(-1);
-
         }else{
 
-            cambiaFragment(0);
+            System.out.println("Primo Accesso");
+            changeFragment(0,false);
         }
 
     }
@@ -72,18 +89,38 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         frag [2] = new FragmentBenvenuto();
     }
 
-    private void changeFragment(int frg){
+    private void changeFragment(int frg, boolean addToBack){
 
-        if(frg == -1)
+        if(frg == -1) {
 
-            startActivity(new Intent(LoginActivity.this,SplashActivity.class));
-        else
+            startActivity(new Intent(LoginActivity.this, SplashActivity.class));
+        }else if(addToBack){
+
             fragmentManager.beginTransaction().replace(R.id.frame_login,frag[frg]).addToBackStack(null).commit();
+        }else{
+
+            fragmentManager.beginTransaction().replace(R.id.frame_login,frag[frg]).commit();
+        }
     }
 
     @Override
     public void cambiaFragment(int index) {
 
-        changeFragment(index);
+        changeFragment(index,true);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        try{
+
+            if((int)getIntent().getExtras().get("from") == 0)
+                finishAffinity();
+
+        }catch (NullPointerException e){
+
+            super.onBackPressed();
+        }
     }
 }

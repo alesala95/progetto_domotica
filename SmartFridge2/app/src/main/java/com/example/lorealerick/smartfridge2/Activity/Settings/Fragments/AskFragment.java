@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Settings.Fragments;
+package com.example.lorealerick.smartfridge2.Activity.Settings.Fragments;
 
 
 import android.content.DialogInterface;

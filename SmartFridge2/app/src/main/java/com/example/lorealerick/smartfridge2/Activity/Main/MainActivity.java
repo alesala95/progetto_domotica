@@ -22,7 +22,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettar
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.R;
-import com.example.lorealerick.smartfridge2.Settings.Impostazioni;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Impostazioni;
 import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
 
 import net.danlew.android.joda.JodaTimeAndroid;

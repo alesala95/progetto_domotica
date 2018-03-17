@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Login.Fragments;
+package com.example.lorealerick.smartfridge2.Activity.Login.Fragments;
 
 
 import android.content.Context;
@@ -11,13 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.lorealerick.*;
-import com.example.lorealerick.smartfridge2.Login.Interfaces.ListenerLogin;
-import com.example.lorealerick.smartfridge2.Login.LoginActivity;
-import com.example.lorealerick.smartfridge2.Models.Utente;
+import com.example.lorealerick.smartfridge2.Activity.Login.Interfaces.ListenerLogin;
+import com.example.lorealerick.smartfridge2.Activity.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.UserControls;
-import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
 public class RegistratiFragment extends Fragment {
 

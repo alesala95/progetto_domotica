@@ -28,7 +28,7 @@
 
         <activity
 
-            android:name=".Login.LoginActivity"
+            android:name=".Activity.Login.LoginActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
 
@@ -41,13 +41,13 @@
 
         <activity
 
-            android:name=".Settings.Impostazioni"
+            android:name=".Activity.Settings.Impostazioni"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
 
-            android:name=".Splash.SplashActivity"
+            android:name=".Activity.Splash.SplashActivity"
             android:noHistory="true" android:screenOrientation="portrait">
 
             <intent-filter>

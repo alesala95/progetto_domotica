@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Settings;
+package com.example.lorealerick.smartfridge2.Activity.Settings;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -12,11 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.R;
-import com.example.lorealerick.smartfridge2.Settings.Fragments.AccountFragment;
-import com.example.lorealerick.smartfridge2.Settings.Fragments.AskFragment;
-import com.example.lorealerick.smartfridge2.Settings.Fragments.FragSettingsHome;
-import com.example.lorealerick.smartfridge2.Settings.Fragments.FrigoInfoFragment;
-import com.example.lorealerick.smartfridge2.Settings.Interfaces.ListenerImpostazioni;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Fragments.AccountFragment;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Fragments.AskFragment;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Fragments.FragInfo;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Fragments.FragSettingsHome;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Fragments.FrigoInfoFragment;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Interfaces.ListenerImpostazioni;
 
 public class Impostazioni extends AppCompatActivity implements ListenerImpostazioni{
 
@@ -30,7 +31,6 @@ public class Impostazioni extends AppCompatActivity implements ListenerImpostazi
     private Fragment fragsSettings [];
 
     SharedPreferences settings;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class Impostazioni extends AppCompatActivity implements ListenerImpostazi
         fragsSettings [0] = new AccountFragment();
         fragsSettings [1] = new FrigoInfoFragment();
         fragsSettings [2] = new AskFragment();
-        fragsSettings [3] = new AccountFragment();
+        fragsSettings [3] = new FragInfo();
     }
 
     private void cambiaFragment (Fragment fragment, boolean addToBackStack ){

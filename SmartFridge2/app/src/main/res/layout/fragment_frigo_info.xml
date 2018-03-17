@@ -2,346 +2,347 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lorealerick.smartfridge2.Settings.Fragments.FrigoInfoFragment">
+    tools:context=".Activity.Settings.Fragments.FrigoInfoFragment">
 
- <ScrollView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:id="@+id/scrollView2"
-     android:scrollbars="none"
-     >
-
-     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">
-
-         <TextView
-             android:id="@+id/headerInfo"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentTop="true"
-             android:layout_alignStart="@+id/textView1"
-             android:layout_marginTop="10dp"
-             android:layout_marginBottom="10dp"
-             android:text="Informazioni"
-             android:textColor="@color/colorPrimary"
-             android:textSize="20dp" />
-
-         <TextView
-             android:id="@+id/textView1"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignStart="@+id/textView2"
-             android:layout_below="@+id/headerInfo"
-             android:text="Modello"
-             android:textColor="@android:color/darker_gray"
-             android:textSize="17dp" />
-
-    <TextView
-        android:id="@+id/modelloFrigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:text="Smart"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/modelloFrigo"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
-
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/div"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Capacità frigo"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
+        android:id="@+id/scrollView2"
+        android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/capacitaFrigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:text="255l"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/capacitaFrigo"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
-
-
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/div2"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Capacità freezer"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
-
-    <TextView
-        android:id="@+id/capacitaFreezer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:text="255l"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/capacitaFreezer"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
-
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/div3"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Numero porte"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
-
-    <TextView
-        android:id="@+id/numPorte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:text="4"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/numPorte"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
-
-
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/div4"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Tipo raffreddamento"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
-
-    <TextView
-        android:id="@+id/tipoRaff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView5"
-        android:layout_below="@+id/textView5"
-        android:text="All-Around"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tipoRaff"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
-
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/div5"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Classe energetica"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
-
-    <TextView
-        android:id="@+id/classeEn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_below="@+id/textView6"
-        android:text="A++"
-        android:textColor="@android:color/black"
-        android:textSize="17dp"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div6"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/classeEn"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
-
-
-         <TextView
-             android:id="@+id/headerSet"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignEnd="@+id/headerInfo"
-             android:layout_below="@+id/div6"
-             android:layout_marginTop="10dp"
-             android:text="Impostazioni"
-             android:textColor="@color/colorPrimary"
-             android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/headerSet"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="10dp"
-        android:text="Lampadina"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
-
-        <Switch
-            android:id="@+id/swtLight"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView7"
-            android:layout_below="@+id/textView7"
-            android:clickable="true"
-            android:textColor="@android:color/black"
-            android:textSize="17dp" />
+            android:layout_height="wrap_content">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div7"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/swtLight"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
+            <TextView
+                android:id="@+id/headerInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/textView1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Informazioni"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_below="@+id/headerInfo"
+                android:text="Modello"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17dp" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/div7"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Allarme porta"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
+            <TextView
+                android:id="@+id/modelloFrigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView1"
+                android:layout_below="@+id/textView1"
+                android:text="Smart"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
 
-        <Switch
-            android:id="@+id/swtDoor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView8"
-            android:layout_below="@+id/textView8"
-            android:clickable="true"
-            android:textColor="@android:color/black"
-            android:textSize="17dp" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div8"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/swtDoor"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/modelloFrigo"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
 
 
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/div8"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="15dp"
-        android:text="Vacation mode"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17dp"
-        />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Capacità frigo"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17dp"
+                />
 
-        <Switch
-            android:id="@+id/swtMode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView9"
-            android:layout_below="@+id/textView9"
-            android:clickable="true"
-            android:textColor="@android:color/black"
-            android:textSize="17dp" />
+            <TextView
+                android:id="@+id/capacitaFrigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_below="@+id/textView2"
+                android:text="255l"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/div9"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/swtMode"
-        android:layout_marginTop="11dp"
-        android:background="#ECEFF1" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/capacitaFrigo"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
 
-     </RelativeLayout>
- </ScrollView>
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div2"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Capacità freezer"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/capacitaFreezer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_below="@+id/textView3"
+                android:text="255l"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/capacitaFreezer"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div3"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Numero porte"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/numPorte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView4"
+                android:layout_below="@+id/textView4"
+                android:text="4"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/numPorte"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div4"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Tipo raffreddamento"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/tipoRaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView5"
+                android:layout_below="@+id/textView5"
+                android:text="All-Around"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tipoRaff"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div5"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Classe energetica"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17dp"
+                />
+
+            <TextView
+                android:id="@+id/classeEn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView6"
+                android:layout_below="@+id/textView6"
+                android:text="A++"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/classeEn"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+
+            <TextView
+                android:id="@+id/headerSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/headerInfo"
+                android:layout_below="@+id/div6"
+                android:layout_marginTop="12dp"
+                android:text="Impostazioni"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headerSet"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="10dp"
+                android:text="Lampadina"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <Switch
+                android:id="@+id/swtLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/textView7"
+                android:layout_alignTop="@+id/textView7"
+                android:layout_marginEnd="5dp"
+                android:clickable="true"
+                android:textColor="@android:color/black"
+                android:textSize="17dp" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/swtLight"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div7"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Allarme porta"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <Switch
+                android:id="@+id/swtDoor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/textView8"
+                android:layout_alignTop="@+id/textView8"
+                android:layout_marginEnd="5dp"
+                android:clickable="true"
+                android:textColor="@android:color/black"
+                android:textSize="17dp" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/swtDoor"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/div8"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Vacation mode"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                />
+
+            <Switch
+                android:id="@+id/swtMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/textView9"
+                android:layout_alignTop="@+id/textView9"
+                android:layout_marginEnd="5dp"
+                android:clickable="true"
+                android:textColor="@android:color/black"
+                android:textSize="17dp" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/div9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/swtMode"
+                android:layout_marginTop="11dp"
+                android:background="#ECEFF1" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

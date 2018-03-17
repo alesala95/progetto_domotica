@@ -1,15 +1,12 @@
-package com.example.lorealerick.smartfridge2.Splash;
+package com.example.lorealerick.smartfridge2.Activity.Splash;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.lorealerick.*;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
-import com.example.lorealerick.smartfridge2.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;

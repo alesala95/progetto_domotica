@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Login.Interfaces;
+package com.example.lorealerick.smartfridge2.Activity.Login.Interfaces;
 
 /**
  * Created by LoreAleRick on 16/03/2018.

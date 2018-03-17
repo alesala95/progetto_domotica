@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Login.Fragments;
+package com.example.lorealerick.smartfridge2.Activity.Login.Fragments;
 
 
 import android.content.Context;
@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lorealerick.smartfridge2.Login.Fragments.*;
 import com.example.lorealerick.smartfridge2.R;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.lorealerick.smartfridge2.Settings.Fragments;
+package com.example.lorealerick.smartfridge2.Activity.Settings.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,12 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Models.SettingsItem;
 import com.example.lorealerick.smartfridge2.R;
-import com.example.lorealerick.smartfridge2.Settings.Adapters.AdapterListaSettingHome;
-import com.example.lorealerick.smartfridge2.Settings.Impostazioni;
-import com.example.lorealerick.smartfridge2.Settings.Interfaces.ListenerImpostazioni;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Adapters.AdapterListaSettingHome;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Impostazioni;
+import com.example.lorealerick.smartfridge2.Activity.Settings.Interfaces.ListenerImpostazioni;
 
 import java.util.ArrayList;
 
