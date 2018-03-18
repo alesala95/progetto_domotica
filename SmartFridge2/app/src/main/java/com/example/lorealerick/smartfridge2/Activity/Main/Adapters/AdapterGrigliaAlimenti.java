@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class AdapterGrigliaAlimenti extends ArrayAdapter <Alimento> {
 
-    ArrayList <Alimento> alimenti;
-    Activity c;
+    private ArrayList <Alimento> alimenti;
+    private Activity c;
 
     public AdapterGrigliaAlimenti(Activity context, int resource, ArrayList<Alimento> alimenti) {
         super(context, resource, alimenti);

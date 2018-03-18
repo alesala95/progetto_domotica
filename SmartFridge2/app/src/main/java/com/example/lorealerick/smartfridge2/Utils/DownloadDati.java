@@ -21,6 +21,9 @@ import retrofit2.Call;
 
 public class DownloadDati {
 
+    private static final int height = 300;
+    private static final int width = 300;
+
     public static Frigo scaricaInfoFrigo (){
 
 
@@ -61,7 +64,7 @@ public class DownloadDati {
         for (int i = 0; i < ricette.size(); i++){
 
             try {
-                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,7 +97,7 @@ public class DownloadDati {
         for (int i = 0; i < alimenti.size(); i++){
 
             try {
-                alimenti.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimento/"+alimenti.get(i).getIdAlimento()+".jpg").get()));
+                alimenti.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimento/"+alimenti.get(i).getIdAlimento()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,7 +133,7 @@ public class DownloadDati {
         for (int i = 0; i < ricette.size(); i++){
 
             try {
-                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -159,7 +162,7 @@ public class DownloadDati {
         }
 
         try {
-            ricetta.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricetta.getId()+".jpg").get()));
+            ricetta.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricetta.getId()+".jpg").resize(height,width).get()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -193,7 +196,7 @@ public class DownloadDati {
         for (int i = 0; i < ricette.size(); i++){
 
             try {
-                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").get()));
+                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
