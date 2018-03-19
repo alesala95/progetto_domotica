@@ -59,7 +59,7 @@ public class FragHome extends Fragment{
     private TextView tempFrigo;
     private TextView statusFreezer;
     private TextView tempFreezer;
-    
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
