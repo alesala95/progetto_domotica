@@ -105,14 +105,11 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
                     FABhide();
                 break;
 
-            case R.id.page:
-                FABhide();
-                break;
-
             case R.id.FBAsearch:
                 editTextSearch.setVisibility(View.VISIBLE);
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(editTextSearch , InputMethodManager.SHOW_IMPLICIT);
+                FABhide();
                 break;
 
             case R.id.FBAadd:
