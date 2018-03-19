@@ -12,8 +12,8 @@ import retrofit2.http.Part;
  * Created by itsadmin on 19/03/2018.
  */
 
-interface Servo {
+public interface UploadImageInterface {
     @Multipart
-    @POST("/")
-    Call<ResponseBody> postImage (@Part MultipartBody.Part image, @Part("name") RequestBody name);
+    @POST("/imagefolder/index.php")
+    Call<MainActivity.UploadObject> uploadFile(@Part MultipartBody.Part file, @Part("name") RequestBody name);
 }
