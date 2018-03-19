@@ -10,7 +10,7 @@
     android:clipToPadding="false"
     android:background="#FFF">
 
-    <ImageView
+    <com.example.lorealerick.smartfridge2.Utils.SquaredItem
         android:id="@+id/immagine"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:background="#CCC"
-        android:transitionName="@string/transizione_ricetta"/>
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

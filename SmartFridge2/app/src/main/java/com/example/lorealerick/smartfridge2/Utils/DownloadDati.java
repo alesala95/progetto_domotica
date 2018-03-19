@@ -21,8 +21,8 @@ import retrofit2.Call;
 
 public class DownloadDati {
 
-    private static final int height = 300;
-    private static final int width = 300;
+    private static final int height = 175;
+    private static final int width = 175;
 
     public static Frigo scaricaInfoFrigo (){
 
