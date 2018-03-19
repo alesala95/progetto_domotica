@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+
+        android:id="@+id/iconRicetta"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="20dp"
+        android:background="#DFDFDF"
+        android:src="@drawable/image"/>
+
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/tilNome"
+        android:layout_toRightOf="@id/iconRicetta"
+        android:layout_alignTop="@id/iconRicetta"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+
+            android:id="@+id/nomeRicettaAggiungi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/tildurata"
+        android:layout_toRightOf="@id/iconRicetta"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/tilNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+
+            android:id="@+id/durata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Durata" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilIng"
+        android:layout_width="match_parent"
+        android:layout_below="@id/difficolta"
+        android:layout_alignStart="@id/iconRicetta"
+        android:layout_marginTop="20dp"
+        android:layout_alignEnd="@id/difficolta"
+        android:layout_height="wrap_content">
+
+        <EditText
+
+            android:id="@+id/ingredienti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingredienti"
+            android:layout_below="@id/durata"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@id/tilIng"
+        android:layout_width="match_parent"
+        android:layout_alignStart="@id/tilIng"
+        android:layout_alignEnd="@id/tilIng"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+
+            android:id="@+id/procedimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Procedimento"
+            android:layout_below="@id/ingredienti"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+
+        android:id="@+id/difficolta"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:layout_alignBottom="@id/iconRicetta"
+        android:layout_below="@id/tildurata"
+        android:layout_toRightOf="@id/iconRicetta"/>
+
+</RelativeLayout>

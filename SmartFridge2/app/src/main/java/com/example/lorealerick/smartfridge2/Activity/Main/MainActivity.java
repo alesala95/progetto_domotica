@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCategoria;
+import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCreaRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
@@ -49,16 +50,17 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
         inizializzaFragment();
 
-        aggiungiFragment(0,false);
+        aggiungiFragment(3,false);
     }
 
     private void inizializzaFragment (){
 
-        frags = new Fragment[3];
+        frags = new Fragment[4];
 
         frags [0] = new FragHome();
         frags [1] = new FragFrigo();
         frags [2] = new FragRicettario();
+        frags [3] = new FragCreaRicetta();
     }
 
     private void cambiaFragment (Fragment fragment, boolean addToBackStack){
@@ -174,6 +176,12 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
                 UtilsAnimation.startFadeInAnimation(titoloApp,this);
                 setTitleToolbar(dett);
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "CreaRicetta":
+
+                setTitleToolbar("Crea Ricetta");
                 menu.getItem(2).setChecked(true);
                 break;
         }
