@@ -18,4 +18,7 @@ public class UtilsAnimation {
         Animation startAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
         view.startAnimation(startAnimation);
     }
+
+
+
 }
