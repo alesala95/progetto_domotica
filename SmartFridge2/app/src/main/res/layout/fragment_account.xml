@@ -138,9 +138,8 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_login"
+            android:background="@drawable/rounded_button_registrati"
             android:text="Esci"
-            android:backgroundTint="#b71c1c"
             android:layout_below="@+id/div3"
             android:textColor="#FFF"
             android:textAllCaps="false"
@@ -149,7 +148,7 @@
             android:layout_marginStart="5dp"
             android:clickable="true"
             android:layout_marginTop="24dp"
-            android:elevation="5dp"
+            android:elevation="2dp"
             style="@style/Base.TextAppearance.AppCompat.Body1" />
 
     </RelativeLayout>

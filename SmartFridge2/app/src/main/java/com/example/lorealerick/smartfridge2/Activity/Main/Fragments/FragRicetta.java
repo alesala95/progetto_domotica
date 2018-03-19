@@ -120,10 +120,11 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
 
     private void share() {
         Intent intent=new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
+        intent.setType("text/plain/image");
         String shareBody= (String) nomeRicetta.getText();
         shareBody= shareBody.concat("\n").concat((String) ingredienti.getText()).concat("\n").concat((String) procedimento.getText());
         String shareSub="Ingredienti,procedimento";
+        intent.putExtra(Intent.EXTRA_STREAM,ricetta.getImage());
         intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
         intent.putExtra(Intent.EXTRA_TEXT,shareBody);
         startActivity(Intent.createChooser(intent,"Condividi"));

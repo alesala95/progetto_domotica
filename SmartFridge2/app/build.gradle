@@ -37,4 +37,7 @@ dependencies {
 
     compile 'net.gotev:uploadservice:2.1'//upload image to server
     compile 'com.steelkiwi:dots-loader-view:1.0.0'
+
+    compile 'com.github.rasoulmiri:Skeleton:v1.0.9'
+
 }
