@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
 
     <RelativeLayout
 
@@ -107,16 +113,11 @@
             android:text="TextView" />
 
     </RelativeLayout>
+    </ScrollView>
 
+    <include layout="@layout/fab"></include>
 
-
-
-
-
-
-
-
-</ScrollView>
+</RelativeLayout>
 
 
 

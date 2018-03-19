@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,9 @@ import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import com.example.lorealerick.smartfridge2.Utils.RecyclerDivider;
 
 import java.util.ArrayList;
+
+import io.rmiri.skeleton.SkeletonGroup;
+import io.rmiri.skeleton.SkeletonView;
 
 /**
  * Created by LoreAleRick on 09/03/2018.
@@ -55,7 +59,7 @@ public class FragHome extends Fragment{
     private TextView tempFrigo;
     private TextView statusFreezer;
     private TextView tempFreezer;
-
+    
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -83,9 +87,9 @@ public class FragHome extends Fragment{
         refreshRtm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 downloadRTM();
                 refreshRealTimeMonitoring();
+
             }
         });
 

@@ -20,4 +20,6 @@
         android:gravity="center">
     </GridView>
 
+    <include layout="@layout/fab"></include>
+
 </RelativeLayout>

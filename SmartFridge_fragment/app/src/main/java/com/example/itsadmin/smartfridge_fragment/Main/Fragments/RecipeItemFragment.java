@@ -104,29 +104,6 @@ public class RecipeItemFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Gestione FBA
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
 
