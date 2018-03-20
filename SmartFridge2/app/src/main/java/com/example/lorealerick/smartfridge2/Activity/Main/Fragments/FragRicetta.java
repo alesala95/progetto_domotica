@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
@@ -41,6 +42,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
     private TextView procedimento;
     private ImageView immagine;
 
+    private ListenerApriRicetta listenerApriRicetta;
     private ListenerRefreshUI listenerRefreshUI;
 
     private RelativeLayout content;
@@ -60,6 +62,8 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
 
         dbAdapter = new DatabaseAdapter(context);
         listenerRefreshUI = (MainActivity)context;
+        listenerApriRicetta = (MainActivity)context;
+
     }
 
     @Override
@@ -107,6 +111,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.FBAadd:
+                listenerApriRicetta.apriCreateRicetta();
                 break;
 
             case R.id.FBAfavourite:

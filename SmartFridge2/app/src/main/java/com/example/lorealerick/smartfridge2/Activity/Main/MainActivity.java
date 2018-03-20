@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
         inizializzaFragment();
 
-        aggiungiFragment(3,false);
+        aggiungiFragment(0,false);
     }
 
     private void inizializzaFragment (){
@@ -211,6 +211,12 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
         fragCategoria.setArguments(bundle);
 
         cambiaFragment(fragCategoria,true);
+    }
+
+
+    public void apriCreateRicetta(){
+        FragCreaRicetta fragCreaRicetta = new FragCreaRicetta();
+        cambiaFragment(fragCreaRicetta,true);
     }
 
     @Override

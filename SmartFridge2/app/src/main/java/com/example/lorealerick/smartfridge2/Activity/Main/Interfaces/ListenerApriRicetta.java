@@ -10,4 +10,6 @@ public interface ListenerApriRicetta {
     void apriRicetta (int idRicetta);
 
     void apriCategoriaRicetta (String category);
+
+    void apriCreateRicetta();
 }

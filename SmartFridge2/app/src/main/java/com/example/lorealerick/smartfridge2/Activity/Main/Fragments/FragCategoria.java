@@ -161,6 +161,7 @@ public class FragCategoria extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.FBAadd:
+                listenerApriRicetta.apriCreateRicetta();
                 break;
         }
     }

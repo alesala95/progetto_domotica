@@ -82,5 +82,5 @@ public class FragCreaRicetta extends Fragment implements View.OnClickListener {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    
+
 }

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.FBAadd:
-
+                listenerApriRicetta.apriCreateRicetta();
                 break;
         }
     }
