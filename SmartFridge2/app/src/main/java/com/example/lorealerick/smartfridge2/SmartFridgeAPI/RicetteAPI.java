@@ -26,4 +26,8 @@ public interface RicetteAPI {
 
     @GET("/smartfridge2/ricetteForCategoriaOffset.php")
     Call<ArrayList<Ricetta>> getRicetteForCategoryOffset (@QueryMap Map<String,Object> values);
+
+    @GET("/smartfridge2/aggiungiRicetta.php")
+    Call <Integer> aggiungiRicetta (@QueryMap Map <String,Object> values);
+
 }

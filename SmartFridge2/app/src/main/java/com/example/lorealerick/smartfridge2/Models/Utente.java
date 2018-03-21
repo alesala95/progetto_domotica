@@ -3,10 +3,6 @@ package com.example.lorealerick.smartfridge2.Models;
 import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by LoreAleRick on 16/03/2018.
- */
-
 public class Utente {
 
     @SerializedName("nome")

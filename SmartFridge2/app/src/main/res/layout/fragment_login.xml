@@ -25,7 +25,9 @@
         android:layout_height="wrap_content"
         android:textColorHint="#FFF"
         android:hint="Email"
-        android:id="@+id/textInputLayout">
+        android:id="@+id/textInputLayout"
+        app:hintTextAppearance="@style/HintText"
+        >
 
     <EditText
         android:id="@+id/editLoginMail"
@@ -66,6 +68,7 @@
         android:textColorHint="#FFF"
         android:hint="Password"
         android:id="@+id/textInputLayout1"
+        app:hintTextAppearance="@style/HintText"
         >
 
     <EditText

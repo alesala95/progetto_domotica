@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_login">
 
     <ImageView
@@ -15,6 +16,20 @@
         android:layout_marginBottom="20dp"
         android:src="@drawable/icon_no_background" />
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_alignStart="@id/tilIng"
+        android:layout_alignEnd="@id/tilIng"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="#FFF"
+        android:hint="Nome"
+        android:id="@+id/textInputLayout"
+        app:hintTextAppearance="@style/HintText"
+        >
+
+
     <EditText
 
         android:id="@+id/registratiNome"
@@ -25,25 +40,39 @@
         android:drawableLeft="@mipmap/ic_account_white_24dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:layout_below="@+id/logo"
+
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:hint="Nome"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#FFF"
         android:textColorHint="#FFF" />
+    </android.support.design.widget.TextInputLayout>
 
     <View
 
         android:id="@+id/regNDivider"
-        android:layout_below="@id/registratiNome"
+        android:layout_below="@id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_height="1dp"
         android:background="#E1F5FE" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/regNDivider"
+        android:layout_width="match_parent"
+        android:layout_alignStart="@id/tilIng"
+        android:layout_alignEnd="@id/tilIng"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="#FFF"
+        android:hint="Cognome"
+        android:id="@+id/textInputLayout1"
+        app:hintTextAppearance="@style/HintText"
+        >
 
     <EditText
 
@@ -55,8 +84,6 @@
         android:drawableLeft="@mipmap/ic_account_white_24dp"
         android:drawablePadding="17dp"
         android:ems="10"
-        android:layout_below="@+id/regNDivider"
-        android:hint="Cognome"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:inputType="textPersonName"
@@ -64,17 +91,31 @@
         android:padding="8dp"
         android:textColor="#fff"
         android:textColorHint="#FFF" />
+    </android.support.design.widget.TextInputLayout>
 
     <View
 
         android:id="@+id/regCRegistrati"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/registratiCognome"
+        android:layout_below="@+id/textInputLayout1"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:background="#E1F5FE" />
 
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/regCRegistrati"
+        android:layout_width="match_parent"
+        android:layout_alignStart="@id/tilIng"
+        android:layout_alignEnd="@id/tilIng"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="#FFF"
+        android:hint="Email"
+        android:id="@+id/textInputLayout2"
+        app:hintTextAppearance="@style/HintText"
+        >
 
     <EditText
 
@@ -82,29 +123,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_below="@+id/regCRegistrati"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:background="@android:color/transparent"
         android:drawableLeft="@mipmap/ic_at_white_24dp"
         android:drawablePadding="17dp"
         android:ems="10"
-        android:hint="Email"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
         android:textColorHint="#FFF" />
 
+    </android.support.design.widget.TextInputLayout>
+
     <View
 
         android:id="@+id/regMDivider"
-        android:layout_below="@+id/registratiMail"
+        android:layout_below="@+id/textInputLayout2"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#E1F5FE" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/regMDivider"
+        android:layout_width="match_parent"
+        android:layout_alignStart="@id/tilIng"
+        android:layout_alignEnd="@id/tilIng"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="#FFF"
+        android:hint="Password"
+        android:id="@+id/textInputLayout3"
+        app:hintTextAppearance="@style/HintText"
+        >
 
     <EditText
 
@@ -114,24 +168,24 @@
         android:layout_marginTop="4dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_below="@id/regMDivider"
         android:background="@android:color/transparent"
         android:drawableLeft="@mipmap/ic_lock_white_24dp"
         android:drawablePadding="17dp"
         android:ems="10"
-        android:hint="Password"
         android:inputType="textPassword"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
         android:textColorHint="#FFF" />
 
+    </android.support.design.widget.TextInputLayout>
+
     <View
 
         android:id="@+id/regPDivider"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_below="@id/registratiPassword"
+        android:layout_below="@id/textInputLayout3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#E1F5FE" />
