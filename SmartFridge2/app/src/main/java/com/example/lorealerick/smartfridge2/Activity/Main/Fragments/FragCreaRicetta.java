@@ -25,6 +25,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApr
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 import com.example.lorealerick.smartfridge2.Utils.UtilsPermission;
 import com.example.lorealerick.smartfridge2.Utils.UtilsRecipe;
 
@@ -45,6 +46,7 @@ public class FragCreaRicetta extends Fragment implements View.OnClickListener {
     private EditText ingredienti;
     private EditText procedimento;
     private EditText nome;
+    private EditText categoria;
     private Spinner difficolta;
     private ImageView iconRicetta;
     private ArrayAdapter <String> stringArrayAdapter;
@@ -52,6 +54,7 @@ public class FragCreaRicetta extends Fragment implements View.OnClickListener {
     private int REQUEST_CAMERA=0, SELECT_FILE=1;
     private String userChoose;
     ListenerRefreshUI listenerRefreshUI;
+    int dif;
 
     FloatingActionButton upRecipe;
 
@@ -74,6 +77,7 @@ public class FragCreaRicetta extends Fragment implements View.OnClickListener {
         ingredienti = view.findViewById(R.id.ingredienti);
         procedimento = view.findViewById(R.id.procedimento);
         difficolta = view.findViewById(R.id.difficolta);
+        categoria=view.findViewById(R.id.categoria);
         iconRicetta=view.findViewById(R.id.iconRicetta);
         upRecipe=view.findViewById(R.id.upRecipe);
 
@@ -116,12 +120,31 @@ public class FragCreaRicetta extends Fragment implements View.OnClickListener {
     }
 
     private void check() {
-        if(nome.getText().length()>0&&durata.getText().length()>0&&ingredienti.getText().length()>0&&procedimento.getText().length()>0){
+        setDifficolta();
+
+        if(nome.getText().length()>0&&durata.getText().length()>0&&ingredienti.getText().length()>0&&procedimento.getText().length()>0&&categoria.getText().length()>0){
             Toast.makeText(getContext(),"Grazie per aver creato la tua ricetta!",Toast.LENGTH_LONG).show();
-            UtilsRecipe.aggiungiRicetta(nome.getText().toString(),durata.getText().toString(),difficolta.getSelectedItem().toString(),ingredienti.getText().toString(),procedimento.getText().toString());
+            UtilsRecipe.aggiungiRicetta(nome.getText().toString(),dif,durata.getText().toString(), UtenteCorrente.getInstance().getNomeUtente(),ingredienti.getText().toString(),procedimento.getText().toString(), categoria.getText().toString());
         }
         else
             Toast.makeText(getContext(),"Non hai completato tutti i campi",Toast.LENGTH_LONG).show();
+    }
+
+    private void setDifficolta() {
+        String val=difficolta.getSelectedItem().toString();
+        switch (val){
+            case "Facile":
+                dif=1;
+                break;
+
+            case "Medio":
+                dif=2;
+                break;
+
+            case "Difficile":
+                dif=3;
+                break;
+        }
     }
 
     private void galleryIntent() {

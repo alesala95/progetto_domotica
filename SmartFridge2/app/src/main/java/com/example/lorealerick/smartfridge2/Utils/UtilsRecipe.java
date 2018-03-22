@@ -16,19 +16,20 @@ import retrofit2.Call;
 
 public class UtilsRecipe {
 
-    public static boolean aggiungiRicetta(String titolo,String durata, String difficolta, String ingredienti, String procedimento){
+    public static boolean aggiungiRicetta(String nome,Integer difficolta, String durata,String autore, String ingredienti, String procedimento, String categoria){
         boolean aggiunto = false;
         int ok = 0;
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("Nome", titolo);
+        map.put("Nome", nome);
         map.put("Difficolta", difficolta);
         map.put("Durata", durata);
-        map.put("autore", UtenteCorrente.getInstance().getNomeUtente());
+        map.put("autore", autore);
         map.put("ingredienti", ingredienti);
         map.put("procedimento", procedimento);
+        map.put("categoria",categoria);
 
 
         Call<Integer> call = ricetteAPI.aggiungiRicetta(map);

@@ -3,6 +3,7 @@ package com.example.lorealerick.smartfridge2.Utils;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
+import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.AlimentiAPI;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.FrigoAPI;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.RicetteAPI;
@@ -15,9 +16,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 
-/**
- * Created by LoreAleRick on 11/03/2018.
- */
+
 
 public class DownloadDati {
 
@@ -50,13 +49,16 @@ public class DownloadDati {
     public static ArrayList<Ricetta> scaricaVetrinaRicette (){
 
         RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+        Ricetta ricetta=null;
 
         Call<ArrayList<Ricetta>> call = ricetteAPI.getVetrinaRicette();
 
         ArrayList <Ricetta> ricette = new ArrayList<>();
 
+
         try {
             ricette = call.execute().body();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +66,10 @@ public class DownloadDati {
         for (int i = 0; i < ricette.size(); i++){
 
             try {
-                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
+                if (!ricette.get(i).getAutore().equals("SmartFridge"))
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/not.jpg").resize(height,width).get()));
+                else
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -133,7 +138,10 @@ public class DownloadDati {
         for (int i = 0; i < ricette.size(); i++){
 
             try {
-                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
+                if (!ricette.get(i).getAutore().equals("SmartFridge"))
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/not.jpg").resize(height,width).get()));
+                else
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -162,7 +170,10 @@ public class DownloadDati {
         }
 
         try {
-            ricetta.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricetta.getId()+".jpg").resize(height,width).get()));
+            if (!ricetta.getAutore().equals("SmartFridge"))
+                ricetta.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/not.jpg").resize(height,width).get()));
+            else
+                ricetta.setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricetta.getId()+".jpg").resize(height,width).get()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -173,6 +184,7 @@ public class DownloadDati {
     public static ArrayList <Ricetta> scaricaFeedRicetteConsigliate (ArrayList<Alimento>alimentiInScadenza){
 
         final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+        Ricetta ricetta = null;
 
         Map<String, Object> map = new HashMap<>();
 
@@ -196,7 +208,10 @@ public class DownloadDati {
         for (int i = 0; i < ricette.size(); i++){
 
             try {
-                ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
+                if (!ricette.get(i).getAutore().equals("SmartFridge"))
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/not.jpg").resize(height,width).get()));
+                else
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

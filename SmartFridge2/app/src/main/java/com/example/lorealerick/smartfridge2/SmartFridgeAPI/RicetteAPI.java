@@ -30,4 +30,6 @@ public interface RicetteAPI {
     @GET("/smartfridge2/aggiungiRicetta.php")
     Call <Integer> aggiungiRicetta (@QueryMap Map <String,Object> values);
 
+
+
 }
