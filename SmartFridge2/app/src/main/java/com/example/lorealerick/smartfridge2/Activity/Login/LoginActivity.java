@@ -1,12 +1,19 @@
 package com.example.lorealerick.smartfridge2.Activity.Login;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.FragmentBenvenuto;
 import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.LoginFragment;
@@ -23,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
     private SharedPreferences preferences;
     private Fragment frag [];
     private FragmentManager fragmentManager;
+    static final int DIALOG_ERROR_CONNECTION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +100,6 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
     private void changeFragment(int frg, boolean addToBack){
 
         if(frg == -1) {
-
             startActivity(new Intent(LoginActivity.this, SplashActivity.class));
         }else if(addToBack){
 
@@ -123,4 +130,5 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
             super.onBackPressed();
         }
     }
+
 }
