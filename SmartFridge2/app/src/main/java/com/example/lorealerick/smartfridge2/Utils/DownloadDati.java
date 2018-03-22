@@ -78,6 +78,40 @@ public class DownloadDati {
         return ricette;
     }
 
+    public static ArrayList<Ricetta> scaricaRicercaRicette (String queryText){
+
+        RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map <String, Object> map = new HashMap<>();
+        map.put("queryText",queryText);
+
+        Call<ArrayList<Ricetta>> call = ricetteAPI.ricercaRicette(map);
+
+        ArrayList <Ricetta> ricette = new ArrayList<>();
+
+
+        try {
+            ricette = call.execute().body();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < ricette.size(); i++){
+
+            try {
+                if (!ricette.get(i).getAutore().equals("SmartFridge"))
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/not.jpg").resize(height,width).get()));
+                else
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ricette;
+    }
+
     public static ArrayList<Alimento> scaricaAlimenti (){
 
         final AlimentiAPI alimentiAPI = Services.getInstance().getRetrofit().create(AlimentiAPI.class);

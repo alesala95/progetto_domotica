@@ -12,4 +12,6 @@ public interface ListenerApriRicetta {
     void apriCategoriaRicetta (String category);
 
     void apriCreateRicetta();
+
+    void apriRicerca();
 }

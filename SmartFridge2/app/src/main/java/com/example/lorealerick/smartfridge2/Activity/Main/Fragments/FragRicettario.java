@@ -98,6 +98,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
             case R.id.FloatingBtn:
                 if(!flag)
@@ -107,10 +108,8 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.FBAsearch:
-                editTextSearch.setVisibility(View.VISIBLE);
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(editTextSearch , InputMethodManager.SHOW_IMPLICIT);
-                FABhide();
+
+                listenerApriRicetta.apriRicerca();
                 break;
 
             case R.id.FBAadd:

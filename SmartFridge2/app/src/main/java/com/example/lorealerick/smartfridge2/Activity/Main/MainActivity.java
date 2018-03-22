@@ -18,6 +18,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCategori
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCreaRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
+import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicerca;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
@@ -184,6 +185,12 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
                 setTitleToolbar("Crea Ricetta");
                 menu.getItem(2).setChecked(true);
                 break;
+
+            case "Ricerca":
+
+                setTitleToolbar("Ricerca");
+                menu.getItem(2).setChecked(true);
+                break;
         }
     }
 
@@ -217,6 +224,13 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
     public void apriCreateRicetta(){
         FragCreaRicetta fragCreaRicetta = new FragCreaRicetta();
         cambiaFragment(fragCreaRicetta,true);
+    }
+
+    @Override
+    public void apriRicerca() {
+
+        FragRicerca fragRicerca = new FragRicerca();
+        cambiaFragment(fragRicerca, true);
     }
 
 
