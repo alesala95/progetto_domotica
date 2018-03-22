@@ -21,8 +21,10 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicerca;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerAggiungiRimuoviRicettaPreferita;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
+import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Activity.Settings.Impostazioni;
 import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
@@ -30,7 +32,7 @@ import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 
-public class MainActivity extends AppCompatActivity implements ListenerRefreshUI,ListenerApriRicetta{
+public class MainActivity extends AppCompatActivity implements ListenerRefreshUI,ListenerApriRicetta,ListenerAggiungiRimuoviRicettaPreferita{
 
     private BottomNavigationView navigation;
     private Toolbar toolbar;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
     private TextView titoloApp;
     private Button goToSettings;
     private Button goToMain;
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         fragmentManager = getSupportFragmentManager();
+
+        databaseAdapter = new DatabaseAdapter(this);
 
         inizializzaFragment();
 
@@ -245,5 +250,17 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
         goToSettings.setVisibility(View.VISIBLE);
         goToMain.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void rimuoviRicettaPreferita(int id) {
+
+        databaseAdapter.rimuoviRicettaPreferita(id);
+    }
+
+    @Override
+    public void aggiungiRicettaPreferita(int id) {
+
+        databaseAdapter.addRicettaPreferita(id);
     }
 }

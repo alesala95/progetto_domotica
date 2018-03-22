@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABELLA_RICETTA = "ricetta";
     public static final String TABELLA_ALIMENTO = "alimento";
     public static final String TABELLA_FRIGO = "frigo";
+    public static final String TABELLA_RICETTE_PREFERITE = "ricette_preferite";
 
     public static final String KEY_RICETTA_ID = "_idRicetta";
     public static final String KEY_RICETTA_NOME = "nomeRicetta";
@@ -49,6 +50,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_FRIGO_LAMPADINA_ACCESA = "lampadinaAccesa";
     public static final String KEY_FRIGO_ALLARME_ATTIVO = "allarmeAttivo";
     public static final String KEY_FRIGO_VACATION_MODE = "vacationMode";
+
+    public static final String KEY_RICETTA_PREFERITA = "_idRicettaPreferita";
+
+    private static final String CREAZIONE_TABELLA_RICETTA_PREFERITA = "CREATE TABLE " + TABELLA_RICETTE_PREFERITE + " ("
+            +" "+ KEY_RICETTA_PREFERITA + " INTEGER PRIMARY KEY)";
 
     private static final String CREAZIONE_TABELLA_RICETTA = "CREATE TABLE " + TABELLA_RICETTA + " ("
             +" "+ KEY_RICETTA_ID + " INTEGER PRIMARY KEY,"
@@ -95,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREAZIONE_TABELLA_RICETTA);
         db.execSQL(CREAZIONE_TABELLA_FRIGO);
         db.execSQL(CREAZIONE_TABELLA_ALIMENTO);
+        db.execSQL(CREAZIONE_TABELLA_RICETTA_PREFERITA);
     }
 
     @Override
@@ -102,6 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABELLA_RICETTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABELLA_FRIGO);
         db.execSQL("DROP TABLE IF EXISTS " + TABELLA_ALIMENTO);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELLA_RICETTE_PREFERITE);
 
         onCreate(db);
     }

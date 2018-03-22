@@ -97,6 +97,46 @@ public class DatabaseAdapter {
         close();
     }
 
+    public void addRicettaPreferita (int idRicetta){
+
+        open();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.KEY_RICETTA_PREFERITA,idRicetta);
+
+        database.insert(DatabaseHelper.TABELLA_RICETTE_PREFERITE, null,values);
+
+        close();
+    }
+
+    public void rimuoviRicettaPreferita (int idRicetta){
+
+        open();
+
+        String query = "DELETE FROM " +DatabaseHelper.TABELLA_RICETTE_PREFERITE + " WHERE " + DatabaseHelper.KEY_RICETTA_PREFERITA + " = "+idRicetta;
+        database.rawQuery(query,null).moveToFirst();
+
+        close();
+    }
+
+    public boolean isRicettaPreferita (int id){
+
+        open();
+
+        String query = "SELECT EXISTS (SELECT " + DatabaseHelper.KEY_RICETTA_PREFERITA + " FROM " + DatabaseHelper.TABELLA_RICETTE_PREFERITE + " WHERE " + DatabaseHelper.KEY_RICETTA_PREFERITA + " = " + id + ")";
+
+        Cursor c = database.rawQuery(query,null);
+
+        c.moveToFirst();
+        int es = c.getInt(0);
+
+        System.out.println("Cursor dice: "+es);
+
+        close();
+
+        return UtilsBool.intToBool(es);
+    }
+
     public Frigo getFrigo (String codice) {
 
         String query = "SELECT * FROM " + DatabaseHelper.TABELLA_FRIGO + " WHERE " + DatabaseHelper.KEY_FRIGO_ID + " = '" + codice + "';";

@@ -28,23 +28,40 @@
             android:textSize="22sp"
             android:gravity="center"/>
 
-        <ImageView
+        <RelativeLayout
 
-            android:id="@+id/immagine"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@+id/titoloRicetta"
-            android:transitionName="@string/transizione_ricetta"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/immagineCont"
+            android:layout_width="wrap_content"
             android:layout_marginTop="7dp"
-            android:background="@color/colorPrimaryDark"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/titoloRicetta"
+            android:layout_height="wrap_content">
+
+            <ImageView
+
+                android:id="@+id/immagine"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <Button
+
+                android:id="@+id/buttonPref"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignRight="@id/immagine"
+                android:layout_alignBottom="@id/immagine"
+                android:background="@drawable/star_non_pref"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/autoreRicetta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/immagine"
+            android:layout_below="@+id/immagineCont"
             android:layout_marginTop="7dp"
             android:text="TextView"
             android:textSize="18sp" />
@@ -116,6 +133,8 @@
     </ScrollView>
 
     <include layout="@layout/fab"></include>
+
+
 
 </RelativeLayout>
 

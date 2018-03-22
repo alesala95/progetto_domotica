@@ -2,6 +2,7 @@ package com.example.lorealerick.smartfridge2.Activity.Main.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerAggiungiRimuoviRicettaPreferita;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRefreshUI;
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
@@ -44,6 +46,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
 
     private ListenerApriRicetta listenerApriRicetta;
     private ListenerRefreshUI listenerRefreshUI;
+    private ListenerAggiungiRimuoviRicettaPreferita listenerAggiungiRimuoviRicettaPreferita;
 
     private RelativeLayout content;
     private Ricetta ricetta;
@@ -53,6 +56,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
     FloatingActionButton FABfavourite;
     FloatingActionButton FABShare;
     boolean flag = false;
+    private Button btnPref;
     final Animation fadein = new AlphaAnimation(0.0f, 1.0f);
     final Animation fadeout = new AlphaAnimation(1.0f, 0.0f);
 
@@ -63,6 +67,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
         dbAdapter = new DatabaseAdapter(context);
         listenerRefreshUI = (MainActivity)context;
         listenerApriRicetta = (MainActivity)context;
+        listenerAggiungiRimuoviRicettaPreferita = (MainActivity) context;
 
     }
 
@@ -72,6 +77,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.frag_ricetta, container, false);
 
         content = view.findViewById(R.id.content);
+        final int id = getArguments().getInt("id");
 
         nomeRicetta = view.findViewById(R.id.titoloRicetta);
         autoreRicetta = view.findViewById(R.id.autoreRicetta);
@@ -82,7 +88,8 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
 
         immagine = view.findViewById(R.id.immagine);
 
-        new DownloadDettagliRicetta().execute(getArguments().getInt("id"));
+
+        new DownloadDettagliRicetta().execute(id);
 
         Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
         FABadd = (FloatingActionButton) view.findViewById(R.id.FBAadd);
@@ -97,7 +104,36 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
         FABfavourite.setOnClickListener(this);
         FABShare.setOnClickListener(this);
 
+        btnPref = view.findViewById(R.id.buttonPref);
+        btnPref.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (dbAdapter.isRicettaPreferita(id)) {
+                    dbAdapter.rimuoviRicettaPreferita(id);
+                    System.out.println("Rimuovo ricetta preferita");
+                }else {
+                    dbAdapter.addRicettaPreferita(id);
+                    System.out.println("Aggiungo ricetta preferita");
+                }
+                repaintPrefStar(dbAdapter.isRicettaPreferita(id));
+            }
+        });
+
+        repaintPrefStar(dbAdapter.isRicettaPreferita(id));
+
         return view;
+    }
+
+    private void repaintPrefStar (boolean pref){
+
+        if(pref){
+
+            btnPref.setBackgroundResource(R.drawable.star_pref);
+        }else{
+
+            btnPref.setBackgroundResource(R.drawable.star_non_pref);
+        }
     }
 
     @Override
