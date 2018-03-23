@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<android.support.v4.widget.SwipeRefreshLayout
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refLayout"
+    android:id="@+id/refLayout"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_login"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recSwipe"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Connessione al frigo"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:textSize="22sp"/>
+    </RelativeLayout>
 
-
-        </android.support.v7.widget.RecyclerView>
-
-
-
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
-</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

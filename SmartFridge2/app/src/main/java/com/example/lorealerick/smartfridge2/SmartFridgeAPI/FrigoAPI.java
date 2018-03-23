@@ -15,6 +15,9 @@ import retrofit2.http.QueryMap;
 
 public interface FrigoAPI {
 
+    @GET("/ottieniCodice")
+    Call <String> connettiFrigo ();
+
     @GET("/smartfridge2/infoFrigo.php")
     Call <Frigo> getInfoFrigo (@QueryMap Map<String,Object> values);
 

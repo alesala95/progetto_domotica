@@ -14,6 +14,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by LoreAleRick on 16/03/2018.
@@ -147,5 +149,31 @@ public class UserControls {
                 System.out.println("Non sono riuscito ad aggiornare la password");
             }
         });
+    }
+
+    public static boolean getCodiceFrigo (String ip){
+
+        boolean conn = false;
+        String codice = null;
+
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://"+ip+"/").addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        FrigoAPI frigoAPI = retrofit.create(FrigoAPI.class);
+        Call <String> call = frigoAPI.connettiFrigo();
+
+        try {
+            codice = call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (codice != null){
+
+            conn = true;
+            UtenteCorrente.getInstance().setCodiceFrigo(codice);
+        }
+
+        return conn;
     }
 }

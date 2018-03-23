@@ -23,7 +23,7 @@ public class UtenteCorrente {
 
     private UtenteCorrente() {
 
-        codiceFrigo = "sf0001ma";
+        //codiceFrigo = "sf0001ma";
     }
 
     public String getCodiceFrigo() {

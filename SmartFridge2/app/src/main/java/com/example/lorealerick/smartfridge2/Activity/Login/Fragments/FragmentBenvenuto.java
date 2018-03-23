@@ -3,6 +3,7 @@ package com.example.lorealerick.smartfridge2.Activity.Login.Fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 import android.os.AsyncTask;
@@ -14,20 +15,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.lorealerick.smartfridge2.Activity.Login.Interfaces.ListenerLogin;
+import com.example.lorealerick.smartfridge2.Activity.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Utils.UserControls;
 
 /**
  * Created by itsadmin on 22/02/2018.
  */
 
-public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.OnRefreshListener{//per refresh della pagina
-
-    //Fragment per ricerca e connessione al frigo
+public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     SwipeRefreshLayout refreshLayout;
-    RecyclerView recSwipe;
     taskRicerca taskR;
+    private SharedPreferences sharedPreferences;
+    private ListenerLogin listenerLogin;
 
 
     public FragmentBenvenuto() {
@@ -37,16 +41,16 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
     public void onAttach(Context context) {
         super.onAttach(context);
 
-
+        sharedPreferences = context.getSharedPreferences("SmartFridge",Context.MODE_PRIVATE);
+        listenerLogin = (LoginActivity) context;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_benvenuto, container, false);
 
-        recSwipe = view.findViewById(R.id.recSwipe);
+
 
         refreshLayout = view.findViewById(R.id.refLayout);
         refreshLayout.setOnRefreshListener(this);
@@ -61,34 +65,39 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
     public void onRefresh() {
 
         taskR.cancel(true);
-
         taskR = new taskRicerca();
         taskR.execute();
     }
 
-    private void frigoDialog(String nome){ //dialog usato per l'inserimento della password per connettersi al frigo
-
+    private void frigoDialog(final NsdServiceInfo service){
 
         final AlertDialog.Builder miaAlert = new AlertDialog.Builder(getActivity());
-        miaAlert.setTitle("Frigo trovato: "+nome);
-        miaAlert.setMessage("Inserisci il codice che trovi dietro al frigo");
+        miaAlert.setTitle("Frigo trovato: "+service.getServiceName());
+
+        miaAlert.setMessage("Scrivo sono gay per confermare tu non sia un bot");
         miaAlert.setCancelable(false);
 
         miaAlert.setView(R.layout.dialog_layout);
         miaAlert.setPositiveButton("Connetti", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                // retrofit + pingTask
-                // se è giusto
-                //listener.cambia(-1);
+                if(UserControls.getCodiceFrigo(service.getServiceName())){
 
+                    sharedPreferences.edit().putString("codiceFrigo",null).apply();
+                    listenerLogin.cambiaFragment(-1);
+                }else{
+
+                    Toast.makeText(getActivity(),"Impossibile connettersi",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         miaAlert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
+                Toast.makeText(getActivity(),"Connessione annullata",Toast.LENGTH_SHORT).show();
             }
         });
+
         AlertDialog alert = miaAlert.create();
         alert.show();
     }
@@ -97,9 +106,8 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
 
         NsdManager.DiscoveryListener mDiscoveryListener;
         NsdManager.ResolveListener mResolveListener;
-        private final String mServiceName = "Frigo";
-
-        String nome = "0001";
+        private final String mServiceName = "SmartFridge";
+        NsdServiceInfo services = null;
 
         NsdManager mNsdManager = (NsdManager) getActivity().getSystemService(Context.NSD_SERVICE);
 
@@ -107,6 +115,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         protected void onPreExecute() {
             super.onPreExecute();
 
+            refreshLayout.setRefreshing(true);
         }
 
         @Override
@@ -128,8 +137,6 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
                 }
             }
 
-            mNsdManager.stopServiceDiscovery(mDiscoveryListener);
-
             return null;
         }
 
@@ -147,7 +154,22 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
             if(refreshLayout.isRefreshing())
                 refreshLayout.setRefreshing(false);
 
-            frigoDialog(nome);
+            mNsdManager.stopServiceDiscovery(mDiscoveryListener);
+
+            if(services != null){
+
+                frigoDialog(services);
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+
+            if(refreshLayout.isRefreshing())
+                refreshLayout.setRefreshing(false);
+
+            mNsdManager.stopServiceDiscovery(mDiscoveryListener);
         }
 
         public void initializeResolveListener(){
@@ -161,8 +183,8 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
                 @Override
                 public void onServiceResolved(NsdServiceInfo nsdServiceInfo) {
 
-                    //ac.add(new mConnessione(nsdServiceInfo.getServiceName(),(nsdServiceInfo.getHost()+"").substring(1),nsdServiceInfo.getHost()));
-                    nome = nsdServiceInfo.getServiceName();
+                    services = nsdServiceInfo;
+                    System.out.println("Risolto");
                 }
             };
         }
