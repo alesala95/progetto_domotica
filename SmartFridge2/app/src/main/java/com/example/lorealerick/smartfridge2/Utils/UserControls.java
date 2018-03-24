@@ -154,13 +154,13 @@ public class UserControls {
     public static boolean getCodiceFrigo (String ip){
 
         boolean conn = false;
-        String codice = null;
+        FrigoCodec codice = null;
 
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://"+ip+"/").addConverterFactory(GsonConverterFactory.create());
 
         final Retrofit retrofit = builder.build();
         FrigoAPI frigoAPI = retrofit.create(FrigoAPI.class);
-        Call <String> call = frigoAPI.connettiFrigo();
+        Call <FrigoCodec> call = frigoAPI.connettiFrigo();
 
         try {
             codice = call.execute().body();
@@ -171,7 +171,7 @@ public class UserControls {
         if (codice != null){
 
             conn = true;
-            UtenteCorrente.getInstance().setCodiceFrigo(codice);
+            UtenteCorrente.getInstance().setCodiceFrigo(codice.getCodiceFrigo());
         }
 
         return conn;

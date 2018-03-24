@@ -1,6 +1,7 @@
 package com.example.lorealerick.smartfridge2.SmartFridgeAPI;
 
 import com.example.lorealerick.smartfridge2.Models.Frigo;
+import com.example.lorealerick.smartfridge2.Utils.FrigoCodec;
 
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import retrofit2.http.QueryMap;
 public interface FrigoAPI {
 
     @GET("/ottieniCodice")
-    Call <String> connettiFrigo ();
+    Call <FrigoCodec> connettiFrigo ();
 
     @GET("/smartfridge2/infoFrigo.php")
     Call <Frigo> getInfoFrigo (@QueryMap Map<String,Object> values);
