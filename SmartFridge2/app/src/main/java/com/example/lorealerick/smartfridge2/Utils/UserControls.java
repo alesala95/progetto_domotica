@@ -158,7 +158,7 @@ public class UserControls {
 
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://"+ip+"/").addConverterFactory(GsonConverterFactory.create());
 
-        Retrofit retrofit = builder.build();
+        final Retrofit retrofit = builder.build();
         FrigoAPI frigoAPI = retrofit.create(FrigoAPI.class);
         Call <String> call = frigoAPI.connettiFrigo();
 

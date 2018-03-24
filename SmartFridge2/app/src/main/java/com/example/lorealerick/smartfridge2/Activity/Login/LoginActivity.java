@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
         //controllo dati inseriti per login e salvataggio tramite singleton
 
-        if(UtenteCorrente.getInstance().geteMail()!=null&& UtenteCorrente.getInstance().getPassword()!=null){//
+        if(UtenteCorrente.getInstance().geteMail()!=null&& UtenteCorrente.getInstance().getPassword()!=null){
 
             System.out.println("Un utente ha già effettuato l'accesso");
 
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
                 if(UtenteCorrente.getInstance().getCodiceFrigo() == null){
 
-                    System.out.println("Non ho frigo");
+                    System.out.println("Non ho un frigo");
                     changeFragment(2,false);
 
                 }else{
@@ -81,18 +81,6 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
                 System.out.println("Vado nella login");
                 changeFragment(0,false);
             }
-
-            /*Frigorifero.getInstance().setNome(preferences.getString("nomeFrigo",null));
-            Frigorifero.getInstance().setCodice(preferences.getString("codiceFrigo",null));
-
-            if(Frigorifero.getInstance().getNome()!=null&& Frigorifero.getInstance().getCodice()!=null){//
-
-                Intent i = new Intent(this,MainActivity.class);
-                startActivity(i);
-            }else{
-
-                cambiaFragment(2);
-            }*/
 
         }else{
 

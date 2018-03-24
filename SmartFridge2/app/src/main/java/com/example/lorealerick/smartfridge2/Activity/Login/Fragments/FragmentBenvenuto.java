@@ -21,6 +21,7 @@ import com.example.lorealerick.smartfridge2.Activity.Login.Interfaces.ListenerLo
 import com.example.lorealerick.smartfridge2.Activity.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.UserControls;
+import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
 /**
  * Created by itsadmin on 22/02/2018.
@@ -28,14 +29,12 @@ import com.example.lorealerick.smartfridge2.Utils.UserControls;
 
 public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
-    SwipeRefreshLayout refreshLayout;
-    taskRicerca taskR;
+    private SwipeRefreshLayout refreshLayout;
+    private taskRicerca taskR;
     private SharedPreferences sharedPreferences;
     private ListenerLogin listenerLogin;
 
-
-    public FragmentBenvenuto() {
-    }
+    public FragmentBenvenuto() {}
 
     @Override
     public void onAttach(Context context) {
@@ -50,8 +49,6 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
 
         View view=inflater.inflate(R.layout.fragment_benvenuto, container, false);
 
-
-
         refreshLayout = view.findViewById(R.id.refLayout);
         refreshLayout.setOnRefreshListener(this);
 
@@ -65,8 +62,11 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
     public void onRefresh() {
 
         taskR.cancel(true);
-        taskR = new taskRicerca();
-        taskR.execute();
+        if (taskR.getStatus() != AsyncTask.Status.RUNNING){
+
+            taskR = new taskRicerca();
+            taskR.execute();
+        }
     }
 
     private void frigoDialog(final NsdServiceInfo service){
@@ -74,16 +74,16 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         final AlertDialog.Builder miaAlert = new AlertDialog.Builder(getActivity());
         miaAlert.setTitle("Frigo trovato: "+service.getServiceName());
 
-        miaAlert.setMessage("Scrivo sono gay per confermare tu non sia un bot");
+        miaAlert.setMessage("Scrivi sono gay per confermare che tu non sia un bot");
         miaAlert.setCancelable(false);
 
         miaAlert.setView(R.layout.dialog_layout);
         miaAlert.setPositiveButton("Connetti", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                if(UserControls.getCodiceFrigo(service.getServiceName())){
+                if(UserControls.getCodiceFrigo((service.getHost()+"").substring(1))){
 
-                    sharedPreferences.edit().putString("codiceFrigo",null).apply();
+                    sharedPreferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
                     listenerLogin.cambiaFragment(-1);
                 }else{
 
@@ -104,12 +104,12 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
 
     private class taskRicerca extends AsyncTask<Void, Void, Void> {
 
-        NsdManager.DiscoveryListener mDiscoveryListener;
-        NsdManager.ResolveListener mResolveListener;
+        private NsdManager.DiscoveryListener mDiscoveryListener;
+        private NsdManager.ResolveListener mResolveListener;
         private final String mServiceName = "SmartFridge";
-        NsdServiceInfo services = null;
+        private NsdServiceInfo services = null;
 
-        NsdManager mNsdManager = (NsdManager) getActivity().getSystemService(Context.NSD_SERVICE);
+        private NsdManager mNsdManager = (NsdManager) getActivity().getSystemService(Context.NSD_SERVICE);
 
         @Override
         protected void onPreExecute() {

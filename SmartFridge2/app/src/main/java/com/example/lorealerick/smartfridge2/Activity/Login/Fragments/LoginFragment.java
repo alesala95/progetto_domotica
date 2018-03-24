@@ -83,7 +83,13 @@ public class LoginFragment extends Fragment{
                             sharedPreferences.edit().putString("password",UtenteCorrente.getInstance().getPassword()).apply();
                         }
 
-                        listenerLogin.cambiaFragment(-1);
+                       if(sharedPreferences.getString("codiceFrigo",null)==null){
+
+                            listenerLogin.cambiaFragment(2);
+                       }else{
+
+                           listenerLogin.cambiaFragment(-1);
+                       }
 
                     }else{
 

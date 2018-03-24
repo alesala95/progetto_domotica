@@ -29,7 +29,7 @@ void setup() {
   delay(10);
   Serial.println('\n');
 
-  //wifiMulti.addAP("Solaris", "84203733a784203733a7842037");  
+  wifiMulti.addAP("Solaris", "84203733a784203733a7842037");  
   wifiMulti.addAP("meme", "pepefrog");
   //wifiMulti.addAP("WmaltaNew","rete1privata2malta3family4");
 
@@ -149,26 +149,22 @@ void pingResp() { //Handler
 
 void inviaCodice(){
 
-  /*StaticJsonBuffer<200> JSONbuffer;
+  StaticJsonBuffer<200> JSONbuffer;
   JsonObject& JSONencoder = JSONbuffer.createObject();
  
-  JSONencoder["accesa"] = accesa;
-  JSONencoder["intens"] = intens;
-  JSONencoder["r"] = r;
-  JSONencoder["g"] = g;
-  JSONencoder["b"] = b;
+  JSONencoder["codiceFrigo"] = codiceFrigo;
   
   /*JsonArray& values = JSONencoder.createNestedArray("colors");
   values.add(r);
   values.add(g);
   values.add(b);
  
-  Serial.println("\nPretty JSON message from buffer: ");
+  Serial.println("\nPretty JSON message from buffer: ");*/
   char JSONmessageBuffer[300];
   JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
   Serial.println(JSONmessageBuffer);
 
-  server.send(200, "text/plain", JSONmessageBuffer);  */
+  server.send(200, "text/plain", JSONmessageBuffer);
 }
 
 
