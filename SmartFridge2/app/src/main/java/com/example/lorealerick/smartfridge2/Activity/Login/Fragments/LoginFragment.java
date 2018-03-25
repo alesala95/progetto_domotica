@@ -20,12 +20,7 @@ import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Utils.UserControls;
 import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
-/**
- * Created by itsadmin on 22/02/2018.
- */
-
 public class LoginFragment extends Fragment{
-
 
     private EditText editEMail;
     private EditText editPassword;
@@ -33,7 +28,6 @@ public class LoginFragment extends Fragment{
     private Button btnRegistrati;
     private CheckBox ricordami;
     private TextView dimenticatoPassword;
-
     private ListenerLogin listenerLogin;
     private SharedPreferences sharedPreferences;
 

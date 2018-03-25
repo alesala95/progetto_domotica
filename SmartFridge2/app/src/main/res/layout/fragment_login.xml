@@ -69,6 +69,9 @@
         android:hint="Password"
         android:id="@+id/textInputLayout1"
         app:hintTextAppearance="@style/HintText"
+        app:passwordToggleDrawable="@drawable/show_hide"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#FFF"
         >
 
     <EditText

@@ -66,6 +66,7 @@ public class FragRicerca extends Fragment {
         grigliaRicerca.setAdapter(adapterGrigliaRicette);
 
         ricerca = view.findViewById(R.id.search_view);
+        ricerca.setQueryHint("Ricerca per ricetta");
         ricerca.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

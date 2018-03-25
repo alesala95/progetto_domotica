@@ -18,23 +18,12 @@
         android:layout_height="match_parent"
         android:padding="7dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/titoloRicetta"
-            android:text=""
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:textSize="22sp"
-            android:gravity="center"/>
-
         <RelativeLayout
 
             android:id="@+id/immagineCont"
             android:layout_width="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/titoloRicetta"
             android:layout_height="wrap_content">
 
             <ImageView

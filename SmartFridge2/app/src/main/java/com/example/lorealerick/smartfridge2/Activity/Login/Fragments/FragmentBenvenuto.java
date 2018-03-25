@@ -75,7 +75,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         final AlertDialog.Builder miaAlert = new AlertDialog.Builder(getActivity());
         miaAlert.setTitle("Frigo trovato: "+service.getServiceName());
 
-        miaAlert.setMessage("Scrivi sono gay per confermare che tu non sia un bot");
+        miaAlert.setMessage("Scrivi il codice:");
         miaAlert.setCancelable(false);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();

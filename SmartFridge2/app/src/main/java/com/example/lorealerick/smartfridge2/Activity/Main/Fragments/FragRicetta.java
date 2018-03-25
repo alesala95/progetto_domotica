@@ -36,7 +36,6 @@ import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
 public class FragRicetta extends Fragment implements View.OnClickListener {
 
     private DatabaseAdapter dbAdapter;
-    private TextView nomeRicetta;
     private TextView autoreRicetta;
     private TextView durataRicetta;
     private TextView difficoltaRicetta;
@@ -79,7 +78,6 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
         content = view.findViewById(R.id.content);
         final int id = getArguments().getInt("id");
 
-        nomeRicetta = view.findViewById(R.id.titoloRicetta);
         autoreRicetta = view.findViewById(R.id.autoreRicetta);
         durataRicetta = view.findViewById(R.id.durataRicetta);
         difficoltaRicetta = view.findViewById(R.id.difficoltaRicetta);
@@ -158,7 +156,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
     private void share() {
         Intent intent=new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain/image");
-        String shareBody= (String) nomeRicetta.getText();
+        String shareBody= ricetta.getNome();
         shareBody= shareBody.concat("\n").concat((String) ingredienti.getText()).concat("\n").concat((String) procedimento.getText());
         String shareSub="Ingredienti,procedimento";
         intent.putExtra(Intent.EXTRA_STREAM,ricetta.getImage());
@@ -228,7 +226,6 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
 
     private void aggiorna (Ricetta ricetta){
 
-        nomeRicetta.setText(ricetta.getNome());
         autoreRicetta.setText(ricetta.getAutore());
         durataRicetta.setText("Durata: " + ricetta.getDurata());
 

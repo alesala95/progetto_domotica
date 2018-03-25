@@ -25,7 +25,6 @@ import com.example.lorealerick.smartfridge2.Activity.Splash.SplashActivity;
 import com.example.lorealerick.smartfridge2.Utils.UserControls;
 import com.example.lorealerick.smartfridge2.Utils.UtenteCorrente;
 
-
 public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
     private SharedPreferences preferences;
@@ -37,7 +36,6 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getWindow().setNavigationBarColor(getResources().getColor(R.color.BlueColor));//cambia colore navigation bar
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -60,8 +58,6 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         UtenteCorrente.getInstance().setPassword(preferences.getString("password",null));
 
         UtenteCorrente.getInstance().setCodiceFrigo(preferences.getString("codiceFrigo",null));
-
-        // Codice per quel cimitero di sinapsi di punzo
 
         // ------------------------
         UtenteCorrente.getInstance().setCodiceFrigo("sf0001ma");
@@ -133,8 +129,6 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
     @Override
     public void onBackPressed() {
-
-
         try{
 
             if(getIntent().getExtras().getInt("from") == 0 || getIntent().getExtras().getInt("from") == 1)
@@ -145,5 +139,6 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
             super.onBackPressed();
         }
     }
+
 
 }
