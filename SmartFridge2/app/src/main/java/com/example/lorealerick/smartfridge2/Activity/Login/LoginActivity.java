@@ -19,6 +19,7 @@ import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.FragmentBen
 import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.LoginFragment;
 import com.example.lorealerick.smartfridge2.Activity.Login.Fragments.RegistratiFragment;
 import com.example.lorealerick.smartfridge2.Activity.Login.Interfaces.ListenerLogin;
+import com.example.lorealerick.smartfridge2.Models.Utente;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.Activity.Splash.SplashActivity;
 import com.example.lorealerick.smartfridge2.Utils.UserControls;
@@ -59,6 +60,13 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         UtenteCorrente.getInstance().setPassword(preferences.getString("password",null));
 
         UtenteCorrente.getInstance().setCodiceFrigo(preferences.getString("codiceFrigo",null));
+
+        // Codice per quel cimitero di sinapsi di punzo
+
+        // ------------------------
+        UtenteCorrente.getInstance().setCodiceFrigo("sf0001ma");
+        preferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
+        // ------------------------
 
         //controllo dati inseriti per login e salvataggio tramite singleton
 
