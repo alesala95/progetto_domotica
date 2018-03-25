@@ -13,11 +13,21 @@ String pw = "smart.alpaca123";
 
 int alimentiResId[]={1,2,3,4,5,6,7,8,9,10,11,12};
 
-int pinAggiungi = 13;
-int pinRimuovi = 12;
+int pinAggiungi = D7;
+int pinRimuovi = D6;
+
+int pinLampadina = D5;
+int pinAllarme = D8;
+int pinVM = D0;
 
 boolean buttonAggiungi;
 boolean buttonRimuovi;
+
+int stato_frigo = 1;
+int stato_freezer = 1;
+
+double temperatura_frigo = 4.0;
+double temperatura_freezer = -3.0;
 
 void setup() {
 
@@ -26,6 +36,10 @@ void setup() {
   
   pinMode(pinAggiungi,INPUT);
   pinMode(pinRimuovi,INPUT);
+
+  pinMode(pinLampadina,OUTPUT);
+  pinMode(pinAllarme,OUTPUT);
+  pinMode(pinVM,OUTPUT);
   
   Serial.begin(115200);         
   delay(10);
@@ -33,7 +47,6 @@ void setup() {
 
   wifiMulti.addAP("Solaris", "84203733a784203733a7842037");  
   wifiMulti.addAP("meme", "pepefrog");
-  //wifiMulti.addAP("WmaltaNew","rete1privata2malta3family4");
 
   Serial.println("Connecting ...");
   int i = 0;
@@ -62,6 +75,8 @@ void setup() {
 
 void loop() { 
 
+  aggiornaStato();
+
   server.handleClient();   
 
   if ((digitalRead(pinAggiungi)==HIGH) and (buttonAggiungi == false)){
@@ -85,48 +100,53 @@ void loop() {
 
       buttonRimuovi = false;
   }
+
+  recuperaStato();
+
+  delay (5000);
   
 }
 
 void aggiungiAlimentoRandom (){
 
-    String baseUrl = "http://smartfridgeifts.altervista.org/smartfridge2/aggiungiAlimento.php/";
+    String baseUrl = "http://smartfridgeifts.altervista.org/smartfridge2/aggiungiAlimentiDumb.php/";
     
     String endpoint = "?";
     
-    endpoint += "idAlimento=";
+    /*endpoint += "idAlimento=";
     endpoint += random (1,13);
 
-    endpoint += "&";
+    endpoint += "&";*/
 
     endpoint += "codiceFrigo=";
     endpoint += codiceFrigo;
-
-    endpoint += "&";
-
-    endpoint += "data_inserimento=";
-    endpoint += "2018-03-23";
 
     String request = baseUrl += endpoint;
 
     HTTPClient http;  
     http.begin(request);
-    http.GET();
-    //http.end;
+    int code = http.GET();
+
+    if(code > 0){
+
+      String payload = http.getString();
+    }
+    
+    http.end();
 
     Serial.println("Alimento aggiunto");
 }
 
 void rimuoviAlimentoRandom (){
 
-    String baseUrl = "http://smartfridgeifts.altervista.org/smartfridge2/rimuoviAlimento.php/";
+    String baseUrl = "http://smartfridgeifts.altervista.org/smartfridge2/rimuoviAlimentiDumb.php/";
     
     String endpoint = "?";
     
-    endpoint += "idAlimento=";
+    /*endpoint += "idAlimento=";
     endpoint += random (1,13);
 
-    endpoint += "&";
+    endpoint += "&";*/
 
     endpoint += "codiceFrigo=";
     endpoint += codiceFrigo;
@@ -135,8 +155,14 @@ void rimuoviAlimentoRandom (){
 
     HTTPClient http;  
     http.begin(request); 
-    http.GET();
-    //http.end;
+    int code = http.GET();
+
+    if (code > 0){
+
+      String payload = http.getString();   
+    }
+    
+    http.end();
 
     Serial.println("Alimento rimosso");
 }
@@ -179,7 +205,90 @@ void inviaCodice(){
  }
 }
 
+void recuperaStato (){
 
+    String baseUrl = "http://smartfridgeifts.altervista.org/smartfridge2/recuperaStatoFrigo.php/";
+    
+    String endpoint = "?";
+    
+    endpoint += "codiceFrigo=";
+    endpoint += codiceFrigo;
+    
+    String request = baseUrl += endpoint;
+
+    HTTPClient http;  
+    http.begin(request); 
+    int code = http.GET();
+    String payload;
+
+    if (code > 0) {
+ 
+      payload = http.getString();   
+      Serial.println(payload);                     
+    }
+    
+    http.end();
+
+    outputLuci(payload.substring(8,9).toInt(),payload.substring(20,21).toInt(),payload.substring(27,28).toInt());
+}
+
+int outputLuci (int luci, int allarme, int vm){
+
+  Serial.println("Valori: ");
+  Serial.println(luci);
+  Serial.println(allarme);
+  Serial.println(vm);
+
+  digitalWrite (pinLampadina, luci);
+  digitalWrite (pinAllarme, allarme);
+  digitalWrite (pinVM,vm);
+}
+
+void aggiornaStato(){
+
+    String baseUrl = "http://smartfridgeifts.altervista.org/smartfridge2/aggiornaStatoF.php/";
+    
+    String endpoint = "?";
+
+    endpoint += "codiceFrigo=";
+    endpoint += codiceFrigo;
+
+    endpoint += "&";
+    
+    endpoint += "stato_frigo=";
+    endpoint += stato_frigo;
+
+    endpoint += "&";
+    
+    endpoint += "stato_freezer=";
+    endpoint += stato_freezer;
+
+    endpoint += "&";
+    
+    endpoint += "temperatura_frigo=";
+    endpoint += temperatura_frigo;
+
+    endpoint += "&";
+    
+    endpoint += "temperatura_freezer=";
+    endpoint += temperatura_freezer;
+
+    String request = baseUrl += endpoint;
+
+    HTTPClient http;  
+    http.begin(request); 
+    int code = http.GET();
+    
+    if (code > 0) {
+ 
+      String payload = http.getString();   
+      Serial.println(payload);                     
+    }
+
+    http.end();
+    
+    Serial.println("Stato aggiornato");  
+}
 
 
 /*
