@@ -19,12 +19,10 @@ import com.example.lorealerick.smartfridge2.Utils.UserControls;
 public class RegistratiFragment extends Fragment {
 
     private Button btnRegistrati;
-
     private EditText regNome;
     private EditText regCognome;
     private EditText regMail;
     private EditText regPassword;
-
     private ListenerLogin listenerLogin;
 
     public RegistratiFragment() {}
@@ -45,9 +43,9 @@ public class RegistratiFragment extends Fragment {
         regCognome = view.findViewById(R.id.registratiCognome);
         regMail = view.findViewById(R.id.registratiMail);
         regPassword = view.findViewById(R.id.registratiPassword);
-
         btnRegistrati= view.findViewById(R.id.btnRegistrati);
 
+        //controllo dati
         btnRegistrati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -63,6 +63,8 @@ public class LoginFragment extends Fragment{
             }
         });
 
+
+        //controllo dati login
         btnAccedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +73,7 @@ public class LoginFragment extends Fragment{
 
                     if(UserControls.isUserExist(editEMail.getText().toString(),editPassword.getText().toString(),true)){ //se utente esiste
 
-                        if(ricordami.isChecked()){
+                        if(ricordami.isChecked()){//memorizzazione utente
 
                             sharedPreferences.edit().putString("email",UtenteCorrente.getInstance().geteMail()).apply();
                             sharedPreferences.edit().putString("password",UtenteCorrente.getInstance().getPassword()).apply();
@@ -97,7 +99,7 @@ public class LoginFragment extends Fragment{
             }
         });
 
-
+//apertura fragment registrati
         btnRegistrati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
