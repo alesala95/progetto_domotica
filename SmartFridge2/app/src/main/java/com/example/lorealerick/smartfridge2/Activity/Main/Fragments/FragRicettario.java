@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,9 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerRef
 import com.example.lorealerick.smartfridge2.Activity.Main.MainActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Categoria;
+import com.example.lorealerick.smartfridge2.Models.Ricetta;
 import com.example.lorealerick.smartfridge2.R;
+import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import com.example.lorealerick.smartfridge2.Utils.UtilsAnimation;
 ;
 import java.util.ArrayList;
@@ -34,13 +37,14 @@ import java.util.ArrayList;
  * Created by LoreAleRick on 08/03/2018.
  */
 
-public class FragRicettario extends Fragment implements View.OnClickListener {
+public class FragRicettario extends Fragment implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener {
 
     private DatabaseAdapter dbAdapter;
     private ArrayList <Categoria> categorie;
     private AdapterListaCategorie adapterListaCategorie;
     private DownloadRicetteManager downloadRicetteManager;
     private ProgressBar progressBarRicettario;
+    private SwipeRefreshLayout refreshLayoutRicettario;
 
     private ListenerRefreshUI listenerRefreshUI;
     private ListenerApriRicetta listenerApriRicetta;
@@ -73,6 +77,8 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
 
         categorie = new ArrayList<>();
         progressBarRicettario = view.findViewById(R.id.progressRicettario);
+        refreshLayoutRicettario = view.findViewById(R.id.refreshRicettario);
+        refreshLayoutRicettario.setOnRefreshListener(this);
 
         adapterListaCategorie = new AdapterListaCategorie(getActivity(),R.layout.item_anteprima_categorie,categorie,listenerApriRicetta);
         ListView listaCategorie = view.findViewById(R.id.listaCategorie);
@@ -154,6 +160,47 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
         flag=true;
     }
 
+    @Override
+    public void onRefresh() {
+
+        new ReDownloadRicette().execute();
+    }
+
+    private class ReDownloadRicette extends AsyncTask <Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            categorie.clear();
+            adapterListaCategorie.notifyDataSetChanged();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            dbAdapter.svuotaTabellaRicette();
+
+            ArrayList <Ricetta> ricette = DownloadDati.scaricaVetrinaRicette();
+            for(Ricetta r : ricette)
+
+                dbAdapter.addRicetta(r);
+
+            for (String s : dbAdapter.getAllCategorie())
+
+                categorie.add(new Categoria(s,dbAdapter.getAllRicetteForCategoria(s,5)));
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            adapterListaCategorie.notifyDataSetChanged();
+        }
+    }
+
 
     private class DownloadRicetteManager extends AsyncTask <Void, Void, Void>{
 
@@ -164,6 +211,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
             categorie.clear();
             adapterListaCategorie.notifyDataSetChanged();
             progressBarRicettario.setVisibility(View.VISIBLE);
+            refreshLayoutRicettario.setRefreshing(true);
         }
 
         @Override
@@ -183,6 +231,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
 
             aggiornaDati();
             progressBarRicettario.setVisibility(View.INVISIBLE);
+            refreshLayoutRicettario.setRefreshing(false);
         }
     }
 
