@@ -343,6 +343,24 @@
                 android:layout_marginTop="11dp"
                 android:background="#ECEFF1" />
 
+            <Button
+                android:id="@+id/btnDisconnetti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_registrati"
+                android:text="Disconnetti"
+                android:layout_below="@+id/div9"
+                android:textColor="#FFF"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:clickable="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="2dp"
+                style="@style/Base.TextAppearance.AppCompat.Body1" />
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

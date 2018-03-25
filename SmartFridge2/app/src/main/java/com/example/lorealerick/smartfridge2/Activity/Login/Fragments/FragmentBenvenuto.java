@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Login.Interfaces.ListenerLogin;
@@ -77,11 +78,18 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         miaAlert.setMessage("Scrivi sono gay per confermare che tu non sia un bot");
         miaAlert.setCancelable(false);
 
-        miaAlert.setView(R.layout.dialog_layout);
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_layout,null);
+        final EditText editText = v.findViewById(R.id.codiceFrigo);
+
+        miaAlert.setView(v);
+
         miaAlert.setPositiveButton("Connetti", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                if(UserControls.getCodiceFrigo((service.getHost()+"").substring(1))){
+                Toast.makeText(getActivity(),editText.getText()+"",Toast.LENGTH_SHORT).show();
+
+                if(UserControls.getCodiceFrigo((service.getHost()+"").substring(1),editText.getText()+"")){
 
                     sharedPreferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
                     listenerLogin.cambiaFragment(-1);

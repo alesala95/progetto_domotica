@@ -9,6 +9,8 @@ ESP8266WiFiMulti wifiMulti;
 ESP8266WebServer server(80);
 
 String codiceFrigo = "sf0001ma";
+String pw = "smart.alpaca123";
+
 int alimentiResId[]={1,2,3,4,5,6,7,8,9,10,11,12};
 
 int pinAggiungi = 13;
@@ -149,22 +151,32 @@ void pingResp() { //Handler
 
 void inviaCodice(){
 
+  String codiceP = server.arg("pw");
+
   StaticJsonBuffer<200> JSONbuffer;
   JsonObject& JSONencoder = JSONbuffer.createObject();
- 
-  JSONencoder["codiceFrigo"] = codiceFrigo;
-  
-  /*JsonArray& values = JSONencoder.createNestedArray("colors");
-  values.add(r);
-  values.add(g);
-  values.add(b);
- 
-  Serial.println("\nPretty JSON message from buffer: ");*/
-  char JSONmessageBuffer[300];
-  JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
-  Serial.println(JSONmessageBuffer);
 
-  server.send(200, "text/plain", JSONmessageBuffer);
+  if (codiceP.equals(pw)){
+
+     JSONencoder["success"] = 1;
+     JSONencoder["codiceFrigo"] = codiceFrigo;
+     
+     char JSONmessageBuffer[300];
+     JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
+     Serial.println(JSONmessageBuffer);
+
+     server.send(200, "text/plain", JSONmessageBuffer);
+ }else{
+
+    JSONencoder["success"] = 0;
+    JSONencoder["codiceFrigo"] = "";
+     
+    char JSONmessageBuffer[300];
+    JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
+    Serial.println(JSONmessageBuffer);
+
+    server.send(200, "text/plain", JSONmessageBuffer);
+ }
 }
 
 

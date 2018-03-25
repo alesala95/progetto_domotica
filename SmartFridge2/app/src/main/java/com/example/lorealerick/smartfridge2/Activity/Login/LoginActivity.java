@@ -48,6 +48,13 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
         preferences = getSharedPreferences("SmartFridge", 0);
 
+        try{
+
+            if(getIntent().getExtras().getInt("from") == 1)
+                cambiaFragment(2);
+
+        }catch (NullPointerException e){}
+
         UtenteCorrente.getInstance().seteMail(preferences.getString("email",null));
         UtenteCorrente.getInstance().setPassword(preferences.getString("password",null));
 
@@ -122,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
 
         try{
 
-            if((int)getIntent().getExtras().get("from") == 0)
+            if(getIntent().getExtras().getInt("from") == 0 || getIntent().getExtras().getInt("from") == 1)
                 finishAffinity();
 
         }catch (NullPointerException e){

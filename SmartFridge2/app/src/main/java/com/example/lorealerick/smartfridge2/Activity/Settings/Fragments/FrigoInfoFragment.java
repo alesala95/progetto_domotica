@@ -2,15 +2,19 @@ package com.example.lorealerick.smartfridge2.Activity.Settings.Fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.lorealerick.smartfridge2.Activity.Login.LoginActivity;
 import com.example.lorealerick.smartfridge2.Database.DatabaseAdapter;
 import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.R;
@@ -26,12 +30,14 @@ public class FrigoInfoFragment extends Fragment {
     private TextView nPorte;
     private TextView tipoRaffreddamento;
     private TextView classeEnergetica;
+    private Button btnDisconnetti;
 
     private Switch swtLight;
     private Switch swtDoor;
     private Switch swtVacationMode;
 
     private DatabaseAdapter databaseAdapter;
+    private SharedPreferences sharedPreferences;
 
     private Frigo frigo;
 
@@ -40,6 +46,7 @@ public class FrigoInfoFragment extends Fragment {
         super.onAttach(context);
 
         databaseAdapter = new DatabaseAdapter(context);
+        sharedPreferences = context.getSharedPreferences("SmartFridge",Context.MODE_PRIVATE);
     }
 
     public FrigoInfoFragment() {}
@@ -91,6 +98,19 @@ public class FrigoInfoFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
                 aggiorna();
+            }
+        });
+
+        btnDisconnetti = view.findViewById(R.id.btnDisconnetti);
+        btnDisconnetti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                UtenteCorrente.getInstance().setCodiceFrigo(null);
+                sharedPreferences.edit().remove("codiceFrigo").apply();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.putExtra("from",1);
+                startActivity(intent);
             }
         });
 

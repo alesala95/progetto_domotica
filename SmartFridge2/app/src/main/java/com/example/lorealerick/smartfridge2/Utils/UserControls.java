@@ -151,7 +151,7 @@ public class UserControls {
         });
     }
 
-    public static boolean getCodiceFrigo (String ip){
+    public static boolean getCodiceFrigo (String ip, String pw){
 
         boolean conn = false;
         FrigoCodec codice = null;
@@ -160,7 +160,11 @@ public class UserControls {
 
         final Retrofit retrofit = builder.build();
         FrigoAPI frigoAPI = retrofit.create(FrigoAPI.class);
-        Call <FrigoCodec> call = frigoAPI.connettiFrigo();
+
+        Map <String, Object> map = new HashMap<>();
+        map.put("pw",pw);
+
+        Call <FrigoCodec> call = frigoAPI.connettiFrigo(map);
 
         try {
             codice = call.execute().body();
@@ -168,7 +172,7 @@ public class UserControls {
             e.printStackTrace();
         }
 
-        if (codice != null){
+        if (codice.getSuccess() == 1){
 
             conn = true;
             UtenteCorrente.getInstance().setCodiceFrigo(codice.getCodiceFrigo());

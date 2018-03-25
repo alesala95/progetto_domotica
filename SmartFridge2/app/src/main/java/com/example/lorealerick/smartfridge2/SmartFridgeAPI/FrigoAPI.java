@@ -8,6 +8,7 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**
@@ -17,7 +18,7 @@ import retrofit2.http.QueryMap;
 public interface FrigoAPI {
 
     @GET("/ottieniCodice")
-    Call <FrigoCodec> connettiFrigo ();
+    Call <FrigoCodec> connettiFrigo (@QueryMap Map <String, Object> values);
 
     @GET("/smartfridge2/infoFrigo.php")
     Call <Frigo> getInfoFrigo (@QueryMap Map<String,Object> values);
