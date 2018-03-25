@@ -174,6 +174,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener,Swi
 
             categorie.clear();
             adapterListaCategorie.notifyDataSetChanged();
+            refreshLayoutRicettario.setRefreshing(true);
         }
 
         @Override
@@ -198,6 +199,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener,Swi
             super.onPostExecute(aVoid);
 
             adapterListaCategorie.notifyDataSetChanged();
+            refreshLayoutRicettario.setRefreshing(false);
         }
     }
 

@@ -87,7 +87,7 @@ public class FragmentBenvenuto extends Fragment implements SwipeRefreshLayout.On
         miaAlert.setPositiveButton("Connetti", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                Toast.makeText(getActivity(),editText.getText()+"",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),editText.getText()+"",Toast.LENGTH_SHORT).show();
 
                 if(UserControls.getCodiceFrigo((service.getHost()+"").substring(1),editText.getText()+"")){
 

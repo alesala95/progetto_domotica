@@ -169,14 +169,16 @@ public class UserControls {
         try {
             codice = call.execute().body();
         } catch (IOException e) {
-            e.printStackTrace();
+
+            System.out.println("Connessione fallita");
         }
 
-        if (codice.getSuccess() == 1){
+        if(codice != null)
+            if (codice.getSuccess() == 1){
 
-            conn = true;
-            UtenteCorrente.getInstance().setCodiceFrigo(codice.getCodiceFrigo());
-        }
+                conn = true;
+                UtenteCorrente.getInstance().setCodiceFrigo(codice.getCodiceFrigo());
+            }
 
         return conn;
     }

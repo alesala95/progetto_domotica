@@ -60,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         UtenteCorrente.getInstance().setCodiceFrigo(preferences.getString("codiceFrigo",null));
 
         // ------------------------
-        UtenteCorrente.getInstance().setCodiceFrigo("sf0001ma");
-        preferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
+        //UtenteCorrente.getInstance().setCodiceFrigo("sf0001ma");
+        //preferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
         // ------------------------
 
         //controllo dati inseriti per login e salvataggio tramite singleton
