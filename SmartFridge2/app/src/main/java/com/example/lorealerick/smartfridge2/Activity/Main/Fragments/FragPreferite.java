@@ -4,14 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.lorealerick.smartfridge2.Activity.Main.Adapters.AdapterGrigliaRicette;
 import com.example.lorealerick.smartfridge2.Activity.Main.Interfaces.ListenerApriRicetta;
@@ -24,36 +22,39 @@ import com.example.lorealerick.smartfridge2.Utils.DownloadDati;
 import java.util.ArrayList;
 
 /**
- * Created by LoreAleRick on 22/03/2018.
+ * Created by LoreAleRick on 25/03/2018.
  */
 
-public class FragRicerca extends Fragment {
+public class FragPreferite extends Fragment {
 
     private ArrayList <Ricetta> ricette;
-    private AdapterGrigliaRicette adapterGrigliaRicette;
-    private SearchView ricerca;
-    private ListenerRefreshUI listenerRefreshUI;
-    private ProgressBar progressBarRicerca;
     private ListenerApriRicetta listenerApriRicetta;
+    private AdapterGrigliaRicette adapterGrigliaRicette;
+    private ListenerRefreshUI listenerRefreshUI;
+    private ProgressBar progressBarPreferite;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        listenerRefreshUI = (MainActivity) context;
         listenerApriRicetta = (MainActivity) context;
+        listenerRefreshUI = (MainActivity) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_ricerca, container, false);
+        View view = inflater.inflate(R.layout.frag_ricette_preferite,container,false);
 
-        listenerRefreshUI.onRefreshUI("Ricerca",null);
-        progressBarRicerca = view.findViewById(R.id.progressRicerca);
+        listenerRefreshUI.onRefreshUI("Preferite",null);
+
         ricette = new ArrayList<>();
-        GridView grigliaRicerca = view.findViewById(R.id.grigliaRicerca);
-        grigliaRicerca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        adapterGrigliaRicette = new AdapterGrigliaRicette(getActivity(),R.layout.item_ricetta,ricette);
+        progressBarPreferite = view.findViewById(R.id.progressPreferite);
+
+        GridView grigliaRicettePreferite = view.findViewById(R.id.grigliaRicettePreferite);
+        grigliaRicettePreferite.setAdapter(adapterGrigliaRicette);
+        grigliaRicettePreferite.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -61,58 +62,49 @@ public class FragRicerca extends Fragment {
             }
         });
 
-        adapterGrigliaRicette = new AdapterGrigliaRicette(getActivity(),R.layout.item_ricetta,ricette);
-
-        grigliaRicerca.setAdapter(adapterGrigliaRicette);
-
-        ricerca = view.findViewById(R.id.search_view);
-        ricerca.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-
-                new ricercaManager().execute(s.toLowerCase());
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
+        new TaskRicettePreferite().execute();
 
         return view;
-    }
-
-    private class ricercaManager extends AsyncTask <String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            ricette.clear();
-            adapterGrigliaRicette.notifyDataSetChanged();
-            progressBarRicerca.setVisibility(View.VISIBLE);
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-
-            ricette.addAll(DownloadDati.scaricaRicercaRicette(strings[0]));
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            progressBarRicerca.setVisibility(View.GONE);
-            adapterGrigliaRicette.notifyDataSetChanged();
-            super.onPostExecute(aVoid);
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        listenerRefreshUI.onRefreshUI("Ricerca",null);
+        listenerRefreshUI.onRefreshUI("Preferite",null);
+    }
+
+    private class TaskRicettePreferite extends AsyncTask <Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            ricette.clear();
+            adapterGrigliaRicette.notifyDataSetChanged();
+            progressBarPreferite.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            ricette.addAll(DownloadDati.scaricaRicettePreferite());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            adapterGrigliaRicette.notifyDataSetChanged();
+            progressBarPreferite.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+
+            progressBarPreferite.setVisibility(View.GONE);
+        }
     }
 }

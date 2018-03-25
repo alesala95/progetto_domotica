@@ -3,6 +3,7 @@ package com.example.lorealerick.smartfridge2.Utils;
 import com.example.lorealerick.smartfridge2.Models.Alimento;
 import com.example.lorealerick.smartfridge2.Models.Frigo;
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
+import com.example.lorealerick.smartfridge2.Models.Utente;
 import com.example.lorealerick.smartfridge2.R;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.AlimentiAPI;
 import com.example.lorealerick.smartfridge2.SmartFridgeAPI.FrigoAPI;
@@ -22,6 +23,46 @@ public class DownloadDati {
 
     private static final int height = 175;
     private static final int width = 175;
+
+    public static boolean isRicettaPreferita (int idRicetta){
+
+        final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map <String, Object> map = new HashMap<>();
+        map.put("emailUtente",UtenteCorrente.getInstance().geteMail());
+        map.put("idRicetta",idRicetta);
+
+        Call <Integer> call = ricetteAPI.isRicettaPreferita(map);
+        int a = 0;
+
+        try {
+            a = call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return UtilsBool.intToBool(a);
+    }
+
+    public static boolean flagRicetta (int idRicetta){
+
+        final RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map <String, Object> map = new HashMap<>();
+        map.put("emailUtente",UtenteCorrente.getInstance().geteMail());
+        map.put("idRicetta",idRicetta);
+
+        Call <FlagRicettaResponse> call = ricetteAPI.flagRicetta(map);
+        FlagRicettaResponse aux = null;
+
+        try {
+            aux = call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return (aux != null);
+    }
 
     public static Frigo scaricaInfoFrigo (){
 
@@ -86,6 +127,40 @@ public class DownloadDati {
         map.put("queryText",queryText);
 
         Call<ArrayList<Ricetta>> call = ricetteAPI.ricercaRicette(map);
+
+        ArrayList <Ricetta> ricette = new ArrayList<>();
+
+
+        try {
+            ricette = call.execute().body();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < ricette.size(); i++){
+
+            try {
+                if (!ricette.get(i).getAutore().equals("SmartFridge"))
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/not.jpg").resize(height,width).get()));
+                else
+                    ricette.get(i).setImage(BitmapHandle.getBytes(Picasso.get().load(Services.getInstance().getRetrofit().baseUrl()+"/img_alimenti/"+ricette.get(i).getId()+".jpg").resize(height,width).get()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ricette;
+    }
+
+    public static ArrayList<Ricetta> scaricaRicettePreferite (){
+
+        RicetteAPI ricetteAPI = Services.getInstance().getRetrofit().create(RicetteAPI.class);
+
+        Map <String, Object> map = new HashMap<>();
+        map.put("emailUtente",UtenteCorrente.getInstance().geteMail());
+
+        Call<ArrayList<Ricetta>> call = ricetteAPI.getRicettePreferite(map);
 
         ArrayList <Ricetta> ricette = new ArrayList<>();
 

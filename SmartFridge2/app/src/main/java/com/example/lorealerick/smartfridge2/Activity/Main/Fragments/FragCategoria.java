@@ -139,6 +139,7 @@ public class FragCategoria extends Fragment implements View.OnClickListener {
         Floatingbtn.setOnClickListener(this);
         FABsearch.setOnClickListener(this);
         FABadd.setOnClickListener(this);
+        FABfavourite.setOnClickListener(this);
 
          return view;
     }
@@ -154,14 +155,15 @@ public class FragCategoria extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.FBAsearch:
-                editTextSearch.setVisibility(View.VISIBLE);
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(editTextSearch , InputMethodManager.SHOW_IMPLICIT);
-                FABhide();
+                listenerApriRicetta.apriRicerca();
                 break;
 
             case R.id.FBAadd:
                 listenerApriRicetta.apriCreateRicetta();
+                break;
+
+            case R.id.FBAfavourite:
+                listenerApriRicetta.apriPreferite();
                 break;
         }
     }

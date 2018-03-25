@@ -14,4 +14,6 @@ public interface ListenerApriRicetta {
     void apriCreateRicetta();
 
     void apriRicerca();
+
+    void apriPreferite ();
 }

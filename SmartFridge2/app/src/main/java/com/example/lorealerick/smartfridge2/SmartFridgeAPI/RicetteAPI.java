@@ -1,6 +1,7 @@
 package com.example.lorealerick.smartfridge2.SmartFridgeAPI;
 
 import com.example.lorealerick.smartfridge2.Models.Ricetta;
+import com.example.lorealerick.smartfridge2.Utils.FlagRicettaResponse;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,5 +33,14 @@ public interface RicetteAPI {
 
     @GET("/smartfridge2/ricercaRicette.php")
     Call <ArrayList<Ricetta>> ricercaRicette (@QueryMap Map <String,Object> values);
+
+    @GET("/smartfridge2/isRicettaPreferita.php")
+    Call <Integer> isRicettaPreferita (@QueryMap Map <String, Object> values);
+
+    @GET("/smartfridge2/aggiungiRimuoviRicettaPreferita.php")
+    Call <FlagRicettaResponse> flagRicetta (@QueryMap Map <String, Object> values);
+
+    @GET("/smartfridge2/ricettePreferite.php")
+    Call <ArrayList<Ricetta>> getRicettePreferite (@QueryMap Map <String, Object> values);
 
 }

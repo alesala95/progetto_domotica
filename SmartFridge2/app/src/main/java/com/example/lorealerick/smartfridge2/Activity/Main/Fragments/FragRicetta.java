@@ -91,10 +91,10 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
 
         new DownloadDettagliRicetta().execute(id);
 
-        Floatingbtn = (FloatingActionButton) view.findViewById(R.id.FloatingBtn);
-        FABadd = (FloatingActionButton) view.findViewById(R.id.FBAadd);
-        FABfavourite = (FloatingActionButton) view.findViewById(R.id.FBAfavourite);
-        FABShare = (FloatingActionButton) view.findViewById(R.id.FBAshare);
+        Floatingbtn = view.findViewById(R.id.FloatingBtn);
+        FABadd = view.findViewById(R.id.FBAadd);
+        FABfavourite = view.findViewById(R.id.FBAfavourite);
+        FABShare = view.findViewById(R.id.FBAshare);
 
         fadein.setDuration(650);
         fadeout.setDuration(500);
@@ -109,18 +109,13 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
 
-                if (dbAdapter.isRicettaPreferita(id)) {
-                    dbAdapter.rimuoviRicettaPreferita(id);
-                    System.out.println("Rimuovo ricetta preferita");
-                }else {
-                    dbAdapter.addRicettaPreferita(id);
-                    System.out.println("Aggiungo ricetta preferita");
-                }
-                repaintPrefStar(dbAdapter.isRicettaPreferita(id));
+                DownloadDati.flagRicetta(id);
+
+                repaintPrefStar(DownloadDati.isRicettaPreferita(id));
             }
         });
 
-        repaintPrefStar(dbAdapter.isRicettaPreferita(id));
+        repaintPrefStar(DownloadDati.isRicettaPreferita(id));
 
         return view;
     }
@@ -151,6 +146,7 @@ public class FragRicetta extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.FBAfavourite:
+                listenerApriRicetta.apriPreferite();
                 break;
 
             case R.id.FBAshare:

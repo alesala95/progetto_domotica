@@ -125,6 +125,7 @@ public class FragCreaRicetta extends Fragment implements View.OnClickListener {
         if(nome.getText().length()>0&&durata.getText().length()>0&&ingredienti.getText().length()>0&&procedimento.getText().length()>0&&categoria.getText().length()>0){
             Toast.makeText(getContext(),"Grazie per aver creato la tua ricetta!",Toast.LENGTH_LONG).show();
             UtilsRecipe.aggiungiRicetta(nome.getText().toString(),dif,durata.getText().toString(), UtenteCorrente.getInstance().getNomeUtente(),ingredienti.getText().toString(),procedimento.getText().toString(), categoria.getText().toString());
+            listenerRefreshUI.onRefreshUI("CreaRicetta","End");
         }
         else
             Toast.makeText(getContext(),"Non hai completato tutti i campi",Toast.LENGTH_LONG).show();

@@ -90,6 +90,7 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
         Floatingbtn.setOnClickListener(this);
         FABsearch.setOnClickListener(this);
         FABadd.setOnClickListener(this);
+        FABfavourite.setOnClickListener(this);
 
         new DownloadRicetteManager().execute();
 
@@ -114,6 +115,10 @@ public class FragRicettario extends Fragment implements View.OnClickListener {
 
             case R.id.FBAadd:
                 listenerApriRicetta.apriCreateRicetta();
+                break;
+
+            case R.id.FBAfavourite:
+                listenerApriRicetta.apriPreferite();
                 break;
         }
     }

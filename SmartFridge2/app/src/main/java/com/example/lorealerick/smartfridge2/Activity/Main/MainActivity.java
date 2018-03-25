@@ -18,6 +18,7 @@ import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCategori
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragCreaRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragFrigo;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragHome;
+import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragPreferite;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicerca;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicetta;
 import com.example.lorealerick.smartfridge2.Activity.Main.Fragments.FragRicettario;
@@ -189,11 +190,22 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
 
                 setTitleToolbar("Crea Ricetta");
                 menu.getItem(2).setChecked(true);
+
+                if (dett != null)
+                    if (dett.equals("End"))
+                        onBackPressed();
+
                 break;
 
             case "Ricerca":
 
                 setTitleToolbar("Ricerca");
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "Preferite":
+
+                setTitleToolbar("Preferite");
                 menu.getItem(2).setChecked(true);
                 break;
         }
@@ -262,5 +274,12 @@ public class MainActivity extends AppCompatActivity implements ListenerRefreshUI
     public void aggiungiRicettaPreferita(int id) {
 
         databaseAdapter.addRicettaPreferita(id);
+    }
+
+    @Override
+    public void apriPreferite() {
+
+        FragPreferite fragPreferite = new FragPreferite();
+        cambiaFragment(fragPreferite, true);
     }
 }
