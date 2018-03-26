@@ -15,6 +15,8 @@ int alimentiResId[]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
 
 int pinAggiungi = D7;
 int pinRimuovi = D6;
+int pinSpegniFrigo=D1;
+int pinSpegniFreezer=D2;
 
 int pinLampadina = D5;
 int pinAllarme = D8;
@@ -26,19 +28,26 @@ boolean buttonRimuovi;
 int stato_frigo = 1;
 int stato_freezer = 1;
 
+boolean buttonSpegniFrigo;
+boolean buttonSpegniFreezer;
+
 double temperatura_frigo = 4.0;
 double temperatura_freezer = -3.0;
 
 int val_Adc = 0;
-float temp = 0;
+
 
 void setup() {
 
   buttonAggiungi = false;
   buttonRimuovi = false;
+  buttonSpegniFrigo = false;
+  buttonSpegniFreezer = false;
   
   pinMode(pinAggiungi,INPUT);
   pinMode(pinRimuovi,INPUT);
+  pinMode(pinSpegniFrigo,INPUT);
+  pinMode(pinSpegniFreezer,INPUT);
 
   pinMode(pinLampadina,OUTPUT);
   pinMode(pinAllarme,OUTPUT);
@@ -86,32 +95,55 @@ void loop() {
       
       aggiungiAlimentoRandom();
       buttonAggiungi = true;
+  }else if ((digitalRead(pinAggiungi)==LOW) and (buttonAggiungi == true)){
+
+    buttonAggiungi = false;
   }
   
   if ((digitalRead(pinRimuovi)==HIGH) and (buttonRimuovi == false)){
 
       rimuoviAlimentoRandom();
       buttonRimuovi = true;
-  }
-
-  if ((digitalRead(pinAggiungi)==LOW) and (buttonAggiungi == true)){
-
-      buttonAggiungi = false;
-  }
-
-  if ((digitalRead(pinRimuovi)==LOW) and (buttonRimuovi == true)){
+  }else if ((digitalRead(pinRimuovi)==LOW) and (buttonRimuovi == true)){
 
       buttonRimuovi = false;
   }
 
-  recuperaStato();
+  if ((digitalRead(pinSpegniFrigo)==HIGH) and (buttonSpegniFrigo == false)){
+      
+      if (stato_frigo == 1)
+         stato_frigo = 0;
+      else if (stato_frigo == 0)
+         stato_frigo = 1;  
+      
+       buttonSpegniFrigo = true;
+  }else if ((digitalRead(pinSpegniFrigo)==LOW) and (buttonSpegniFrigo == true)){
+
+      buttonSpegniFrigo = false;
+  }
   
-  val_Adc = analogRead(0);
-  temp = ((val_Adc * 0.00488) - 0.5) / 0.01;
+  if ((digitalRead(pinSpegniFreezer)==HIGH) and (buttonSpegniFreezer == false)){
+
+      if (stato_freezer == 1)
+         stato_freezer = 0;
+      else if (stato_freezer == 0)
+         stato_freezer = 1; 
+         
+      buttonSpegniFreezer = true;
+  }else if ((digitalRead(pinSpegniFreezer)==LOW) and (buttonSpegniFreezer == true)){
+
+      buttonSpegniFreezer = false;
+  }
+
+  val_Adc = analogRead(A0);
+  temperatura_frigo = (((val_Adc * 0.00488) - 0.5) / 0.01)-230;
+  temperatura_freezer=(((val_Adc * 0.00488) - 0.5) / 0.01)-240;
+  Serial.println(temperatura_frigo);
+  Serial.println(temperatura_freezer);
+
+   recuperaStato();
   
-  
-  
-  delay (5000);
+  delay (250);
   
 }
 
@@ -250,6 +282,11 @@ int outputLuci (int luci, int allarme, int vm){
   digitalWrite (pinLampadina, luci);
   digitalWrite (pinAllarme, allarme);
   digitalWrite (pinVM,vm);
+
+  if(vm==0)
+    stato_frigo=1;
+   else if(vm==1)
+    stato_frigo=0;
 }
 
 void aggiornaStato(){

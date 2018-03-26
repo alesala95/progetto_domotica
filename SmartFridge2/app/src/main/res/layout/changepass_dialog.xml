@@ -17,7 +17,7 @@
         android:hint="Inserisci password attuale"
         app:passwordToggleDrawable="@drawable/show_hide"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#FFF"
+        app:passwordToggleTint="@color/colorPrimary"
         >
 
     <EditText
@@ -44,7 +44,7 @@
         android:hint="Inserisci nuova password"
         app:passwordToggleDrawable="@drawable/show_hide"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#FFF"
+        app:passwordToggleTint="@color/colorPrimary"
         >
 
     <EditText
@@ -70,7 +70,7 @@
         android:hint="Reinserisci la password"
         app:passwordToggleDrawable="@drawable/show_hide"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#FFF"
+        app:passwordToggleTint="@color/colorPrimary"
         >
 
     <EditText

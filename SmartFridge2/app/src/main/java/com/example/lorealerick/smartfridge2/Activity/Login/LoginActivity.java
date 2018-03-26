@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimaryDark));
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -60,8 +62,8 @@ public class LoginActivity extends AppCompatActivity implements ListenerLogin{
         UtenteCorrente.getInstance().setCodiceFrigo(preferences.getString("codiceFrigo",null));
 
         // ------------------------
-        //UtenteCorrente.getInstance().setCodiceFrigo("sf0001ma");
-        //preferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
+        UtenteCorrente.getInstance().setCodiceFrigo("sf0001ma");
+        preferences.edit().putString("codiceFrigo", UtenteCorrente.getInstance().getCodiceFrigo()).apply();
         // ------------------------
 
         //controllo dati inseriti per login e salvataggio tramite singleton
