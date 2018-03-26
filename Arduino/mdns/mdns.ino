@@ -11,7 +11,7 @@ ESP8266WebServer server(80);
 String codiceFrigo = "sf0001ma";
 String pw = "smart.alpaca123";
 
-int alimentiResId[]={1,2,3,4,5,6,7,8,9,10,11,12};
+int alimentiResId[]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
 
 int pinAggiungi = D7;
 int pinRimuovi = D6;
