@@ -29,6 +29,9 @@ int stato_freezer = 1;
 double temperatura_frigo = 4.0;
 double temperatura_freezer = -3.0;
 
+int val_Adc = 0;
+float temp = 0;
+
 void setup() {
 
   buttonAggiungi = false;
@@ -102,7 +105,12 @@ void loop() {
   }
 
   recuperaStato();
-
+  
+  val_Adc = analogRead(0);
+  temp = ((val_Adc * 0.00488) - 0.5) / 0.01;
+  
+  
+  
   delay (5000);
   
 }
